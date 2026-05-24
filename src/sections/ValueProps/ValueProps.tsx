@@ -64,7 +64,12 @@ export function ValueProps() {
       <Container>
         <StaggerGroup className={styles.values} stagger={0.08}>
           {values.map((value) => (
-            <StaggerItem key={value.title} as="article" className={styles.values__card}>
+            <StaggerItem
+              key={value.title}
+              as="article"
+              className={styles.values__card}
+              tabIndex={0}
+            >
               <span className={styles.values__icon} aria-hidden="true">
                 {value.icon}
               </span>
