@@ -6,6 +6,7 @@ $hero-navy: #050a15;
 $hero-cyan: #00d2ff;
 $hero-cyan-deep: #007fff;
 $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
+$hero-corner-radius: clamp(1.6rem, 4vw, 3.4rem);
 
 .hero {
   position: relative;
@@ -20,9 +21,10 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
   padding-top: calc(var(--header-height, 88px) + clamp(0.1rem, 0.85vh, 0.55rem));
   padding-bottom: $hero-bottom-space;
   color: $color-white;
-  overflow-x: clip;
-  overflow-y: visible;
-  border-radius: 0 0 clamp(1.2rem, 3.2vw, 2.8rem) clamp(1.2rem, 3.2vw, 2.8rem);
+  overflow: hidden;
+  border-bottom-right-radius: $hero-corner-radius;
+  border-bottom-left-radius: $hero-corner-radius;
+  clip-path: inset(0 round 0 0 $hero-corner-radius $hero-corner-radius);
 
   // ---------------------------------------------------------------------------
   // Arrière-plan cinématique + parallax
