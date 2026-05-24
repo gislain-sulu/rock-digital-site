@@ -11,7 +11,7 @@
  */
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
@@ -47,6 +47,14 @@ const titleWord = {
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -34]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.84]);
+  const visualY = useTransform(scrollYProgress, [0, 1], [0, -52]);
 
   return (
     <section
@@ -61,6 +69,14 @@ export function HeroSection() {
           className={styles.hero__layout}
           initial={false}
           animate="visible"
+          style={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  y: contentY,
+                  opacity: contentOpacity,
+                }
+          }
           variants={{
             visible: { transition: { staggerChildren: 0.08 } },
           }}
@@ -127,7 +143,12 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          <HeroVisual />
+          <motion.div
+            className={styles.hero__visualCol}
+            style={prefersReducedMotion ? undefined : { y: visualY }}
+          >
+            <HeroVisual />
+          </motion.div>
         </motion.div>
       </Container>
 

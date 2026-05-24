@@ -60,7 +60,7 @@ const values: Value[] = [
 
 export function ValueProps() {
   return (
-    <Section tone="light" size="md" id="values">
+    <Section tone="light" size="md" id="values" className={styles.valuesSection}>
       <Container>
         <StaggerGroup className={styles.values} stagger={0.08}>
           {values.map((value) => (

@@ -1,7 +1,13 @@
 'use client';
 
 import { Navbar } from '../Navbar';
+import styles from './Header.module.scss';
 
 export function Header() {
-  return <Navbar />;
+  return (
+    <div className={styles.header}>
+      <span className={styles.header__halo} aria-hidden />
+      <Navbar />
+    </div>
+  );
 }

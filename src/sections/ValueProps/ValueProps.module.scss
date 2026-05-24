@@ -2,7 +2,17 @@
 @use '@/styles/mixins' as *;
 @use '@/styles/breakpoints' as *;
 
+.valuesSection {
+  position: relative;
+  z-index: 6;
+  margin-top: -80px;
+  padding: 0 0 88px;
+}
+
 .values {
+  position: relative;
+  z-index: 2;
+  margin-top: -28px;
   display: grid;
   grid-template-columns: 1fr;
   gap: $space-6;
