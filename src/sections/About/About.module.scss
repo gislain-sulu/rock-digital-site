@@ -1,0 +1,172 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.about {
+  position: relative;
+
+  &__inner {
+    width: 100%;
+    padding-inline: clamp(1rem, 3.2vw, 3rem);
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    background: url('/about5.png');
+    background-repeat: no-repeat;
+    right: -72%;
+    top: -8%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.4rem, 4vw, 3rem);
+    align-items: center;
+
+    @include bp-up(lg) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2rem, 4vw, 4rem);
+    }
+  }
+
+  &__media {
+    min-width: 0;
+  }
+
+  &__thumb {
+    position: relative;
+    line-height: 0;
+  }
+
+  &__thumbImage {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-position: center;
+  }
+
+  &__shape {
+    position: absolute;
+    inset: auto -6% -10% auto;
+    width: clamp(180px, 30vw, 320px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, rgba(56, 189, 248, 0.38) 0%, rgba(37, 99, 235, 0.18) 45%, transparent 74%),
+      url('/feature-design-1.png') center/cover no-repeat;
+    filter: blur(1px);
+    opacity: 0.84;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__title {
+    position: absolute;
+    left: clamp(1rem, 2vw, 1.5rem);
+    bottom: clamp(1rem, 2.2vw, 1.5rem);
+    margin: 0;
+    padding: 0.5rem 0.8rem;
+    border-radius: 999px;
+    font-family: $font-ui;
+    font-size: clamp(0.7rem, 0.95vw, 0.8rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-white;
+    background: rgba(7, 30, 62, 0.78);
+    border: 1px solid rgba(147, 197, 253, 0.42);
+    backdrop-filter: blur(8px);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.35rem);
+    min-width: 0;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 1.6vw, 0.95rem);
+  }
+
+  &__mainTitle {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(1.8rem, 4.2vw, 3.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: $color-black;
+
+    span {
+      background: $gradient-blue;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  &__lead {
+    margin: 0;
+    max-width: 58ch;
+    color: $text-secondary;
+    line-height: $lh-relaxed;
+  }
+
+  &__feature {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: fit-content;
+    border-radius: 999px;
+    padding: 0.55rem 0.95rem 0.55rem 0.55rem;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    background: rgba(240, 249, 255, 0.86);
+  }
+
+  &__featureIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    color: $color-blue;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(59, 130, 246, 0.24);
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__featureTitle {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    line-height: 1.2;
+    color: $color-black;
+  }
+
+  &__text {
+    margin: 0;
+    max-width: 58ch;
+    color: $text-secondary;
+    line-height: $lh-relaxed;
+  }
+
+  &__actions {
+    padding-top: 0.2rem;
+  }
+}

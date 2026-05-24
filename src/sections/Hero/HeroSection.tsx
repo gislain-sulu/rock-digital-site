@@ -16,8 +16,8 @@ import { useRef } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
 import { Container } from '@/components/ui/Container';
+import { RockDigitalButton } from '@/components/ui/RockDigitalButton';
 
-import { CTAButton } from './components/CTAButton';
 import { HeroBackground } from './components/HeroBackground';
 import { HeroVisual } from './components/HeroVisual';
 import { HeroScrollIndicator } from './components/HeroScrollIndicator';
@@ -134,12 +134,30 @@ export function HeroSection() {
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: 0.58 }}
             >
-              <CTAButton href="/contact" variant="primary">
+              <RockDigitalButton
+                href="/contact"
+                variant="default"
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="M13 5l7 7-7 7" />
+                  </svg>
+                }
+                iconPosition="right"
+              >
                 Démarrer un projet
-              </CTAButton>
-              <CTAButton href="/portfolio" variant="secondary" showArrow={false}>
+              </RockDigitalButton>
+              <RockDigitalButton href="/portfolio" variant="outline">
                 Voir nos réalisations
-              </CTAButton>
+              </RockDigitalButton>
             </motion.div>
           </div>
 

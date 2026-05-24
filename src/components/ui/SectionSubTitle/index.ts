@@ -1,0 +1,1 @@
+export { SectionSubTitle } from './SectionSubTitle';

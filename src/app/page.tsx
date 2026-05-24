@@ -1,3 +1,4 @@
+import { About } from '@/sections/About';
 import { CTA } from '@/sections/CTA';
 import { Hero } from '@/sections/Hero';
 import { Portfolio } from '@/sections/Portfolio';
@@ -13,6 +14,7 @@ export default function HomePage() {
     <>
       <Hero />
       <ValueProps />
+      <About />
       <Services />
       <Process />
       <Portfolio />

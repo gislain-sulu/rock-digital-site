@@ -1,0 +1,31 @@
+@use '@/styles/tokens' as *;
+
+.sectionSubTitle {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: fit-content;
+  align-self: flex-start;
+  padding: 6px 29px;
+  margin: 0 0 22px;
+  border-radius: 20px;
+  border: 1px solid $border-strong;
+  background-color: rgba($brand-accent, 0.06);
+  color: $brand-accent;
+  font-family: $font-ui;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 25px;
+  text-transform: uppercase;
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 7px;
+    background: $brand-accent;
+    border-radius: 30px;
+    left: -8%;
+    top: 14px;
+  }
+}
