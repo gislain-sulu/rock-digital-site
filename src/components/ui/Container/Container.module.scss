@@ -1,0 +1,31 @@
+@use '@/styles/tokens' as *;
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: $container-padding;
+
+  &--sm {
+    max-width: $container-sm;
+  }
+
+  &--md {
+    max-width: $container-md;
+  }
+
+  &--lg {
+    max-width: $container-lg;
+  }
+
+  &--xl {
+    max-width: $container-xl;
+  }
+
+  &--2xl {
+    max-width: $container-2xl;
+  }
+
+  &--fluid {
+    max-width: 100%;
+  }
+}

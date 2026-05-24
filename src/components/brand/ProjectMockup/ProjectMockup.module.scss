@@ -1,0 +1,206 @@
+@use '@/styles/tokens' as *;
+
+.mock {
+  --accent: #{$color-blue};
+  --accent-deep: #{$color-blue-deep};
+  --surface: #ffffff;
+  --surface-soft: #{$color-blue-soft};
+  --text: #{$color-black};
+  --text-soft: #{$color-blue-slate};
+  --shape: #{$color-orange};
+
+  position: relative;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid $border-default;
+  box-shadow: $shadow-sm;
+  isolation: isolate;
+  aspect-ratio: 4 / 3;
+
+  &--blue {
+    --accent: #{$color-blue};
+    --accent-deep: #{$color-blue-deep};
+    --surface: #ffffff;
+    --surface-soft: #{$color-blue-soft};
+    --shape: #{$color-orange};
+  }
+
+  &--orange {
+    --accent: #{$color-orange};
+    --accent-deep: #b76a06;
+    --surface: #fff;
+    --surface-soft: #{$color-orange-soft};
+    --shape: #{$color-blue};
+  }
+
+  &--dark {
+    --accent: #{$color-orange};
+    --accent-deep: #{$color-black};
+    --surface: #{$color-black};
+    --surface-soft: rgba(255, 255, 255, 0.08);
+    --text: #ffffff;
+    --text-soft: rgba(255, 255, 255, 0.6);
+    --shape: #{$color-blue};
+    background: var(--surface);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  &__chrome {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.04);
+    border-bottom: 1px solid $border-default;
+  }
+
+  &__dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(35, 31, 32, 0.15);
+
+    &:nth-child(1) {
+      background: #fb7185;
+    }
+    &:nth-child(2) {
+      background: #fbbf24;
+    }
+    &:nth-child(3) {
+      background: #34d399;
+    }
+  }
+
+  &__url {
+    margin-left: auto;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: rgba(35, 31, 32, 0.5);
+    letter-spacing: 0.04em;
+  }
+
+  &--dark &__chrome {
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  &--dark &__url {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &__viewport {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 100% 0%,
+        color-mix(in srgb, var(--accent) 12%, transparent),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  &__pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(35, 31, 32, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(35, 31, 32, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(
+      ellipse at 100% 0%,
+      black 0%,
+      transparent 70%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse at 100% 0%,
+      black 0%,
+      transparent 70%
+    );
+  }
+
+  &--dark &__pattern {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1;
+  }
+
+  &__category {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+  }
+
+  &__label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    max-width: 70%;
+  }
+
+  &__bars {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+
+    span {
+      display: block;
+      height: 8px;
+      background: var(--surface-soft);
+      border-radius: 4px;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 4px;
+
+    span {
+      display: block;
+      height: 36px;
+      background: var(--surface-soft);
+      border-radius: 6px;
+
+      &:nth-child(2) {
+        background: color-mix(in srgb, var(--accent) 80%, transparent);
+      }
+    }
+  }
+
+  &__shape {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    bottom: -50px;
+    right: -50px;
+    background: var(--shape);
+    border-radius: 999px;
+    opacity: 0.15;
+    z-index: 0;
+  }
+}

@@ -1,0 +1,80 @@
+// =============================================================================
+// Breakpoints (mobile-first)
+// =============================================================================
+$bp-xs: 360px;
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
+$bp-3xl: 1920px;
+
+@mixin bp-up($size) {
+  @if $size == xs {
+    @media (min-width: $bp-xs) {
+      @content;
+    }
+  } @else if $size == sm {
+    @media (min-width: $bp-sm) {
+      @content;
+    }
+  } @else if $size == md {
+    @media (min-width: $bp-md) {
+      @content;
+    }
+  } @else if $size == lg {
+    @media (min-width: $bp-lg) {
+      @content;
+    }
+  } @else if $size == xl {
+    @media (min-width: $bp-xl) {
+      @content;
+    }
+  } @else if $size == 2xl {
+    @media (min-width: $bp-2xl) {
+      @content;
+    }
+  } @else if $size == 3xl {
+    @media (min-width: $bp-3xl) {
+      @content;
+    }
+  }
+}
+
+@mixin bp-down($size) {
+  @if $size == sm {
+    @media (max-width: ($bp-sm - 1px)) {
+      @content;
+    }
+  } @else if $size == md {
+    @media (max-width: ($bp-md - 1px)) {
+      @content;
+    }
+  } @else if $size == lg {
+    @media (max-width: ($bp-lg - 1px)) {
+      @content;
+    }
+  } @else if $size == xl {
+    @media (max-width: ($bp-xl - 1px)) {
+      @content;
+    }
+  }
+}
+
+@mixin reduce-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin touch {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+@mixin can-hover {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}

@@ -1,0 +1,109 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: $z-overlay;
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(46, 110, 187, 0.2) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(245, 158, 11, 0.18) 0%,
+      transparent 55%
+    ),
+    $color-black;
+  color: $color-white;
+  overflow-y: auto;
+
+  @include bp-up(lg) {
+    display: none;
+  }
+
+  &__inner {
+    min-height: 100dvh;
+    padding-top: calc(var(--header-height, 80px) + #{$space-8});
+    padding-bottom: $space-8;
+    padding-inline: $container-padding;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $space-10;
+  }
+
+  &__nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  &__nav ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+
+  &__link {
+    display: flex;
+    align-items: baseline;
+    gap: $space-4;
+    padding: $space-3 0;
+    color: $color-white;
+    font-family: $font-display;
+    font-weight: $fw-bold;
+    font-size: clamp(2rem, 8vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: $ls-tight;
+    transition: color $duration-base $ease-out-quart, padding-left $duration-base $ease-out-quart;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    &:hover {
+      color: $color-orange;
+      padding-left: $space-2;
+    }
+
+    &--active {
+      color: $color-orange;
+    }
+  }
+
+  &__linkNum {
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-medium;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: $ls-widest;
+  }
+
+  &__linkLabel {
+    flex: 1;
+  }
+
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    gap: $space-6;
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: rgba(255, 255, 255, 0.65);
+
+    a {
+      transition: color $duration-base $ease-out-quart;
+      &:hover {
+        color: $color-orange;
+      }
+    }
+  }
+}

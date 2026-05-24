@@ -1,0 +1,12 @@
+@use '@/styles/tokens' as *;
+
+.logo {
+  display: inline-block;
+  height: auto;
+  transition: opacity $duration-base $ease-out-quart;
+  user-select: none;
+
+  &--symbol {
+    aspect-ratio: 220 / 160;
+  }
+}

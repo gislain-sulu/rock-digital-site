@@ -1,0 +1,58 @@
+@use '@/styles/tokens' as *;
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: $space-8;
+  border-radius: $radius-lg;
+  transition:
+    transform $duration-base $ease-out-quart,
+    border-color $duration-base $ease-out-quart,
+    box-shadow $duration-slow $ease-out-quart,
+    background-color $duration-base $ease-out-quart;
+  isolation: isolate;
+  overflow: hidden;
+
+  &--light {
+    background: $color-white;
+    border: 1px solid $border-default;
+    color: $text-primary;
+    box-shadow: $shadow-xs;
+  }
+
+  &--soft {
+    background: $color-gray-lighter;
+    border: 1px solid $border-default;
+    color: $text-primary;
+  }
+
+  &--dark {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $border-on-dark;
+    color: $color-white;
+  }
+
+  &--outline {
+    background: transparent;
+    border: 1px solid $border-default;
+    color: $text-primary;
+  }
+
+  &--interactive {
+    cursor: pointer;
+
+    &:hover,
+    &:focus-within {
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+      border-color: rgba(46, 110, 187, 0.25);
+    }
+
+    &.card--dark:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@use '@/styles/tokens' as *;
+
+.pixel-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  &__pixel {
+    position: absolute;
+    display: block;
+    will-change: transform, opacity;
+  }
+}

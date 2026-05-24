@@ -1,0 +1,247 @@
+@use 'sass:math';
+@use 'tokens' as *;
+@use 'breakpoints' as *;
+
+// =============================================================================
+// Mixins utilitaires
+// =============================================================================
+
+@mixin container($max: $container-2xl) {
+  width: 100%;
+  max-width: $max;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+}
+
+@mixin section($size: md) {
+  position: relative;
+  @if $size == sm {
+    padding-block: $section-py-sm;
+  } @else if $size == lg {
+    padding-block: $section-py-lg;
+  } @else {
+    padding-block: $section-py-md;
+  }
+}
+
+@mixin focus-ring($color: $color-orange, $offset: 3px) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: $offset;
+    border-radius: $radius-xs;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin text-balance {
+  text-wrap: balance;
+}
+
+@mixin text-pretty {
+  text-wrap: pretty;
+}
+
+// Truncate à n lignes
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Glassmorphism subtil (mode clair, conforme charte)
+@mixin glass-light {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid $border-default;
+}
+
+@mixin glass-dark {
+  background: rgba(11, 27, 58, 0.7);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid $border-on-dark;
+}
+
+// Grille auto-fit
+@mixin auto-grid($min: 280px, $gap: $space-6) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
+  gap: $gap;
+}
+
+// Flex helpers
+@mixin flex($dir: row, $align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Aspect ratio safe
+@mixin aspect($w: 16, $h: 9) {
+  aspect-ratio: math.div($w, $h);
+}
+
+// Style des liens premium
+@mixin underline-grow($color: currentColor, $height: 1px) {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: $height;
+    background: $color;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform $duration-base $ease-out-quart;
+  }
+  &:hover::after,
+  &:focus-visible::after {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+}
+
+// Style "kicker" — petit label uppercase (souvent orange)
+@mixin kicker($color: $brand-accent) {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-ui;
+  font-size: $fs-sm;
+  font-weight: $fw-semibold;
+  letter-spacing: $ls-widest;
+  text-transform: uppercase;
+  color: $color;
+}
+
+// Tag chip
+@mixin chip($bg: $color-blue-soft, $color: $color-blue) {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-1 $space-3;
+  border-radius: $radius-pill;
+  background: $bg;
+  color: $color;
+  font-family: $font-ui;
+  font-size: $fs-xs;
+  font-weight: $fw-semibold;
+  letter-spacing: $ls-wide;
+}
+
+// Surface premium (utilisée par les cartes)
+@mixin surface-card {
+  background: $color-white;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  transition: $transition-base;
+  &:hover {
+    border-color: rgba(46, 110, 187, 0.2);
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+}
+
+// Surface dark
+@mixin surface-card-dark {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border-on-dark;
+  border-radius: $radius-lg;
+  transition: $transition-base;
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+// Heading scale
+@mixin h-display {
+  font-family: $font-display;
+  font-weight: $fw-extrabold;
+  font-size: $fs-display;
+  line-height: $lh-tight;
+  letter-spacing: $ls-tighter;
+  @include text-balance;
+}
+
+@mixin h1 {
+  font-family: $font-display;
+  font-weight: $fw-extrabold;
+  font-size: $fs-5xl;
+  line-height: $lh-tight;
+  letter-spacing: $ls-tight;
+  @include text-balance;
+}
+
+@mixin h2 {
+  font-family: $font-display;
+  font-weight: $fw-bold;
+  font-size: $fs-4xl;
+  line-height: $lh-snug;
+  letter-spacing: $ls-tight;
+  @include text-balance;
+}
+
+@mixin h3 {
+  font-family: $font-display;
+  font-weight: $fw-semibold;
+  font-size: $fs-3xl;
+  line-height: $lh-snug;
+  @include text-balance;
+}
+
+@mixin h4 {
+  font-family: $font-display;
+  font-weight: $fw-semibold;
+  font-size: $fs-2xl;
+  line-height: $lh-snug;
+}
+
+@mixin body-lg {
+  font-family: $font-body;
+  font-weight: $fw-regular;
+  font-size: $fs-md;
+  line-height: $lh-relaxed;
+  @include text-pretty;
+}
+
+@mixin body {
+  font-family: $font-body;
+  font-weight: $fw-regular;
+  font-size: $fs-base;
+  line-height: $lh-relaxed;
+}
+
+@mixin body-sm {
+  font-family: $font-body;
+  font-weight: $fw-regular;
+  font-size: $fs-sm;
+  line-height: $lh-base;
+}

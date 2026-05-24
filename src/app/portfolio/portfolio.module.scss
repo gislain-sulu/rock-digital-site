@@ -1,0 +1,177 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+  }
+
+  &__filter {
+    padding: $space-2 $space-4;
+    background: $color-white;
+    border: 1px solid $border-default;
+    border-radius: 999px;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $color-blue-slate;
+    cursor: pointer;
+    transition:
+      background-color $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart,
+      color $duration-base $ease-out-quart;
+    @include focus-ring;
+
+    &:hover {
+      border-color: $color-blue;
+      color: $color-blue;
+    }
+
+    &--active {
+      background: $color-black;
+      border-color: $color-black;
+      color: $color-white;
+
+      &:hover {
+        background: $color-orange;
+        border-color: $color-orange;
+        color: $color-white;
+      }
+    }
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-6;
+
+    @include bp-up(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bp-up(xl) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__card {
+    height: 100%;
+  }
+
+  &__cardLink {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: $space-5;
+    background: $color-white;
+    border: 1px solid $border-default;
+    border-radius: $radius-lg;
+    transition:
+      transform $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart,
+      box-shadow $duration-base $ease-out-quart;
+    scroll-margin-top: 120px;
+    @include focus-ring;
+
+    &:hover {
+      transform: translateY(-6px);
+      border-color: rgba(46, 110, 187, 0.2);
+      box-shadow: $shadow-lg;
+
+      .grid__cardTitle {
+        color: $color-blue;
+      }
+    }
+  }
+
+  &__cardVisual {
+    margin-bottom: $space-5;
+  }
+
+  &__cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    padding-inline: $space-1;
+  }
+
+  &__cardMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__cardCategory {
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    color: $color-orange;
+    text-transform: uppercase;
+    letter-spacing: $ls-widest;
+  }
+
+  &__cardYear {
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    color: $text-muted;
+    letter-spacing: $ls-wide;
+  }
+
+  &__cardTitle {
+    @include h4;
+    color: $color-black;
+    margin: 0;
+    transition: color $duration-base $ease-out-quart;
+  }
+
+  &__cardDescription {
+    color: $text-secondary;
+    line-height: $lh-relaxed;
+    margin: 0;
+    font-size: $fs-sm;
+  }
+
+  &__cardTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-top: $space-2;
+  }
+}
+
+.testimonialsLine {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  max-width: 880px;
+
+  &__kicker {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $color-orange;
+    text-transform: uppercase;
+    letter-spacing: $ls-widest;
+    margin: 0;
+  }
+
+  &__quote {
+    @include h3;
+    color: $color-black;
+    margin: 0;
+
+    span {
+      background: $gradient-blue;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+}

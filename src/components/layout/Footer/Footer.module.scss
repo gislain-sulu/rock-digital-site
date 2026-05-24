@@ -1,0 +1,191 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.footer {
+  position: relative;
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(46, 110, 187, 0.2) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 0% 100%,
+      rgba(245, 158, 11, 0.12) 0%,
+      transparent 55%
+    ),
+    $color-black;
+  color: $color-white;
+
+  &__srTitle {
+    @include visually-hidden;
+  }
+
+  &__inner {
+    @include container;
+  }
+
+  &__top {
+    padding-block: $section-py-md;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-10;
+
+    @include bp-up(md) {
+      grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: $space-12;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+  }
+
+  &__logo {
+    width: 220px;
+    height: auto;
+  }
+
+  &__tagline {
+    color: rgba(255, 255, 255, 0.68);
+    font-family: $font-body;
+    font-size: $fs-base;
+    line-height: $lh-relaxed;
+    max-width: 380px;
+    @include text-pretty;
+  }
+
+  &__socials {
+    display: flex;
+    gap: $space-2;
+  }
+
+  &__socialLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.72);
+    transition:
+      color $duration-base $ease-out-quart,
+      background-color $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart,
+      transform $duration-base $ease-out-quart;
+    @include focus-ring($color-orange);
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      background: $color-orange;
+      color: $color-white;
+      border-color: $color-orange;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+
+  &__heading {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    letter-spacing: $ls-widest;
+    text-transform: uppercase;
+    color: $color-orange;
+    margin: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+
+  &__link {
+    font-family: $font-body;
+    font-size: $fs-sm;
+    color: rgba(255, 255, 255, 0.66);
+    transition: color $duration-base $ease-out-quart, padding-left $duration-base $ease-out-quart;
+
+    &:hover {
+      color: $color-white;
+      padding-left: 4px;
+    }
+  }
+
+  &__copy {
+    font-family: $font-body;
+    font-size: $fs-sm;
+    color: rgba(255, 255, 255, 0.66);
+    line-height: $lh-relaxed;
+    margin: 0;
+    max-width: 320px;
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    margin-top: $space-4;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: rgba(255, 255, 255, 0.66);
+
+    a {
+      transition: color $duration-base $ease-out-quart;
+      &:hover {
+        color: $color-orange;
+      }
+    }
+  }
+
+  &__bottom {
+    padding-block: $space-6;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  &__bottomRow {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    color: rgba(255, 255, 255, 0.5);
+
+    @include bp-up(md) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__legal {
+    display: flex;
+    gap: $space-4;
+    flex-wrap: wrap;
+
+    a {
+      transition: color $duration-base $ease-out-quart;
+      &:hover {
+        color: $color-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,215 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.services {
+  &__heading {
+    margin-bottom: $space-12;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-5;
+
+    @include bp-up(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bp-up(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__card {
+    height: 100%;
+  }
+
+  &__cardInner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $space-6;
+    height: 100%;
+    padding: $space-8;
+    background: $color-white;
+    border: 1px solid $border-default;
+    border-radius: $radius-lg;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+      transform $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart,
+      box-shadow $duration-base $ease-out-quart;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(245, 158, 11, 0.5),
+        rgba(46, 110, 187, 0.5)
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity $duration-base $ease-out-quart;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      top: -110px;
+      right: -110px;
+      background: radial-gradient(
+        circle,
+        rgba(245, 158, 11, 0.1) 0%,
+        transparent 70%
+      );
+      transition: transform $duration-slow $ease-out-quart;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      border-color: transparent;
+      box-shadow: $shadow-lg;
+
+      &::before {
+        opacity: 1;
+      }
+
+      &::after {
+        transform: scale(2);
+      }
+
+      .services__number {
+        color: $color-orange;
+      }
+
+      .services__iconWrap {
+        background: $color-orange;
+        border-color: $color-orange;
+        color: $color-white;
+      }
+
+      .services__link {
+        color: $color-orange;
+
+        svg {
+          transform: translateX(4px);
+        }
+      }
+    }
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__number {
+    font-family: $font-display;
+    font-weight: $fw-bold;
+    font-size: $fs-xl;
+    color: rgba(35, 31, 32, 0.18);
+    letter-spacing: $ls-tight;
+    transition: color $duration-base $ease-out-quart;
+  }
+
+  &__iconWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: $radius-md;
+    background: $color-blue-soft;
+    color: $color-blue;
+    border: 1px solid rgba(46, 110, 187, 0.16);
+    transition:
+      color $duration-base $ease-out-quart,
+      background-color $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart;
+  }
+
+  &__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    flex: 1;
+  }
+
+  &__title {
+    @include h4;
+    color: $color-black;
+    margin: 0;
+  }
+
+  &__description {
+    color: $text-secondary;
+    line-height: $lh-relaxed;
+    margin: 0;
+  }
+
+  &__bullets {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    margin-top: $space-2;
+    padding: 0;
+
+    li {
+      font-family: $font-ui;
+      font-size: $fs-sm;
+      color: $color-blue-slate;
+      display: flex;
+      gap: $space-2;
+
+      span {
+        color: $color-orange;
+        font-weight: $fw-bold;
+      }
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $color-blue;
+    margin-top: auto;
+    padding-top: $space-3;
+    border-top: 1px solid $border-default;
+    transition: color $duration-base $ease-out-quart;
+    @include focus-ring;
+    border-radius: $radius-xs;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      transition: transform $duration-base $ease-out-quart;
+    }
+  }
+}

@@ -1,0 +1,171 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.testimonials {
+  margin-top: $space-12;
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+
+  &__viewport {
+    position: relative;
+    padding: $space-12;
+    background: $color-gray-lighter;
+    border: 1px solid $border-default;
+    border-radius: $radius-xl;
+    overflow: hidden;
+    min-height: 280px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      top: -160px;
+      right: -160px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      bottom: -160px;
+      left: -160px;
+      background: radial-gradient(circle, rgba(46, 110, 187, 0.12) 0%, transparent 70%);
+      z-index: 0;
+    }
+  }
+
+  &__quote {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-6;
+    max-width: 880px;
+  }
+
+  &__mark {
+    width: 36px;
+    height: 36px;
+    color: rgba(245, 158, 11, 0.5);
+  }
+
+  &__text {
+    font-family: $font-display;
+    font-weight: $fw-semibold;
+    font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+    line-height: $lh-snug;
+    color: $color-black;
+    letter-spacing: $ls-tight;
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    font-style: normal;
+  }
+
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: $gradient-blue;
+    color: $color-white;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    letter-spacing: $ls-wide;
+  }
+
+  &__name {
+    display: block;
+    font-family: $font-ui;
+    font-size: $fs-base;
+    font-weight: $fw-semibold;
+    color: $color-black;
+  }
+
+  &__role {
+    display: block;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $text-muted;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-4;
+
+    @include bp-up(md) {
+      justify-content: flex-end;
+      gap: $space-6;
+    }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: $color-white;
+    border: 1px solid $border-default;
+    color: $color-black;
+    transition:
+      background-color $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart,
+      color $duration-base $ease-out-quart;
+    @include focus-ring;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      background: $color-black;
+      color: $color-white;
+      border-color: $color-black;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+
+  &__dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(35, 31, 32, 0.18);
+    border: none;
+    cursor: pointer;
+    transition:
+      background-color $duration-base $ease-out-quart,
+      width $duration-base $ease-out-quart;
+    @include focus-ring;
+
+    &--active {
+      background: $color-orange;
+      width: 28px;
+    }
+  }
+}

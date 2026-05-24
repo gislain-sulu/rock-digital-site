@@ -1,0 +1,159 @@
+@use 'reset';
+@use 'tokens' as *;
+@use 'typography';
+@use 'breakpoints' as *;
+@use 'mixins' as *;
+
+// =============================================================================
+// CSS Custom Properties (pour transitions runtime & thèmes)
+// =============================================================================
+:root {
+  --color-blue: #{$color-blue};
+  --color-blue-deep: #{$color-blue-deep};
+  --color-orange: #{$color-orange};
+  --color-black: #{$color-black};
+  --color-white: #{$color-white};
+  --color-gray-dark: #{$color-gray-dark};
+  --color-gray-light: #{$color-gray-light};
+  --color-gray-lighter: #{$color-gray-lighter};
+  --color-blue-soft: #{$color-blue-soft};
+  --color-orange-soft: #{$color-orange-soft};
+
+  --bg-base: #{$bg-base};
+  --bg-subtle: #{$bg-subtle};
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-muted: #{$text-muted};
+
+  --container-max: #{$container-2xl};
+  --container-padding: #{$container-padding};
+
+  --header-height: 88px;
+
+  color-scheme: light;
+}
+
+html {
+  position: relative;
+}
+
+// Contenu visible avant hydratation React (évite l'écran blanc si le JS est lent ou bloqué)
+html:not(.motion-hydrated) {
+  [style*='opacity:0'],
+  [style*='opacity: 0'] {
+    opacity: 1 !important;
+  }
+
+  [style*='translateY(-'],
+  [style*='translateY(-3'] {
+    transform: none !important;
+  }
+
+  [class*='split__mask'] {
+    overflow: visible !important;
+  }
+
+  [class*='split__token'] {
+    transform: none !important;
+  }
+}
+
+html,
+body {
+  background-color: $bg-base;
+  color: $text-primary;
+}
+
+// Désactive scroll-behavior natif quand Lenis prend la main
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+main {
+  min-height: 100vh;
+}
+
+// Skip link accessible
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: $z-toast;
+  padding: $space-3 $space-4;
+  background: $color-black;
+  color: $color-white;
+  border-radius: $radius-sm;
+  font-family: $font-ui;
+  font-size: $fs-sm;
+  font-weight: $fw-semibold;
+  transition: top $duration-base $ease-out-quart;
+  &:focus {
+    top: 1rem;
+  }
+}
+
+// Sélection
+::selection {
+  background: rgba(46, 110, 187, 0.18);
+  color: $color-black;
+}
+
+// Scrollbar (subtile, conforme charte minimaliste)
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(35, 31, 32, 0.15);
+  border-radius: 999px;
+  border: 3px solid $bg-base;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(35, 31, 32, 0.3);
+}
+
+// Focus outline global
+:focus-visible {
+  outline: 2px solid $brand-accent;
+  outline-offset: 3px;
+  border-radius: $radius-xs;
+}
+
+// prefers-reduced-motion
+@include reduce-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,63 @@
+@use '@/styles/tokens' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-1 $space-3 $space-1 $space-3;
+  border-radius: $radius-pill;
+  font-family: $font-ui;
+  font-size: $fs-xs;
+  font-weight: $fw-semibold;
+  letter-spacing: $ls-wider;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  line-height: 1.4;
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.85;
+  }
+
+  &__icon {
+    display: inline-flex;
+    margin-left: -2px;
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+
+  &--blue {
+    background: $color-blue-soft;
+    color: $color-blue;
+    border-color: rgba(46, 110, 187, 0.12);
+  }
+
+  &--orange {
+    background: $color-orange-soft;
+    color: #b76a06;
+    border-color: rgba(245, 158, 11, 0.18);
+  }
+
+  &--dark {
+    background: rgba(35, 31, 32, 0.06);
+    color: $color-black;
+    border-color: rgba(35, 31, 32, 0.12);
+  }
+
+  &--light {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-white;
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-black;
+    border-color: rgba(35, 31, 32, 0.18);
+  }
+}

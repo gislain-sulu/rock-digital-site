@@ -1,0 +1,82 @@
+@use '@/styles/tokens' as *;
+
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+
+  &--size-sm {
+    padding-block: $section-py-sm;
+  }
+
+  &--size-md {
+    padding-block: $section-py-md;
+  }
+
+  &--size-lg {
+    padding-block: $section-py-lg;
+  }
+
+  &--tone-light {
+    background-color: $bg-base;
+    color: $text-primary;
+  }
+
+  &--tone-subtle {
+    background-color: $bg-subtle;
+    color: $text-primary;
+  }
+
+  &--tone-soft {
+    background: linear-gradient(180deg, $bg-base 0%, $color-blue-soft 100%);
+    color: $text-primary;
+  }
+
+  &--tone-deep {
+    background:
+      radial-gradient(
+        ellipse at 20% 0%,
+        rgba(46, 110, 187, 0.4) 0%,
+        transparent 50%
+      ),
+      $color-blue-deep;
+    color: $text-on-dark;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: $text-on-dark;
+    }
+
+    p {
+      color: $text-on-dark-soft;
+    }
+  }
+
+  &--tone-dark {
+    background:
+      radial-gradient(
+        ellipse at 80% 100%,
+        rgba(245, 158, 11, 0.18) 0%,
+        transparent 55%
+      ),
+      $color-black;
+    color: $text-on-dark;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: $text-on-dark;
+    }
+
+    p {
+      color: $text-on-dark-soft;
+    }
+  }
+}

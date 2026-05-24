@@ -1,0 +1,66 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+  max-width: 760px;
+
+  &--align-center {
+    align-items: center;
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  &--align-left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  &__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    letter-spacing: $ls-widest;
+    text-transform: uppercase;
+    color: $color-orange;
+    margin: 0;
+  }
+
+  &__kickerDot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: $color-orange;
+    border-radius: 999px;
+  }
+
+  &__title {
+    @include h2;
+    margin: 0;
+    color: inherit;
+  }
+
+  &__description {
+    @include body-lg;
+    color: $text-secondary;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  &--tone-dark {
+    color: $color-white;
+
+    .heading__title {
+      color: $color-white;
+    }
+
+    .heading__description {
+      color: $text-on-dark-soft;
+    }
+  }
+}

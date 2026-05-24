@@ -1,0 +1,81 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: calc(var(--header-height, 80px) + #{$space-16});
+  padding-bottom: $section-py-md;
+  background: $bg-base;
+
+  @include bp-up(lg) {
+    padding-top: calc(var(--header-height, 80px) + #{$space-20});
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &__gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      rgba(46, 110, 187, 0.12) 0%,
+      transparent 55%
+    );
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-5;
+    max-width: 900px;
+  }
+
+  &__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $color-orange;
+    text-transform: uppercase;
+    letter-spacing: $ls-widest;
+    margin: 0;
+
+    span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: $color-orange;
+      border-radius: 999px;
+    }
+  }
+
+  &__title {
+    @include h-display;
+    color: $color-black;
+    margin: 0;
+    max-width: 18ch;
+  }
+
+  &__description {
+    @include body-lg;
+    color: $text-secondary;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  &__extra {
+    margin-top: $space-4;
+  }
+}

@@ -1,0 +1,21 @@
+.split {
+  display: inline;
+
+  &__mask {
+    display: inline-flex;
+    overflow: hidden;
+    vertical-align: bottom;
+    line-height: 1;
+    padding-block: 0.05em;
+  }
+
+  &__token {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  &__space {
+    display: inline-block;
+    white-space: pre;
+  }
+}

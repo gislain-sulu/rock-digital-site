@@ -1,0 +1,63 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+
+.legal {
+  padding-top: calc(var(--header-height, 80px) + #{$space-12});
+
+  &__article {
+    display: flex;
+    flex-direction: column;
+    gap: $space-6;
+    max-width: 820px;
+
+    h1 {
+      @include h1;
+      color: $color-black;
+      margin: 0 0 $space-4 0;
+    }
+
+    h2 {
+      @include h3;
+      color: $color-black;
+      margin: $space-6 0 $space-3 0;
+    }
+
+    h3 {
+      @include h4;
+      color: $color-black;
+      margin: $space-4 0 $space-2 0;
+    }
+
+    p {
+      @include body;
+      color: $text-secondary;
+      margin: 0;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: $space-6;
+      color: $text-secondary;
+      line-height: $lh-relaxed;
+
+      li {
+        margin-bottom: $space-2;
+      }
+    }
+
+    a {
+      color: $color-blue;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color $duration-base $ease-out-quart;
+
+      &:hover {
+        color: $color-orange;
+      }
+    }
+
+    strong {
+      color: $color-black;
+    }
+  }
+}

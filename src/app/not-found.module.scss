@@ -1,0 +1,76 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.notFound {
+  position: relative;
+  overflow: hidden;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--header-height, 80px) + #{$space-12});
+  padding-bottom: $space-16;
+  background:
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(46, 110, 187, 0.08) 0%,
+      transparent 60%
+    ),
+    $bg-base;
+
+  & > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-12;
+    align-items: center;
+
+    @include bp-up(lg) {
+      grid-template-columns: 1.4fr 1fr;
+      gap: $space-16;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-5;
+    max-width: 640px;
+  }
+
+  &__kicker {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $color-orange;
+    text-transform: uppercase;
+    letter-spacing: $ls-widest;
+    margin: 0;
+  }
+
+  &__title {
+    @include h-display;
+    color: $color-black;
+    margin: 0;
+  }
+
+  &__lead {
+    @include body-lg;
+    color: $text-secondary;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-3;
+    margin-top: $space-2;
+  }
+
+  &__visual {
+    width: 100%;
+    max-width: 460px;
+    margin-inline: auto;
+  }
+}

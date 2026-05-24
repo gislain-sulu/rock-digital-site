@@ -1,0 +1,48 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+
+.loading {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-4;
+  background: $bg-base;
+  padding-top: var(--header-height, 80px);
+
+  &__label {
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    text-transform: uppercase;
+    letter-spacing: $ls-widest;
+    color: $color-blue;
+  }
+
+  &__bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(46, 110, 187, 0.15);
+    border-radius: 999px;
+    overflow: hidden;
+
+    span {
+      display: block;
+      width: 40%;
+      height: 100%;
+      background: $gradient-orange;
+      border-radius: 999px;
+      animation: loading-slide 1.4s ease-in-out infinite;
+    }
+  }
+
+  @keyframes loading-slide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(350%);
+    }
+  }
+}

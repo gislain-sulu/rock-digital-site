@@ -1,0 +1,82 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.stats {
+  &__bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  &__titleAccent {
+    background: $gradient-orange;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__grid {
+    margin-top: $space-12;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-6;
+
+    @include bp-up(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__card {
+    position: relative;
+    padding: $space-8 $space-6;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: $radius-lg;
+    text-align: left;
+    transition:
+      transform $duration-base $ease-out-quart,
+      background-color $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: $space-6;
+      left: $space-6;
+      width: 24px;
+      height: 2px;
+      background: $color-orange;
+      border-radius: 999px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-3px);
+    }
+  }
+
+  &__value {
+    font-family: $font-display;
+    font-weight: $fw-extrabold;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: $color-white;
+    letter-spacing: $ls-tighter;
+    line-height: 1;
+    margin: 0;
+    margin-top: $space-3;
+  }
+
+  &__label {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: rgba(255, 255, 255, 0.65);
+    margin: $space-2 0 0 0;
+    letter-spacing: $ls-wide;
+  }
+}

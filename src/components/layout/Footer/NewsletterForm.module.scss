@@ -1,0 +1,86 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  margin-top: $space-2;
+
+  &__label {
+    @include visually-hidden;
+  }
+
+  &__row {
+    display: flex;
+    align-items: stretch;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $radius-pill;
+    overflow: hidden;
+    transition:
+      border-color $duration-base $ease-out-quart,
+      background-color $duration-base $ease-out-quart;
+
+    &:focus-within {
+      border-color: rgba(245, 158, 11, 0.6);
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  &__input {
+    flex: 1;
+    min-width: 0;
+    padding: $space-3 $space-4;
+    background: transparent;
+    border: 0;
+    color: $color-white;
+    font-family: $font-body;
+    font-size: $fs-sm;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__submit {
+    padding-inline: $space-5;
+    background: $color-orange;
+    color: $color-white;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    border: none;
+    cursor: pointer;
+    transition: background-color $duration-base $ease-out-quart;
+    @include focus-ring;
+
+    &:hover:not(:disabled) {
+      background: $color-black;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__status {
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    min-height: 1em;
+    color: rgba(255, 255, 255, 0.6);
+
+    &[data-status='success'] {
+      color: $color-success;
+    }
+
+    &[data-status='error'] {
+      color: #f87171;
+    }
+  }
+}

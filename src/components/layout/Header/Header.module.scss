@@ -1,0 +1,211 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: $z-header;
+  height: var(--header-height, 80px);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(0);
+  transition:
+    background-color $duration-base $ease-out-quart,
+    border-color $duration-base $ease-out-quart,
+    backdrop-filter $duration-base $ease-out-quart,
+    box-shadow $duration-base $ease-out-quart;
+  border-bottom: 1px solid transparent;
+
+  &--scrolled {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom-color: $border-default;
+    box-shadow: 0 4px 24px rgba(35, 31, 32, 0.04);
+  }
+
+  &--hero {
+    .header__navLink {
+      color: rgba(255, 255, 255, 0.82);
+
+      &:hover,
+      &--active {
+        color: #00d2ff;
+      }
+    }
+
+    .header__burger {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: $color-white;
+
+      .header__burgerBar {
+        background: $color-white;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.28);
+        color: $color-white;
+
+        .header__burgerBar {
+          background: $color-white;
+        }
+      }
+    }
+  }
+
+  &__inner {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-6;
+    width: 100%;
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    @include focus-ring;
+    border-radius: $radius-sm;
+  }
+
+  &__logo {
+    width: 150px;
+    height: auto;
+
+    @include bp-up(md) {
+      width: 180px;
+    }
+  }
+
+  &__nav {
+    display: none;
+
+    @include bp-up(lg) {
+      display: block;
+    }
+  }
+
+  &__navList {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+
+  &__navLink {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: $space-2 $space-4;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $text-primary;
+    border-radius: $radius-pill;
+    transition: color $duration-base $ease-out-quart;
+    @include focus-ring;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      transform: translateX(-50%) scaleX(0);
+      width: 18px;
+      height: 2px;
+      background: $color-orange;
+      border-radius: 999px;
+      transform-origin: center;
+      transition: transform $duration-base $ease-out-quart;
+    }
+
+    &:hover,
+    &--active {
+      color: $color-blue;
+    }
+
+    &--active::before {
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
+
+  &__cta {
+    display: none;
+
+    @include bp-up(md) {
+      display: inline-flex;
+    }
+  }
+
+  &__burger {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid $border-default;
+    background: rgba(255, 255, 255, 0.6);
+    color: $color-black;
+    transition:
+      background-color $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart;
+    @include focus-ring;
+
+    @include bp-up(lg) {
+      display: none;
+    }
+
+    &:hover {
+      background: $color-black;
+      border-color: $color-black;
+      color: $color-white;
+
+      .header__burgerBar {
+        background: $color-white;
+      }
+    }
+  }
+
+  &__burgerBar {
+    position: absolute;
+    left: 50%;
+    width: 18px;
+    height: 2px;
+    background: $color-black;
+    border-radius: 999px;
+    transform: translateX(-50%);
+    transition: transform $duration-base $ease-out-quart;
+
+    &:nth-child(1) {
+      top: 18px;
+    }
+
+    &:nth-child(2) {
+      bottom: 18px;
+    }
+
+    &--open-1 {
+      top: 50% !important;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &--open-2 {
+      bottom: 50% !important;
+      transform: translate(-50%, 50%) rotate(-45deg);
+    }
+  }
+}

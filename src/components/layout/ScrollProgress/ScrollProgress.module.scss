@@ -1,0 +1,11 @@
+@use '@/styles/tokens' as *;
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: $gradient-orange;
+  transform-origin: 0%;
+  z-index: $z-toast;
+  pointer-events: none;
+}

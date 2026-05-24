@@ -1,0 +1,97 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// =============================================================================
+// Typographie de base
+// =============================================================================
+
+html {
+  font-family: $font-body;
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $fs-base;
+  line-height: $lh-relaxed;
+  color: $text-primary;
+  background-color: $bg-base;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-display;
+  color: $text-primary;
+  font-weight: $fw-bold;
+  letter-spacing: $ls-tight;
+  line-height: $lh-snug;
+}
+
+p {
+  color: $text-secondary;
+  line-height: $lh-relaxed;
+  @include text-pretty;
+}
+
+strong,
+b {
+  font-weight: $fw-semibold;
+  color: $text-primary;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+small {
+  font-size: $fs-sm;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
+  font-size: 0.9em;
+}
+
+// Utilitaires de texte
+.u-text-balance {
+  text-wrap: balance;
+}
+
+.u-text-pretty {
+  text-wrap: pretty;
+}
+
+.u-text-gradient-blue {
+  background: $gradient-blue;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.u-text-gradient-orange {
+  background: $gradient-orange;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.u-text-accent {
+  color: $brand-accent;
+}
+
+.u-text-blue {
+  color: $brand-primary;
+}

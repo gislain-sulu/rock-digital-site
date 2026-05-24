@@ -1,0 +1,92 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/breakpoints' as *;
+
+$hero-cyan: #00d2ff;
+
+.visual {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(260px, 42vh, 480px);
+  margin-inline: auto;
+  max-width: 420px;
+
+  @include bp-up(md) {
+    justify-content: flex-end;
+    max-width: none;
+    min-height: clamp(320px, 68vh, 540px);
+    align-self: stretch;
+  }
+
+  @media (min-width: 1440px) {
+    min-height: clamp(360px, 70vh, 620px);
+  }
+
+  &__glow {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(85%, 360px);
+    height: 45%;
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba($hero-cyan, 0.28) 0%,
+      rgba($hero-cyan, 0.08) 45%,
+      transparent 72%
+    );
+    filter: blur(18px);
+    pointer-events: none;
+  }
+
+  &__figure {
+    position: relative;
+    width: min(100%, 380px);
+    height: clamp(280px, 48vh, 520px);
+    z-index: 1;
+
+    @include bp-up(md) {
+      width: min(100%, 420px);
+      height: 100%;
+      max-height: 540px;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1365px) {
+      width: min(100%, 390px);
+      max-height: 500px;
+    }
+
+    @media (min-width: 1440px) {
+      width: min(100%, 470px);
+      max-height: 620px;
+    }
+  }
+
+  &__rock {
+    position: absolute;
+    bottom: -2%;
+    left: 50%;
+    transform: translateX(-48%);
+    width: 118%;
+    height: 72%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__rockImage {
+    object-fit: contain;
+    object-position: bottom center;
+    opacity: 0.92;
+  }
+
+  &__image {
+    position: relative;
+    z-index: 1;
+    object-fit: contain;
+    object-position: bottom center;
+    filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
+  }
+}
