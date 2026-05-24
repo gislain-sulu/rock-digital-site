@@ -135,6 +135,7 @@ $hero-cyan-deep: #007fff;
     gap: clamp(0.875rem, 2.2vh, 1.25rem);
     min-width: 0;
     max-width: 100%;
+    padding-bottom: clamp(1.8rem, 5vh, 3.2rem);
 
     @include bp-up(md) {
       max-width: 640px;
@@ -142,6 +143,7 @@ $hero-cyan-deep: #007fff;
 
     @include bp-up(lg) {
       max-width: 680px;
+      padding-bottom: clamp(2.2rem, 6vh, 4rem);
     }
 
     @media (min-width: 1440px) {
