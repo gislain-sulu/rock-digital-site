@@ -2,6 +2,18 @@
 @use '@/styles/mixins' as *;
 @use '@/styles/breakpoints' as *;
 
+.process__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: $space-2;
+}
+
+.process__heading {
+  gap: $space-5;
+}
+
 .process {
   position: relative;
   margin-top: $space-12;

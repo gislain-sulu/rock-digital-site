@@ -1,0 +1,163 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+
+// .service-single-box
+.serviceSingleBox {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  text-align: left;
+  background: $color-white;
+  border-radius: 5px;
+  box-shadow: 0 0 30px rgba(15, 23, 42, 0.08);
+  transition: 0.5s;
+
+  &::before {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    background: var(--service-hover-bg) center / cover no-repeat;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    clip-path: polygon(50% 0, 50% 0, 50% 50%, 50% 100%, 50% 100%, 50% 50%);
+    transition: 0.4s;
+  }
+
+  &:hover {
+    &::before {
+      clip-path: polygon(25% -70%, 75% -70%, 120% 50%, 75% 170%, 25% 170%, -20% 50%);
+    }
+
+    .serviceSingleBox__title,
+    .serviceSingleBox__text,
+    .serviceSingleBox__btnLink {
+      color: $color-white;
+    }
+
+    .serviceSingleBox__bullets li {
+      color: rgba(255, 255, 255, 0.92);
+
+      span {
+        color: $color-white;
+      }
+    }
+
+    .serviceSingleBox__icon img {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+// .service-icon
+.serviceSingleBox__icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(1rem, 2vw, 1.6rem);
+
+  img {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    max-width: 64px;
+    transition: 0.5s;
+  }
+}
+
+// .service-content
+.serviceSingleBox__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: $space-3;
+  position: relative;
+  z-index: 1;
+}
+
+// .service-title
+.serviceSingleBox__title {
+  margin: 0;
+  font-family: $font-display;
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-weight: $fw-semibold;
+  line-height: 1.25;
+  color: $color-black;
+  transition: color 0.4s;
+}
+
+// .service-text
+.serviceSingleBox__text {
+  margin: 0;
+  font-family: $font-ui;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  line-height: 1.6;
+  color: $text-secondary;
+  transition: color 0.4s;
+}
+
+.serviceSingleBox__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $color-blue-slate;
+    display: flex;
+    gap: $space-2;
+    transition: color 0.4s;
+
+    span {
+      color: $color-orange;
+      font-weight: $fw-bold;
+      flex-shrink: 0;
+      transition: color 0.4s;
+    }
+  }
+}
+
+// .service-btn
+.serviceSingleBox__btn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(0.4rem, 1vw, 0.6rem);
+}
+
+.serviceSingleBox__btnLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: $font-ui;
+  font-size: clamp(0.82rem, 0.95vw, 0.94rem);
+  font-weight: $fw-semibold;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $brand-accent;
+  transition: color 0.4s;
+  @include focus-ring;
+}
+
+.serviceSingleBox__btnIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}

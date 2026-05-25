@@ -1,9 +1,10 @@
 import { About } from '@/sections/About';
 import { CTA } from '@/sections/CTA';
 import { Hero } from '@/sections/Hero';
+import { ITServices } from '@/sections/ITServices';
 import { Portfolio } from '@/sections/Portfolio';
 import { Process } from '@/sections/Process';
-import { Services } from '@/sections/Services';
+// import { Services } from '@/sections/Services';
 import { Stats } from '@/sections/Stats';
 import { Technologies } from '@/sections/Technologies';
 import { Testimonials } from '@/sections/Testimonials';
@@ -15,7 +16,8 @@ export default function HomePage() {
       <Hero />
       <ValueProps />
       <About />
-      <Services />
+      <ITServices />
+      {/* <Services /> */}
       <Process />
       <Portfolio />
       <Technologies />

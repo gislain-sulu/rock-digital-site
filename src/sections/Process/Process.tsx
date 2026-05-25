@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
 import { processSteps } from '@/lib/content';
 
 import styles from './Process.module.scss';
@@ -21,17 +22,20 @@ export function Process() {
   return (
     <Section tone="light" size="lg" id="process">
       <Container>
-        <SectionHeading
-          kicker="Notre méthode"
-          title={
-            <>
-              Une approche éprouvée,{' '}
-              <span className="u-text-gradient-blue">six étapes claires.</span>
-            </>
-          }
-          description="De la découverte à l'optimisation continue, nous structurons chaque mission pour livrer un produit solide, mesurable et désirable."
-          align="left"
-        />
+        <div className={styles.process__header}>
+          <SectionSubTitle>Notre méthode</SectionSubTitle>
+          <SectionHeading
+            title={
+              <>
+                Une approche éprouvée,{' '}
+                <span className="u-text-gradient-blue">six étapes claires.</span>
+              </>
+            }
+            description="De la découverte à l'optimisation continue, nous structurons chaque mission pour livrer un produit solide, mesurable et désirable."
+            align="left"
+            className={styles.process__heading}
+          />
+        </div>
 
         <div className={styles.process} ref={ref}>
           <div className={styles.process__rail} aria-hidden="true">
