@@ -1,7 +1,9 @@
 'use client';
 
 import { motion, type Variants } from 'framer-motion';
-import { type ReactNode } from 'react';
+import { type ElementType, type ReactNode } from 'react';
+
+import { useHomeGsapManaged } from '@/contexts/HomeGsapContext';
 
 import { fadeUp } from '@/animations/variants';
 
@@ -24,6 +26,13 @@ export function FadeIn({
   as = 'div',
   once = true,
 }: FadeInProps) {
+  const homeGsap = useHomeGsapManaged();
+
+  if (homeGsap) {
+    const Tag = as as ElementType;
+    return <Tag className={className}>{children}</Tag>;
+  }
+
   const variants: Variants = {
     hidden: { opacity: 0, y },
     visible: {

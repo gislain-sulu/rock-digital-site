@@ -1,7 +1,9 @@
 'use client';
 
 import { motion, type Variants } from 'framer-motion';
-import { type ReactNode } from 'react';
+import { type ElementType, type ReactNode } from 'react';
+
+import { useHomeGsapManaged } from '@/contexts/HomeGsapContext';
 
 type StaggerGroupProps = {
   children: ReactNode;
@@ -20,6 +22,13 @@ export function StaggerGroup({
   as = 'div',
   once = true,
 }: StaggerGroupProps) {
+  const homeGsap = useHomeGsapManaged();
+
+  if (homeGsap) {
+    const Tag = as as ElementType;
+    return <Tag className={className}>{children}</Tag>;
+  }
+
   const variants: Variants = {
     hidden: {},
     visible: {
@@ -47,6 +56,7 @@ type StaggerItemProps = {
   className?: string;
   as?: 'div' | 'li' | 'article' | 'span';
   y?: number;
+  tabIndex?: number;
 };
 
 export function StaggerItem({
@@ -54,7 +64,19 @@ export function StaggerItem({
   className,
   as = 'div',
   y = 24,
+  tabIndex,
 }: StaggerItemProps) {
+  const homeGsap = useHomeGsapManaged();
+
+  if (homeGsap) {
+    const Tag = as as ElementType;
+    return (
+      <Tag className={className} tabIndex={tabIndex}>
+        {children}
+      </Tag>
+    );
+  }
+
   const variants: Variants = {
     hidden: { opacity: 0, y },
     visible: {
@@ -65,7 +87,12 @@ export function StaggerItem({
   };
   const MotionTag = motion[as];
   return (
-    <MotionTag className={className} variants={variants} initial={false}>
+    <MotionTag
+      className={className}
+      variants={variants}
+      initial={false}
+      tabIndex={tabIndex}
+    >
       {children}
     </MotionTag>
   );

@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
 import { technologies } from '@/lib/content';
 
 import styles from './Technologies.module.scss';
@@ -14,10 +15,12 @@ export function Technologies() {
   const marqueeItems = useMemo(() => [...technologies, ...technologies], []);
 
   return (
-    <Section tone="subtle" size="lg" id="technologies">
+    <Section tone="subtle" size="lg" id="technologies" className={styles.techSection}>
       <Container>
+        <SectionSubTitle className={styles.tech__kicker}>
+          Stack technique
+        </SectionSubTitle>
         <SectionHeading
-          kicker="Stack technique"
           title={
             <>
               Des technologies modernes,{' '}
@@ -45,32 +48,6 @@ export function Technologies() {
           </motion.ul>
         </div>
       </div>
-
-      <Container>
-        <div className={styles.tech__grid}>
-          {technologies.map((tech, idx) => (
-            <motion.div
-              key={tech.name}
-              className={styles.tech__card}
-              initial={false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{
-                duration: 0.5,
-                delay: (idx % 8) * 0.04,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <span
-                className={styles.tech__cardDot}
-                data-category={tech.category}
-              />
-              <span className={styles.tech__cardLabel}>{tech.name}</span>
-              <span className={styles.tech__cardCategory}>{tech.category}</span>
-            </motion.div>
-          ))}
-        </div>
-      </Container>
     </Section>
   );
 }

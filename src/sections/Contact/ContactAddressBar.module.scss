@@ -1,0 +1,89 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/breakpoints' as *;
+
+.addressArea {
+  margin-top: -$space-6;
+  padding: $space-6 0;
+  background: $brand-accent;
+  border-radius: $hero-corner-radius $hero-corner-radius 0 0;
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-6;
+    align-items: center;
+
+    @include bp-up(lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: $space-8;
+    }
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    min-width: 0;
+
+    @include bp-up(lg) {
+      &:last-child {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &__icon {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba($color-white, 0.2);
+    color: $text-on-dark;
+
+    svg {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      content: '';
+      border-radius: 50%;
+      border: 1px dashed rgba($color-white, 0.45);
+      animation: address-icon-spin 12s linear infinite;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(1.125rem, 2.4vw, 1.75rem);
+    font-weight: $fw-semibold;
+    line-height: $lh-snug;
+    color: $text-on-dark;
+  }
+
+  &__cta {
+    flex-shrink: 0;
+  }
+}
+
+@keyframes address-icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

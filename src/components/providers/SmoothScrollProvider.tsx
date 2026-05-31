@@ -1,10 +1,13 @@
 'use client';
 
 import Lenis from 'lenis';
+import gsap from 'gsap';
 import { type ReactNode, useEffect } from 'react';
 
 import { useMotionReady } from '@/hooks/useMotionReady';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { attachLenisScrollTrigger, detachLenisScrollTrigger } from '@/lib/gsap/attachLenisScrollTrigger';
+import { registerGsap } from '@/lib/gsap/registerGsap';
 
 type SmoothScrollProviderProps = {
   children: ReactNode;
@@ -17,6 +20,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   useEffect(() => {
     if (reducedMotion) return;
 
+    registerGsap();
+
     const lenis = new Lenis({
       duration: 1.15,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -26,17 +31,20 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       lerp: 0.1,
     });
 
-    let raf = 0;
-    const loop = (time: number) => {
-      lenis.raf(time);
-      raf = requestAnimationFrame(loop);
+    attachLenisScrollTrigger(lenis);
+
+    const onTick = (time: number) => {
+      lenis.raf(time * 1000);
     };
-    raf = requestAnimationFrame(loop);
+
+    gsap.ticker.add(onTick);
+    gsap.ticker.lagSmoothing(0);
 
     document.documentElement.classList.add('lenis');
 
     return () => {
-      cancelAnimationFrame(raf);
+      gsap.ticker.remove(onTick);
+      detachLenisScrollTrigger(lenis);
       lenis.destroy();
       document.documentElement.classList.remove('lenis');
     };

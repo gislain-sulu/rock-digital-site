@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Montserrat, Open_Sans } from 'next/font/google';
 
 import { Footer } from '@/components/layout/Footer';
+import { GoTopButton } from '@/components/layout/GoTopButton';
 import { Header } from '@/components/layout/Header';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
@@ -73,6 +74,7 @@ export default function RootLayout({
           <Header />
           <main id="main">{children}</main>
           <Footer />
+          <GoTopButton />
         </SmoothScrollProvider>
       </body>
     </html>

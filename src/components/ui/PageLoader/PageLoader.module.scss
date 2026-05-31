@@ -1,7 +1,7 @@
 @use '@/styles/tokens' as *;
 @use '@/styles/mixins' as *;
 
-.loading {
+.pageLoader {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,13 @@
   justify-content: center;
   gap: $space-4;
   background: $bg-base;
-  padding-top: var(--header-height, 80px);
+
+  &--overlay {
+    position: fixed;
+    inset: 0;
+    z-index: $z-overlay;
+    min-height: 0;
+  }
 
   &__label {
     font-family: $font-ui;
@@ -33,11 +39,11 @@
       height: 100%;
       background: $gradient-orange;
       border-radius: 999px;
-      animation: loading-slide 1.4s ease-in-out infinite;
+      animation: page-loader-slide 1.4s ease-in-out infinite;
     }
   }
 
-  @keyframes loading-slide {
+  @keyframes page-loader-slide {
     0% {
       transform: translateX(-100%);
     }

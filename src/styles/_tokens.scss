@@ -8,6 +8,7 @@
 // -----------------------------------------------------------------------------
 $color-blue: #2e6ebb; // BLEU PRINCIPAL — confiance, technologie
 $color-orange: #f59e0b; // ORANGE PRINCIPAL — énergie, action
+$color-orange-bright: #fdba3a; // extrémité claire du dégradé orange officiel
 $color-black: #231f20; // NOIR PROFOND — élégance, expertise
 $color-gray-dark: #4d4d4d; // GRIS FONCÉ — stabilité
 
@@ -31,7 +32,7 @@ $color-blue-night: #0b1b3a;
 // Dégradés officiels
 // -----------------------------------------------------------------------------
 $gradient-blue: linear-gradient(135deg, #1e4fa1 0%, #2e6ebb 100%);
-$gradient-orange: linear-gradient(135deg, #f59e0b 0%, #fdba3a 100%);
+$gradient-orange: linear-gradient(135deg, $color-orange 0%, $color-orange-bright 100%);
 $gradient-blue-deep: linear-gradient(180deg, #1e4fa1 0%, #0b1b3a 100%);
 $gradient-hero: radial-gradient(
   ellipse at 50% 100%,

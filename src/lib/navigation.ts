@@ -8,7 +8,6 @@ export const primaryNav: NavItem[] = [
   { label: 'Services', href: '/services' },
   { label: 'Réalisations', href: '/portfolio' },
   { label: 'À propos', href: '/a-propos' },
-  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 

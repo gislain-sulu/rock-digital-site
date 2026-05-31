@@ -1,0 +1,191 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.aboutValues {
+  &__shell {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+    overflow: hidden;
+    background: $color-white;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.1);
+
+    @include bp-up(lg) {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr);
+      align-items: stretch;
+    }
+  }
+
+  &__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(0.85rem, 1.8vw, 1.1rem);
+    padding: clamp(1.75rem, 3.5vw, 2.75rem) clamp(1.5rem, 3vw, 2.5rem);
+    background:
+      radial-gradient(circle at 18% 88%, rgba(56, 189, 248, 0.22) 0%, transparent 42%),
+      radial-gradient(circle at 72% 92%, rgba(46, 110, 187, 0.35) 0%, transparent 48%),
+      linear-gradient(155deg, #0f2f66 0%, #0b1b3a 58%, #08152f 100%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 0,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 12px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.03) 0,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 12px
+      );
+    color: $text-on-dark;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  &__kicker {
+    margin: 0;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    letter-spacing: $ls-widest;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  &__panelTitle {
+    margin: 0;
+    max-width: 14ch;
+    font-family: $font-display;
+    font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+    font-weight: $fw-semibold;
+    line-height: 1.12;
+    letter-spacing: $ls-tight;
+    color: $color-white;
+  }
+
+  &__accentLine {
+    display: block;
+    width: 56px;
+    height: 3px;
+    border-radius: 999px;
+    background: $brand-accent;
+  }
+
+  &__panelLead {
+    margin: 0;
+    max-width: 34ch;
+    font-family: $font-ui;
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: $lh-relaxed;
+    color: $text-on-dark-soft;
+  }
+
+  &__panelDecor {
+    position: absolute;
+    right: -8%;
+    bottom: -18%;
+    width: min(72%, 320px);
+    aspect-ratio: 1.1;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(96, 165, 250, 0.45) 0%, transparent 55%),
+      radial-gradient(circle at 70% 60%, rgba(37, 99, 235, 0.35) 0%, transparent 50%);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: $color-white;
+
+    @include bp-up(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(0.85rem, 1.6vw, 1.15rem);
+    padding: clamp(1.35rem, 2.4vw, 2rem) clamp(1.2rem, 2.2vw, 1.75rem);
+    border-bottom: 1px solid rgba($brand-primary, 0.1);
+
+    @include bp-up(md) {
+      min-height: 168px;
+      border-right: 1px solid rgba($brand-primary, 0.1);
+
+      &:nth-child(2n) {
+        border-right: none;
+      }
+
+      &:nth-child(n + 3) {
+        border-bottom: none;
+      }
+    }
+
+    &:last-child {
+      @media (max-width: 767px) {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__featureIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    border: 1.5px solid currentColor;
+    background: rgba($brand-primary, 0.04);
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    &--blue {
+      color: $brand-primary;
+      border-color: rgba($brand-primary, 0.35);
+    }
+
+    &--orange {
+      color: $brand-accent;
+      border-color: rgba($brand-accent, 0.4);
+      background: rgba($brand-accent, 0.06);
+    }
+  }
+
+  &__featureBody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+
+  &__featureTitle {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+    font-weight: $fw-semibold;
+    line-height: 1.25;
+    color: $color-blue-night;
+  }
+
+  &__featureText {
+    margin: 0;
+    font-family: $font-ui;
+    font-size: clamp(0.88rem, 1vw, 0.98rem);
+    line-height: 1.55;
+    color: $text-secondary;
+  }
+}

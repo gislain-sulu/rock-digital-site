@@ -21,6 +21,8 @@
   z-index: 1;
   overflow: hidden;
   border: 1px solid transparent;
+  cursor: pointer;
+  appearance: none;
   transition: $duration-slow;
 }
 
@@ -62,6 +64,11 @@
   color: $color-white;
 }
 
+.solutekBtn__link:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .solutekBtn__link--default:hover .solutekHoverBtn,
 .solutekBtn__link--dark:hover .solutekHoverBtn {
   opacity: 1;
@@ -72,6 +79,9 @@
 .solutekBtn__label {
   position: relative;
   z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .solutekBtn__icon {

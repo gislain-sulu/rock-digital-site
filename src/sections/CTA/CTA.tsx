@@ -1,91 +1,143 @@
-import { MountainFacets } from '@/components/brand/MountainFacets';
-import { PixelGrid } from '@/components/brand/PixelGrid';
-import { Button } from '@/components/ui/Button';
-import { Container } from '@/components/ui/Container';
-import { Section } from '@/components/ui/Section';
+'use client';
+
+import { AddressIcon, EmailIcon, PhoneIcon } from '@/components/icons/ContactIcons';
 import { FadeIn } from '@/components/motion/FadeIn';
-import { siteConfig } from '@/lib/seo';
+import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
+import { Container } from '@/components/ui/Container';
+import { RockDigitalButton } from '@/components/ui/RockDigitalButton';
+import { Section } from '@/components/ui/Section';
+import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
+import { contactInfo, contactLinks } from '@/lib/contact';
 
 import styles from './CTA.module.scss';
 
+const arrowIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M5 12h14" />
+    <path d="M13 5l7 7-7 7" />
+  </svg>
+);
+
+const metaItems = [
+  {
+    icon: EmailIcon,
+    label: 'Email',
+    value: contactInfo.email,
+    href: contactLinks.email,
+  },
+  {
+    icon: PhoneIcon,
+    label: 'Téléphone',
+    value: contactInfo.phone,
+    href: contactLinks.phone,
+  },
+  {
+    icon: AddressIcon,
+    label: 'Adresse',
+    value: contactInfo.address,
+  },
+] as const;
+
 export function CTA() {
   return (
-    <Section tone="dark" size="lg" className={styles.cta} id="cta">
-      <div className={styles.cta__bg} aria-hidden="true">
-        <PixelGrid variant="dark" density="high" />
-        <div className={styles.cta__mountain}>
-          <MountainFacets variant="dark" animated={false} />
-        </div>
-      </div>
+    <Section tone="light" size="lg" id="contact" className={styles.ctaSection}>
+      <Container className={styles.ctaSection__container}>
+        <div className={styles.ctaSection__panel}>
+          <StaggerGroup className={styles.ctaSection__mainGroup} stagger={0.12}>
+            <StaggerItem className={styles.ctaSection__main}>
+              <SectionSubTitle className={styles.ctaSection__eyebrow}>
+                Contact
+              </SectionSubTitle>
 
-      <Container>
-        <div className={styles.cta__inner}>
-          <FadeIn>
-            <p className={styles.cta__kicker}>
-              <span aria-hidden="true">★</span> Prêt à construire votre prochain produit ?
-            </p>
-          </FadeIn>
+              <h2 className={styles.ctaSection__title}>
+                Construisons ensemble la{' '}
+                <span className="u-text-gradient-blue">fondation digitale</span>{' '}
+                de demain.
+              </h2>
 
-          <FadeIn delay={0.1}>
-            <h2 className={styles.cta__title}>
-              Construisons ensemble{' '}
-              <span className={styles.cta__titleAccent}>
-                la fondation digitale de demain.
-              </span>
-            </h2>
-          </FadeIn>
+              <p className={styles.ctaSection__lead}>
+                Parlons de votre site, application ou plateforme. Deux parcours :
+                une demande de devis structurée ou une discussion directe avec
+                l&apos;équipe.
+              </p>
 
-          <FadeIn delay={0.2}>
-            <p className={styles.cta__lead}>
-              Un projet ? Une idée ? Une transformation à entreprendre ?
-              Échangeons 30 minutes pour évaluer ensemble la meilleure voie.
-            </p>
-          </FadeIn>
+              <div className={styles.ctaSection__actions}>
+                <RockDigitalButton
+                  href="/contact"
+                  variant="default"
+                  icon={arrowIcon}
+                  iconPosition="right"
+                >
+                  Démarrer un projet
+                </RockDigitalButton>
+                <RockDigitalButton href="/contact#devis" variant="outline">
+                  Demander un devis
+                </RockDigitalButton>
+              </div>
+            </StaggerItem>
+          </StaggerGroup>
 
-          <FadeIn delay={0.3}>
-            <div className={styles.cta__actions}>
-              <Button href="/contact" variant="primary" size="lg">
-                Démarrer un projet
-              </Button>
-              <Button
-                href={`mailto:${siteConfig.email}`}
-                external
-                variant="light"
-                size="lg"
+          <div className={styles.ctaSection__visualCol}>
+            <div className={styles.ctaSection__backdrop} aria-hidden="true">
+              <div className={styles.ctaSection__bgImage} />
+              <div className={styles.ctaSection__overlay} />
+              <span className={styles.ctaSection__orb} />
+              <span
+                className={`${styles.ctaSection__orb} ${styles['ctaSection__orb--accent']}`}
+              />
+              <span className={styles.ctaSection__grid} />
+            </div>
+
+            <FadeIn y={40} delay={0.15} className={styles.ctaSection__metaWrap}>
+              <aside
+                className={styles.ctaSection__meta}
+                aria-label="Coordonnées"
               >
-                Écrire à l'équipe
-              </Button>
-            </div>
-          </FadeIn>
+                <header className={styles.ctaSection__metaHeader}>
+                  <span className={styles.ctaSection__metaBadge}>Coordonnées</span>
+                  <p className={styles.ctaSection__metaIntro}>
+                    Une équipe disponible pour concrétiser votre vision digitale.
+                  </p>
+                </header>
 
-          <FadeIn delay={0.4}>
-            <div className={styles.cta__meta}>
-              <div>
-                <span className={styles.cta__metaLabel}>Email</span>
-                <a
-                  className={styles.cta__metaValue}
-                  href={`mailto:${siteConfig.email}`}
-                >
-                  {siteConfig.email}
-                </a>
-              </div>
-              <div>
-                <span className={styles.cta__metaLabel}>Téléphone</span>
-                <a
-                  className={styles.cta__metaValue}
-                  href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`}
-                >
-                  {siteConfig.phone}
-                </a>
-              </div>
-              <div>
-                <span className={styles.cta__metaLabel}>Localisation</span>
-                <span className={styles.cta__metaValue}>
-                  {siteConfig.address}
-                </span>
-              </div>
-            </div>
-          </FadeIn>
+                <div className={styles.ctaSection__metaList}>
+                  {metaItems.map(({ icon: Icon, label, value, ...rest }) => (
+                    <div key={label} className={styles.ctaSection__metaItem}>
+                      <span
+                        className={styles.ctaSection__metaIcon}
+                        aria-hidden="true"
+                      >
+                        <Icon />
+                      </span>
+                      <div className={styles.ctaSection__metaContent}>
+                        <span className={styles.ctaSection__metaLabel}>{label}</span>
+                        {'href' in rest && rest.href ? (
+                          <a
+                            href={rest.href}
+                            className={styles.ctaSection__metaValue}
+                          >
+                            {value}
+                          </a>
+                        ) : (
+                          <span className={styles.ctaSection__metaValue}>
+                            {value}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </aside>
+            </FadeIn>
+          </div>
         </div>
       </Container>
     </Section>

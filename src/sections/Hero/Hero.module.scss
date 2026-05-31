@@ -157,15 +157,6 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
     }
   }
 
-  &__badge {
-    background: rgba($hero-cyan, 0.08);
-    border-color: rgba($hero-cyan, 0.28);
-    color: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 0 24px rgba($hero-cyan, 0.12);
-  }
-
   &__title {
     margin: 0;
     font-family: $font-display;
@@ -175,6 +166,7 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
     letter-spacing: $ls-tight;
     color: $color-white;
     text-shadow: 0 2px 40px rgba(0, 0, 0, 0.45);
+    perspective: 900px;
     @include text-balance;
 
     @media (min-width: 1440px) {
@@ -186,14 +178,19 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
 
   &__titleLine {
     display: block;
+    overflow: hidden;
+    padding-bottom: 0.06em;
+    will-change: clip-path, opacity;
   }
 
   &__word {
-    display: inline;
+    display: inline-block;
+    transform-style: preserve-3d;
+    will-change: transform, opacity, filter;
   }
 
   &__titleHighlight {
-    display: inline;
+    display: inline-block;
     background: linear-gradient(135deg, $hero-cyan 0%, $hero-cyan-deep 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -216,7 +213,7 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
   }
 
   &__titleAccent {
-    display: inline;
+    display: inline-block;
     color: rgba(255, 255, 255, 0.94);
   }
 
@@ -227,11 +224,19 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
     color: rgba(255, 255, 255, 0.78);
     text-shadow: 0 1px 24px rgba(0, 0, 0, 0.35);
     font-size: clamp(0.9375rem, 1.6vw, 1.125rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.35rem, 1vh, 0.5rem);
 
     @media (min-width: 1440px) {
       max-width: 58ch;
       font-size: clamp(1rem, 1.08vw, 1.18rem);
     }
+  }
+
+  &__leadChunk {
+    display: block;
+    will-change: transform, opacity, filter;
   }
 
   &__actions {

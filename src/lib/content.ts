@@ -219,6 +219,34 @@ export const projects: Project[] = [
   },
 ];
 
+export const partnerBrands = [
+  'AROUNDS',
+  'Technology',
+  'Grameen',
+  'Walmart',
+  'Deluxon',
+] as const;
+
+/** Jeux de logos synchronisés avec chaque slide du carousel projets (page d'accueil). */
+export const recentProjectPartnerSlides: readonly (readonly string[])[] = [
+  ['AROUNDS', 'Technology', 'Grameen', 'Walmart', 'Deluxon'],
+  ['Technology', 'Grameen', 'Walmart', 'Deluxon', 'AROUNDS'],
+  ['Grameen', 'Walmart', 'Deluxon', 'AROUNDS', 'Technology'],
+  ['Walmart', 'Deluxon', 'AROUNDS', 'Technology', 'Grameen'],
+  ['Deluxon', 'AROUNDS', 'Technology', 'Grameen', 'Walmart'],
+  ['AROUNDS', 'Grameen', 'Deluxon', 'Technology', 'Walmart'],
+];
+
+/** Vignettes carousel project-area (SoluTek project1–5.png) */
+export const recentProjectImages: Record<string, string> = {
+  'fintech-platform': '/project1.png',
+  'health-app': '/project2.png',
+  'ecommerce-luxe': '/project3.png',
+  'edu-saas': '/project4.png',
+  'logistics-dashboard': '/project5.png',
+  'creative-agency': '/project1.png',
+};
+
 export type Technology = {
   name: string;
   category: 'frontend' | 'backend' | 'mobile' | 'devops' | 'data';
@@ -250,6 +278,7 @@ export type Testimonial = {
   author: string;
   role: string;
   company: string;
+  rating: 3 | 4 | 5;
 };
 
 export const testimonials: Testimonial[] = [
@@ -259,6 +288,7 @@ export const testimonials: Testimonial[] = [
     author: 'Sarah Lemoine',
     role: 'CPO',
     company: 'Vantio SaaS',
+    rating: 5,
   },
   {
     quote:
@@ -266,6 +296,7 @@ export const testimonials: Testimonial[] = [
     author: 'Karim Bennani',
     role: 'CEO',
     company: 'Atlas Health',
+    rating: 4,
   },
   {
     quote:
@@ -273,6 +304,7 @@ export const testimonials: Testimonial[] = [
     author: 'Léa Martin',
     role: 'Directrice Marketing',
     company: 'Maison Vertal',
+    rating: 5,
   },
   {
     quote:
@@ -280,6 +312,7 @@ export const testimonials: Testimonial[] = [
     author: 'Antoine Dubois',
     role: 'Fondateur',
     company: 'Studio Orbe',
+    rating: 4,
   },
 ];
 

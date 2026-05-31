@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,13 +15,15 @@ import styles from './Navbar.module.scss';
 
 export function Navbar() {
   const pathname = usePathname();
-  const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    setScrolled(latest > 24);
-  });
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -39,18 +41,15 @@ export function Navbar() {
 
   return (
     <>
-      <motion.header
+      <header
         className={cn(
           styles.navbar,
           scrolled && styles['navbar--scrolled'],
           heroMode && styles['navbar--hero']
         )}
-        initial={false}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <span className={styles.navbar__ambientGlow} aria-hidden />
-        <motion.div className={styles.navbar__inner}>
+        <div className={styles.navbar__inner}>
           <Link
             href="/"
             className={styles.navbar__brand}
@@ -72,7 +71,7 @@ export function Navbar() {
 
           <nav className={styles.navbar__nav} aria-label="Navigation principale">
             <ul className={styles.navbar__navList}>
-              {primaryNav.slice(0, -1).map((item) => {
+              {primaryNav.map((item) => {
                 const active =
                   item.href === '/'
                     ? pathname === '/'
@@ -95,11 +94,8 @@ export function Navbar() {
             </ul>
           </nav>
 
-          <motion.div className={styles.navbar__actions}>
-            <RockDigitalButton
-              href="/contact"
-              className={styles.navbar__cta}
-            >
+          <div className={styles.navbar__actions}>
+            <RockDigitalButton href="/contact" className={styles.navbar__cta}>
               Démarrer un projet
             </RockDigitalButton>
             <button
@@ -123,9 +119,9 @@ export function Navbar() {
                 )}
               />
             </button>
-          </motion.div>
-        </motion.div>
-      </motion.header>
+          </div>
+        </div>
+      </header>
 
       <AnimatePresence>
         {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}

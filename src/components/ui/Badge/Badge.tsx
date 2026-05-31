@@ -9,11 +9,13 @@ type BadgeTone = 'blue' | 'orange' | 'dark' | 'light' | 'outline';
 type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
   tone?: BadgeTone;
   icon?: ReactNode;
+  showDot?: boolean;
 };
 
 export function Badge({
   tone = 'blue',
   icon,
+  showDot = true,
   className,
   children,
   ...rest
@@ -28,7 +30,7 @@ export function Badge({
           {icon}
         </span>
       )}
-      <span className={styles.badge__dot} aria-hidden="true" />
+      {showDot && <span className={styles.badge__dot} aria-hidden="true" />}
       <span className={styles.badge__label}>{children}</span>
     </span>
   );

@@ -1,0 +1,51 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/breakpoints' as *;
+
+.aboutCareers {
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vw, 2rem);
+    align-items: flex-start;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border-radius: $radius-md;
+    border: 1px solid $border-default;
+    background: rgba($brand-primary, 0.04);
+    box-shadow: 0 0 30px rgba(15, 23, 42, 0.06);
+
+    @include bp-up(md) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: $space-10;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 1.6vw, 0.95rem);
+    max-width: 620px;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: $fw-semibold;
+    line-height: 1.15;
+    color: $color-blue-night;
+
+    span {
+      color: $brand-accent;
+    }
+  }
+
+  &__lead {
+    margin: 0;
+    font-family: $font-ui;
+    font-size: $fs-base;
+    color: $text-secondary;
+    line-height: $lh-relaxed;
+  }
+}

@@ -2,7 +2,7 @@
 @use '@/styles/mixins' as *;
 @use '@/styles/breakpoints' as *;
 
-.about {
+.aboutShowcase {
   position: relative;
 
   &__inner {
@@ -60,7 +60,12 @@
     aspect-ratio: 1;
     border-radius: 50%;
     background:
-      radial-gradient(circle, rgba(56, 189, 248, 0.38) 0%, rgba(37, 99, 235, 0.18) 45%, transparent 74%),
+      radial-gradient(
+        circle,
+        rgba(56, 189, 248, 0.38) 0%,
+        rgba(37, 99, 235, 0.18) 45%,
+        transparent 74%
+      ),
       url('/feature-design-1.png') center/cover no-repeat;
     filter: blur(1px);
     opacity: 0.84;
@@ -68,7 +73,7 @@
     pointer-events: none;
   }
 
-  &__title {
+  &__badge {
     position: absolute;
     left: clamp(1rem, 2vw, 1.5rem);
     bottom: clamp(1rem, 2.2vw, 1.5rem);
@@ -109,10 +114,7 @@
     color: $color-black;
 
     span {
-      background: $gradient-blue;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: $brand-accent;
     }
   }
 

@@ -1,86 +1,123 @@
 @use '@/styles/tokens' as *;
 @use '@/styles/mixins' as *;
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: $space-3;
+// Structure form-field2 (Solutek) — couleurs charte Rock Digital
+.subscribeForm2 {
   margin-top: $space-2;
 
   &__label {
     @include visually-hidden;
   }
 
-  &__row {
-    display: flex;
-    align-items: stretch;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: $radius-pill;
-    overflow: hidden;
-    transition:
-      border-color $duration-base $ease-out-quart,
-      background-color $duration-base $ease-out-quart;
-
-    &:focus-within {
-      border-color: rgba(245, 158, 11, 0.6);
-      background: rgba(255, 255, 255, 0.08);
-    }
-  }
-
-  &__input {
-    flex: 1;
-    min-width: 0;
-    padding: $space-3 $space-4;
-    background: transparent;
-    border: 0;
-    color: $color-white;
-    font-family: $font-body;
-    font-size: $fs-sm;
-
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  &__submit {
-    padding-inline: $space-5;
-    background: $color-orange;
-    color: $color-white;
-    font-family: $font-ui;
-    font-size: $fs-sm;
-    font-weight: $fw-semibold;
-    border: none;
-    cursor: pointer;
-    transition: background-color $duration-base $ease-out-quart;
-    @include focus-ring;
-
-    &:hover:not(:disabled) {
-      background: $color-black;
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
-
   &__status {
+    margin: $space-2 0 0;
     font-family: $font-ui;
     font-size: $fs-xs;
     min-height: 1em;
-    color: rgba(255, 255, 255, 0.6);
+    line-height: $lh-snug;
+    color: $text-on-dark-soft;
 
     &[data-status='success'] {
-      color: $color-success;
+      color: $brand-success;
     }
 
     &[data-status='error'] {
       color: #f87171;
     }
+  }
+}
+
+.formField2 {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border: 1px solid $border-on-dark;
+  border-radius: $radius-md;
+  overflow: hidden;
+  transition: border-color $duration-base $ease-out-quart;
+
+  &:focus-within {
+    border-color: rgba($brand-accent, 0.65);
+  }
+
+  &__input {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    height: 56px;
+    margin: 0;
+    padding: 0 $space-5;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    box-shadow: none;
+    background-color: rgba($color-white, 0.06);
+    color: $text-on-dark-soft;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-regular;
+    line-height: $lh-snug;
+
+    &::placeholder {
+      color: $color-blue-gray;
+      font-family: $font-ui;
+      font-size: $fs-sm;
+      font-weight: $fw-regular;
+      line-height: $lh-snug;
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      box-shadow: none;
+      color: $text-on-dark;
+    }
+  }
+
+  &__button {
+    position: relative;
+    top: 0;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 56px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background-color: $brand-accent;
+    color: $text-on-dark;
+    font-size: $fs-xl;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color $duration-base $ease-out-quart;
+
+    &:focus-visible {
+      outline: 2px solid $text-on-dark;
+      outline-offset: -2px;
+    }
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: $color-black;
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+  }
+
+  &__loading {
+    font-family: $font-ui;
+    font-size: $fs-xl;
+    line-height: 1;
   }
 }

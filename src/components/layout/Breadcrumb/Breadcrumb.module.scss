@@ -1,0 +1,69 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/breakpoints' as *;
+
+.breadcrumbArea {
+  position: relative;
+  padding: clamp(7rem, 14vw, 10rem) 0 clamp(4rem, 8vw, 6rem);
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba($brand-primary, 0.35) 0%,
+      transparent 55%
+    ),
+    $color-blue-night;
+
+  &__content {
+    text-align: center;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: $fw-semibold;
+    line-height: 1.1;
+    letter-spacing: $ls-tight;
+    text-transform: uppercase;
+    color: $text-on-dark;
+  }
+
+  &__list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    margin: $space-5 0 0;
+    padding: $space-1 $space-3;
+    list-style: none;
+    border-radius: $radius-sm;
+    background-color: rgba($color-white, 0.06);
+  }
+
+  &__list li {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $text-on-dark-soft;
+
+    a {
+      color: $text-on-dark-soft;
+      transition: color $duration-base $ease-out-quart;
+
+      &:hover {
+        color: $brand-accent;
+      }
+    }
+
+    span[aria-current='page'] {
+      color: $text-on-dark;
+    }
+  }
+
+  &__sep {
+    color: $brand-accent;
+    font-weight: $fw-semibold;
+  }
+}

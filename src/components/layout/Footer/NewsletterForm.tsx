@@ -6,6 +6,16 @@ import styles from './NewsletterForm.module.scss';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
+const sendIcon = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path
+      fill="currentColor"
+      d="m2.6 10.42l7.64 3.34l3.34 7.64c.16.37.52.6.92.6h.05a1 1 0 0 0 .9-.69l5.5-17a.988.988 0 0 0-1.25-1.25L2.69 8.55c-.4.13-.67.49-.69.9s.22.8.6.97"
+    />
+  </svg>
+);
+
 export function NewsletterForm() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<Status>('idle');
@@ -27,40 +37,50 @@ export function NewsletterForm() {
   }
 
   return (
-    <form className={styles.form} onSubmit={onSubmit} noValidate>
-      <label htmlFor="newsletter-email" className={styles.form__label}>
-        Adresse e-mail
-      </label>
-      <div className={styles.form__row}>
-        <input
-          id="newsletter-email"
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          required
-          placeholder="vous@entreprise.com"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          className={styles.form__input}
-          aria-invalid={status === 'error' ? 'true' : undefined}
-          aria-describedby="newsletter-status"
-        />
-        <button
-          type="submit"
-          className={styles.form__submit}
-          disabled={status === 'submitting'}
-        >
-          {status === 'submitting' ? '...' : "S'abonner"}
-        </button>
-      </div>
+    <div className={styles.subscribeForm2}>
+      <form onSubmit={onSubmit} noValidate>
+        <label htmlFor="newsletter-email" className={styles.subscribeForm2__label}>
+          Adresse e-mail
+        </label>
+        <div className={styles.formField2}>
+          <input
+            id="newsletter-email"
+            type="email"
+            name="EMAIL"
+            inputMode="email"
+            autoComplete="email"
+            required
+            placeholder="Entrez votre e-mail"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            className={styles.formField2__input}
+            aria-invalid={status === 'error' ? 'true' : undefined}
+            aria-describedby="newsletter-status"
+          />
+          <button
+            type="submit"
+            className={styles.formField2__button}
+            disabled={status === 'submitting'}
+            aria-label="S'abonner à la newsletter"
+          >
+            {status === 'submitting' ? (
+              <span className={styles.formField2__loading} aria-hidden="true">
+                …
+              </span>
+            ) : (
+              sendIcon
+            )}
+          </button>
+        </div>
+      </form>
       <p
         id="newsletter-status"
-        className={styles.form__status}
+        className={styles.subscribeForm2__status}
         data-status={status}
         role={status === 'error' ? 'alert' : 'status'}
       >
         {message}
       </p>
-    </form>
+    </div>
   );
 }

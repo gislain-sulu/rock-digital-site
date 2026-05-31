@@ -1,2 +1,6 @@
-export { ServiceSingleBox } from './ServiceSingleBox';
-export type { ServiceSingleBoxProps } from './ServiceSingleBox';
+export {
+  ServiceSingleBox,
+  ServiceSingleBoxWithBullets,
+  ServiceSingleBoxWithoutBullets,
+} from './ServiceSingleBox';
+export type { ServiceSingleBoxProps, ServiceSingleBoxVariant } from './ServiceSingleBox';

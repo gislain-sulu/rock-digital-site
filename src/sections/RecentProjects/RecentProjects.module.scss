@@ -1,0 +1,382 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+// =============================================================================
+// project-area — SoluTek (https://solutek-html.netlify.app/)
+// =============================================================================
+
+$project-footer-bg: #171a2b;
+$project-tag-bg: #050a1e;
+$project-stage-bg: $project-tag-bg;
+$project-card-radius: 20px;
+$bandeau-radius: clamp(1.75rem, 3.2vw, 2.75rem);
+$project-header-x: clamp(1rem, 12vw, 18.5rem);
+$project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
+
+.projectArea {
+  position: relative;
+  isolation: isolate;
+  padding: 120px 0 88px;
+  overflow-x: clip;
+  background-image: url('/project-area-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  &__container {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+
+  // row project — 2 colonnes (titre / CTA), aligné sur le layout Rock Digital
+  &__projectRow {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: end;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    padding-inline: $project-header-x;
+
+    @include bp-up(lg) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+  &__projectCol {
+    min-width: 0;
+
+    &:last-child {
+      display: flex;
+      justify-content: flex-start;
+
+      @include bp-up(lg) {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &__headerIntro {
+    max-width: 640px;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(1.85rem, 3.8vw, 2.625rem);
+    font-weight: $fw-bold;
+    line-height: 1.2;
+    color: $project-tag-bg;
+
+    span {
+      display: inline;
+      color: $brand-accent;
+    }
+  }
+
+  &__headerAside {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+    text-align: left;
+
+    @include bp-up(lg) {
+      width: auto;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -3.25rem;
+      height: 1px;
+      background: #e4e4e4;
+
+      @include bp-up(lg) {
+        bottom: -3.25rem;
+      }
+    }
+  }
+
+  &__cta {
+    display: inline-flex;
+  }
+
+  // row carousel — gouttière alignée sur le carousel, plus étroite que l'en-tête
+  &__carouselRow {
+    margin-top: 0;
+    padding-inline: $project-carousel-x;
+    background: transparent;
+  }
+
+  &__carousel {
+    position: relative;
+    z-index: 1;
+    padding-inline: 0;
+    background-color: transparent;
+  }
+
+  &__viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__track {
+    display: flex;
+    width: max-content;
+    margin-bottom: 30px;
+    will-change: transform;
+  }
+
+  &__card {
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  &__cardLink {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    @include focus-ring($brand-accent, 4px);
+  }
+
+  &__thumb {
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform $duration-slower $ease-out-expo;
+  }
+
+  &__cardLink:hover &__image,
+  &__cardLink:focus-visible &__image {
+    transform: scale(1.04);
+  }
+
+  &__content {
+    padding: 33px 0 41px;
+    text-align: center;
+    background: $project-footer-bg;
+    border-radius: 0 0 $project-card-radius $project-card-radius;
+  }
+
+  &__cardTitle {
+    margin: 0 0 23px;
+    font-family: $font-display;
+    font-size: clamp(1.1rem, 1.6vw, 1.375rem);
+    font-weight: $fw-semibold;
+    line-height: 1.27;
+    color: #fefefe;
+    transition: color $duration-slow $ease-out-quart;
+  }
+
+  &__cardLink:hover &__cardTitle,
+  &__cardLink:focus-visible &__cardTitle {
+    color: $brand-accent;
+  }
+
+  &__tag {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 7px 35px;
+    border-radius: $project-card-radius;
+    background-color: $project-tag-bg;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-regular;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: #fefefe;
+    cursor: pointer;
+    transition: color $duration-slow $ease-out-quart;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: $project-card-radius;
+      background: $brand-accent;
+      transform: scale(0);
+      transition: transform $duration-slow $ease-out-quart;
+    }
+  }
+
+  &__cardLink:hover &__tag::before,
+  &__cardLink:focus-visible &__tag::before {
+    transform: scale(1);
+  }
+
+  &__dots {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding-top: 20px;
+    padding-bottom: 0;
+  }
+
+  &__dot {
+    position: relative;
+    z-index: 1;
+    width: 10px;
+    height: 10px;
+    margin-right: 26px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: $brand-accent;
+    cursor: pointer;
+    transition: background-color $duration-base $ease-out-quart;
+    @include focus-ring($brand-accent, 4px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: -5px;
+      width: 20px;
+      height: 20px;
+      border: 1px dashed $color-white;
+      border-radius: 50%;
+      opacity: 1;
+    }
+
+    &--active {
+      background: $color-white;
+      line-height: 10px;
+
+      &::before {
+        border-color: $color-white;
+      }
+    }
+  }
+
+  // brand-area — sous les owl-dots (projectArea__dots)
+  &__bandeau {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  &__bandeauViewport {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    contain: paint;
+    isolation: isolate;
+  }
+
+  &__bandeauTrack {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+
+    &--auto {
+      animation: recent-projects-bandeau 32s linear infinite;
+    }
+
+    &[data-paused='true'] {
+      animation-play-state: paused;
+    }
+  }
+
+  &__bandeauList {
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__bandeauBrand {
+    flex-shrink: 0;
+    font-family: $font-display;
+    font-size: clamp(1rem, 1.8vw, 1.35rem);
+    font-weight: $fw-bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $color-white;
+    white-space: nowrap;
+  }
+}
+
+@keyframes recent-projects-bandeau {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@include bp-down(md) {
+  .projectArea {
+    padding-block: clamp(4rem, 10vw, 6rem) clamp(3rem, 7vw, 5rem);
+
+    &__projectRow {
+      padding-inline: clamp(1rem, 3.2vw, 3rem);
+      margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    &__headerAside {
+      &::before {
+        display: none;
+      }
+    }
+
+    &__carouselRow {
+      padding-inline: clamp(1rem, 3.2vw, 3rem);
+    }
+  }
+
+  .brandArea {
+    margin-inline: clamp(1rem, 3.2vw, 1.75rem);
+  }
+}
+
+// brand-area séparée (SoluTek)
+.brandArea {
+  background: $brand-accent;
+  padding: 41px 0;
+  margin: 0 49px;
+  left: 0;
+  right: 0;
+  border-radius: 0 0 50px 50px;
+
+  &__row {
+    margin: 0;
+  }
+}
+
+@include reduce-motion {
+  .projectArea__image,
+  .projectArea__cardTitle,
+  .projectArea__tag,
+  .projectArea__tag::before {
+    transition: none;
+  }
+
+  .projectArea__bandeauTrack--auto {
+    animation: none;
+  }
+}

@@ -5,6 +5,8 @@ import { cn } from '@/utils/cn';
 
 import styles from './ServiceSingleBox.module.scss';
 
+export type ServiceSingleBoxVariant = 'with-bullets' | 'without-bullets';
+
 export type ServiceSingleBoxProps = {
   title: string;
   description: string;
@@ -12,10 +14,12 @@ export type ServiceSingleBoxProps = {
   image: string;
   imageAlt: string;
   bullets?: string[];
+  variant?: ServiceSingleBoxVariant;
   ctaLabel?: string;
   hoverBackgroundImage?: string;
   className?: string;
   as?: ElementType;
+  id?: string;
 };
 
 const DEFAULT_HOVER_BG = '/service6.png';
@@ -27,17 +31,22 @@ export function ServiceSingleBox({
   image,
   imageAlt,
   bullets = [],
+  variant = 'without-bullets',
   ctaLabel = 'En savoir plus',
   hoverBackgroundImage = DEFAULT_HOVER_BG,
   className,
   as: Component = 'article',
+  id,
 }: ServiceSingleBoxProps) {
   const boxStyle = {
     '--service-hover-bg': `url(${hoverBackgroundImage})`,
   } as CSSProperties;
 
+  const shouldRenderBullets = variant === 'with-bullets' && bullets.length > 0;
+
   return (
     <Component
+      id={id}
       className={cn(styles.serviceSingleBox, className)}
       style={boxStyle}
     >
@@ -49,7 +58,7 @@ export function ServiceSingleBox({
         <h3 className={styles.serviceSingleBox__title}>{title}</h3>
         <p className={styles.serviceSingleBox__text}>{description}</p>
 
-        {bullets.length > 0 && (
+        {shouldRenderBullets && (
           <ul className={styles.serviceSingleBox__bullets}>
             {bullets.map((bullet) => (
               <li key={bullet}>
@@ -70,4 +79,12 @@ export function ServiceSingleBox({
       </div>
     </Component>
   );
+}
+
+export function ServiceSingleBoxWithBullets(props: ServiceSingleBoxProps) {
+  return <ServiceSingleBox {...props} variant="with-bullets" />;
+}
+
+export function ServiceSingleBoxWithoutBullets(props: ServiceSingleBoxProps) {
+  return <ServiceSingleBox {...props} variant="without-bullets" />;
 }

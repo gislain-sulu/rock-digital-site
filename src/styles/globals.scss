@@ -60,8 +60,17 @@ html:not(.motion-hydrated) {
 
 html,
 body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   background-color: $bg-base;
   color: $text-primary;
+}
+
+main {
+  min-height: 100vh;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 // Désactive scroll-behavior natif quand Lenis prend la main
@@ -90,8 +99,66 @@ html.lenis {
   pointer-events: none;
 }
 
-main {
-  min-height: 100vh;
+
+// Masque le header pendant l’UI de chargement (src/app/loading.tsx dans #main)
+body:has(#main [data-page-loading]) [data-layout='site-header'] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+// Premier chargement accueil — masque chrome + contenu tant que l'écran boot est monté
+body:has(#main [data-home-boot-screen]) {
+  overflow: hidden;
+
+  [data-layout='site-header'],
+  [data-layout='site-footer'],
+  [data-layout='scroll-progress'],
+  [data-layout='go-top'],
+  [data-home-boot-content] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+// Avant la timeline d'entrée GSAP — évite le flash de texte visible
+body.home-gsap-active:not(.home-hero-entered) {
+  #hero .hero__titleLine,
+  #hero .hero__word,
+  #hero .hero__lead,
+  #hero .hero__leadChunk,
+  #hero .hero__actions,
+  #hero .hero__visualCol,
+  #hero .hero__scroll,
+  [data-layout='site-header'] .header__halo,
+  [data-layout='site-header'] .navbar__brand,
+  [data-layout='site-header'] .navbar__navLink,
+  [data-layout='site-header'] .navbar__cta,
+  [data-layout='site-header'] .navbar__burger,
+  [data-layout='site-header'] .navbar__actions {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home-gsap-active:not(.home-hero-entered) {
+    #hero .hero__titleLine,
+    #hero .hero__word,
+    #hero .hero__lead,
+    #hero .hero__leadChunk,
+    #hero .hero__actions,
+    #hero .hero__visualCol,
+    #hero .hero__scroll,
+    [data-layout='site-header'] .header__halo,
+    [data-layout='site-header'] .navbar__brand,
+    [data-layout='site-header'] .navbar__navLink,
+    [data-layout='site-header'] .navbar__cta,
+    [data-layout='site-header'] .navbar__burger,
+    [data-layout='site-header'] .navbar__actions {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
 
 // Skip link accessible

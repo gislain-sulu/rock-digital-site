@@ -1,173 +1,164 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
-import { SectionHeading } from '@/components/ui/SectionHeading';
+import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { testimonials } from '@/lib/content';
-import { cn } from '@/utils/cn';
 
+import { TestimonialSingleBox } from './TestimonialSingleBox';
 import styles from './Testimonials.module.scss';
 
-const AUTOPLAY_MS = 6500;
+const AUTOPLAY_MS = 3200;
+const TRANSITION_MS = 1500;
+const GAP = 30;
+
+function getVisibleCount(viewportWidth: number) {
+  if (viewportWidth >= 1200) return 3;
+  if (viewportWidth >= 768) return 2;
+  return 1;
+}
 
 export function Testimonials() {
-  const [index, setIndex] = useState(0);
+  const reducedMotion = useReducedMotion();
+  const count = testimonials.length;
+  const loopItems = useMemo(
+    () => (count > 0 ? [...testimonials, ...testimonials, ...testimonials] : []),
+    [count]
+  );
+
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [index, setIndex] = useState(count);
+  const [animate, setAnimate] = useState(true);
   const [paused, setPaused] = useState(false);
-  const reduced = useReducedMotion();
 
-  const next = useCallback(() => {
-    setIndex((current) => (current + 1) % testimonials.length);
-  }, []);
+  const slideWidth =
+    viewportWidth > 0
+      ? (viewportWidth - GAP * (visibleCount - 1)) / visibleCount
+      : 0;
 
-  const prev = useCallback(() => {
-    setIndex(
-      (current) => (current - 1 + testimonials.length) % testimonials.length
-    );
-  }, []);
+  const offset = index * (slideWidth + GAP);
 
   useEffect(() => {
-    if (paused || reduced) return;
-    const timer = setInterval(next, AUTOPLAY_MS);
-    return () => clearInterval(timer);
-  }, [paused, reduced, next]);
+    if (count === 0) return;
+    setIndex(count);
+    setAnimate(false);
+  }, [count]);
 
-  const current = testimonials[index];
-  if (!current) return null;
+  useEffect(() => {
+    const node = viewportRef.current;
+    if (!node) return;
+
+    const measure = () => {
+      setViewportWidth(node.clientWidth);
+      setVisibleCount(getVisibleCount(window.innerWidth));
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    window.addEventListener('resize', measure);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
+
+  const goNext = useCallback(() => {
+    setAnimate(!reducedMotion);
+    setIndex((current) => current + 1);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (paused || reducedMotion || count === 0) return;
+    const timer = window.setInterval(goNext, AUTOPLAY_MS);
+    return () => window.clearInterval(timer);
+  }, [paused, reducedMotion, count, goNext]);
+
+  const handleTransitionEnd = useCallback(() => {
+    if (count === 0) return;
+
+    if (index >= count * 2) {
+      setAnimate(false);
+      setIndex(count);
+    } else if (index < count) {
+      setAnimate(false);
+      setIndex(count * 2 - 1);
+    }
+  }, [count, index]);
+
+  if (count === 0) return null;
 
   return (
-    <Section tone="light" size="lg" id="testimonials">
-      <Container>
-        <SectionHeading
-          kicker="Témoignages"
-          title={
-            <>
-              La voix de nos clients,{' '}
-              <span className="u-text-gradient-blue">notre meilleure preuve.</span>
-            </>
-          }
-          description="Ils nous ont confié leur transformation digitale. Voici ce qu'ils en disent."
-          align="left"
-        />
-
-        <div
-          className={styles.testimonials}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
-          onBlur={() => setPaused(false)}
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="Témoignages clients"
-        >
-          <div className={styles.testimonials__viewport}>
-            <AnimatePresence initial={false} mode="wait">
-              <motion.blockquote
-                key={index}
-                className={styles.testimonials__quote}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -24 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                aria-live="polite"
-              >
-                <svg
-                  className={styles.testimonials__mark}
-                  viewBox="0 0 48 48"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M14 10c-5 2-9 7-9 14v14h14V24h-9c0-6 4-10 8-12l-4-2zm22 0c-5 2-9 7-9 14v14h14V24h-9c0-6 4-10 8-12l-4-2z" />
-                </svg>
-                <p className={styles.testimonials__text}>{current.quote}</p>
-                <footer className={styles.testimonials__author}>
-                  <span className={styles.testimonials__avatar}>
-                    {current.author
-                      .split(' ')
-                      .map((word) => word[0])
-                      .slice(0, 2)
-                      .join('')}
-                  </span>
-                  <span>
-                    <span className={styles.testimonials__name}>
-                      {current.author}
-                    </span>
-                    <span className={styles.testimonials__role}>
-                      {current.role} · {current.company}
-                    </span>
-                  </span>
-                </footer>
-              </motion.blockquote>
-            </AnimatePresence>
-          </div>
-
-          <div className={styles.testimonials__controls}>
-            <button
-              type="button"
-              onClick={prev}
-              className={styles.testimonials__btn}
-              aria-label="Témoignage précédent"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <path
-                  d="M19 12H5M12 19l-7-7 7-7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <div
-              className={styles.testimonials__dots}
-              role="tablist"
-              aria-label="Sélectionner un témoignage"
-            >
-              {testimonials.map((testimonial, idx) => (
-                <button
-                  key={testimonial.author}
-                  type="button"
-                  role="tab"
-                  aria-selected={idx === index}
-                  aria-label={`Témoignage ${idx + 1} sur ${testimonials.length}`}
-                  className={cn(
-                    styles.testimonials__dot,
-                    idx === index && styles['testimonials__dot--active']
-                  )}
-                  onClick={() => setIndex(idx)}
-                />
-              ))}
+    <Section tone="light" size="lg" id="testimonials" className={styles.testimonialArea}>
+      <Container size="fluid" className={styles.testimonialArea__container}>
+        <div className={styles.testimonialArea__row}>
+          <div className={styles.testimonialArea__colFull}>
+            <div className={styles.testimonialArea__sectionTitle}>
+              <SectionSubTitle>TÉMOIGNAGES</SectionSubTitle>
+              <h2 className={styles.testimonialArea__mainTitle}>
+                Ce que disent nos <span>clients</span>
+              </h2>
             </div>
-            <button
-              type="button"
-              onClick={next}
-              className={styles.testimonials__btn}
-              aria-label="Témoignage suivant"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <path
-                  d="M5 12h14M12 5l7 7-7 7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
           </div>
         </div>
       </Container>
+
+      <div className={styles.testimonialArea__carousel}>
+        <div className={styles.testimonialArea__carouselInner}>
+          <div className={styles.testimonialArea__rowInner}>
+            <div
+              className={styles.testimonialArea__list}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onFocus={() => setPaused(true)}
+              onBlur={() => setPaused(false)}
+              role="region"
+              aria-roledescription="carousel"
+              aria-label="Témoignages clients"
+            >
+              <div ref={viewportRef} className={styles.testimonialArea__viewport}>
+                <div
+                  className={styles.testimonialArea__track}
+                  style={{
+                    gap: `${GAP}px`,
+                    transform: `translate3d(-${offset}px, 0, 0)`,
+                    transition:
+                      animate && !reducedMotion
+                        ? `transform ${TRANSITION_MS}ms ease`
+                        : 'none',
+                  }}
+                  onTransitionEnd={handleTransitionEnd}
+                >
+                  {loopItems.map((item, itemIdx) => (
+                    <article
+                      key={`${item.author}-${itemIdx}`}
+                      className={styles.testimonialArea__item}
+                      style={
+                        slideWidth > 0
+                          ? { flex: `0 0 ${slideWidth}px`, width: slideWidth }
+                          : undefined
+                      }
+                    >
+                      <TestimonialSingleBox
+                        quote={item.quote}
+                        author={item.author}
+                        role={item.role}
+                        rating={item.rating}
+                      />
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </Section>
   );
 }
