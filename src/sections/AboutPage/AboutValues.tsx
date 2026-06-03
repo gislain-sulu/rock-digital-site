@@ -1,5 +1,14 @@
+'use client';
+
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { useRef } from 'react';
+
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
+import { GSAP_EASE } from '@/lib/gsap/constants';
+import { prefersReducedMotion } from '@/lib/gsap/motion';
+import { registerGsap } from '@/lib/gsap/registerGsap';
 import { aboutWhyChooseItems } from '@/lib/aboutPageContent';
 import { cn } from '@/utils/cn';
 
@@ -56,10 +65,65 @@ function FeatureIcon({
 }
 
 export function AboutValues() {
+  const shellRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const section = shellRef.current;
+      if (!section) return;
+
+      registerGsap();
+      if (prefersReducedMotion()) return;
+
+      const panel = section.querySelector('[class*="aboutValues__panel"]');
+      const cards = section.querySelectorAll('[class*="aboutValues__feature"]');
+
+      if (panel) {
+        gsap.from(panel, {
+          x: -56,
+          autoAlpha: 0,
+          duration: 1,
+          ease: GSAP_EASE.expo,
+          clearProps: 'transform,opacity,visibility',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 82%',
+            once: true,
+            toggleActions: 'play none none none',
+          },
+        });
+      }
+
+      if (cards.length) {
+        gsap.from(cards, {
+          y: 40,
+          autoAlpha: 0,
+          duration: 0.9,
+          stagger: 0.1,
+          ease: GSAP_EASE.out,
+          clearProps: 'transform,opacity,visibility',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 82%',
+            once: true,
+            toggleActions: 'play none none none',
+          },
+        });
+      }
+    },
+    { scope: shellRef, dependencies: [], revertOnUpdate: true }
+  );
+
   return (
-    <Section tone="subtle" size="lg" id="valeurs" className={styles.aboutValues}>
+    <Section
+      tone="subtle"
+      size="lg"
+      id="valeurs"
+      className={styles.aboutValues}
+      data-page-section="about-values"
+    >
       <Container>
-        <div className={styles.aboutValues__shell}>
+        <div ref={shellRef} className={styles.aboutValues__shell}>
           <aside className={styles.aboutValues__panel} aria-labelledby="about-why-title">
             <p className={styles.aboutValues__kicker}>Pourquoi nous choisir ?</p>
             <h2 id="about-why-title" className={styles.aboutValues__panelTitle}>

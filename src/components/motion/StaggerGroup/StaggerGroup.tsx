@@ -4,6 +4,7 @@ import { motion, type Variants } from 'framer-motion';
 import { type ElementType, type ReactNode } from 'react';
 
 import { useHomeGsapManaged } from '@/contexts/HomeGsapContext';
+import { useSiteGsapManaged } from '@/contexts/SiteGsapContext';
 
 type StaggerGroupProps = {
   children: ReactNode;
@@ -23,8 +24,9 @@ export function StaggerGroup({
   once = true,
 }: StaggerGroupProps) {
   const homeGsap = useHomeGsapManaged();
+  const siteGsap = useSiteGsapManaged();
 
-  if (homeGsap) {
+  if (homeGsap || siteGsap) {
     const Tag = as as ElementType;
     return <Tag className={className}>{children}</Tag>;
   }
@@ -67,8 +69,9 @@ export function StaggerItem({
   tabIndex,
 }: StaggerItemProps) {
   const homeGsap = useHomeGsapManaged();
+  const siteGsap = useSiteGsapManaged();
 
-  if (homeGsap) {
+  if (homeGsap || siteGsap) {
     const Tag = as as ElementType;
     return (
       <Tag className={className} tabIndex={tabIndex}>

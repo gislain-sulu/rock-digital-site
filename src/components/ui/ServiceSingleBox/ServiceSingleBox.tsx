@@ -47,6 +47,7 @@ export function ServiceSingleBox({
   return (
     <Component
       id={id}
+      data-service-box
       className={cn(styles.serviceSingleBox, className)}
       style={boxStyle}
     >

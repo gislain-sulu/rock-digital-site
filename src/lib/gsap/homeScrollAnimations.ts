@@ -1,6 +1,8 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { HERO_SELECTORS } from './heroSelectors';
+
 const EASE_OUT = 'power3.out';
 const EASE_EXPO = 'expo.out';
 
@@ -69,9 +71,7 @@ function parallaxY(
 /** Animations scroll immersives — page d'accueil uniquement. */
 export function buildHomeScrollAnimations(root: HomeRoot): void {
   const hero = q(root, '#hero');
-  const values = q(root, '#values');
   const about = q(root, '#about');
-  const itServices = q(root, '#it-services');
   const process = q(root, '#process');
   const projects = q(root, '#recent-projects');
   const technologies = q(root, '#technologies');
@@ -80,10 +80,10 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
 
   // —— Hero : parallax scroll (entrée gérée par homeHeroEntrance) ——
   if (hero) {
-    const heroMedia = q(hero, '.hero__media');
-    const heroImageWrap = q(hero, '.hero__imageWrap');
-    const heroVisual = q(hero, '.hero__visualCol');
-    const heroLayout = q(hero, '.hero__layout');
+    const heroMedia = q(hero, HERO_SELECTORS.media);
+    const heroImageWrap = q(hero, HERO_SELECTORS.imageWrap);
+    const heroVisual = q(hero, HERO_SELECTORS.visualCol);
+    const heroLayout = q(hero, HERO_SELECTORS.layout);
 
     parallaxY(heroMedia, 80, hero, 'top top', 'bottom top');
 
@@ -155,11 +155,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  // —— Value props — cartes en cascade ——
-  if (values) {
-    const cards = qa(values, 'article');
-    revealOnScroll(cards, { y: 48, stagger: 0.1 }, { trigger: values, start: 'top 82%' });
-  }
+  // —— Value props : animations dans ValueProps.tsx (client) ——
 
   // —— About : split média / contenu ——
   if (about) {
@@ -188,36 +184,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  // —— IT Services ——
-  if (itServices) {
-    const heading = q(itServices, '[class*="itServices__heading"]');
-    const cards = qa(itServices, '.serviceSingleBox');
-
-    if (heading) {
-      revealOnScroll(
-        qa(heading, 'h2, [class*="SectionSubTitle"], [class*="sectionSubTitle"]'),
-        { y: 40, stagger: 0.08 },
-        { trigger: itServices, start: 'top 85%' }
-      );
-    }
-    if (cards.length) {
-      ScrollTrigger.batch(cards, {
-        start: 'top 88%',
-        once: true,
-        onEnter: (batch) => {
-          gsap.from(batch, {
-            autoAlpha: 0,
-            y: 64,
-            scale: 0.96,
-            duration: 0.95,
-            stagger: 0.09,
-            ease: EASE_OUT,
-            clearProps: 'transform',
-          });
-        },
-      });
-    }
-  }
+  // —— IT Services : animations dans ITServices.tsx (client) ——
 
   // —— Process — en-tête + léger lift de la timeline ——
   if (process) {
@@ -386,14 +353,17 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
 export function buildHomeReducedMotion(root: HomeRoot): void {
   gsap.set(
     [
-      ...qa(root, '#hero .hero__titleLine, #hero .hero__word, #hero .hero__leadChunk, #hero .hero__lead, #hero .hero__actions > *, #hero .hero__visualCol, #hero .hero__scroll, #hero .hero__media'),
+      ...qa(
+        root,
+        '#hero [class*="hero__titleLine"], #hero [class*="hero__word"], #hero [class*="hero__leadChunk"], #hero [class*="hero__lead"], #hero [class*="hero__actions"] > *, #hero [class*="hero__visualCol"], #hero [class*="hero__scroll"], #hero [class*="hero__media"]'
+      ),
       ...qa(
         document.body,
         '[data-layout="site-header"] .navbar, [data-layout="site-header"] .header__halo, [data-layout="site-header"] .navbar__brand, [data-layout="site-header"] .navbar__navLink, [data-layout="site-header"] .navbar__cta, [data-layout="site-header"] .navbar__burger'
       ),
-      ...qa(root, '#values article'),
+      ...qa(root, '#values [data-value-card]'),
       ...qa(root, '#about [class*="aboutShowcase__media"], #about [class*="aboutShowcase__content"]'),
-      ...qa(root, '#it-services .serviceSingleBox, #it-services [class*="itServices__heading"] *'),
+      ...qa(root, '#it-services [data-service-box], #it-services [class*="itServices__heading"] *'),
       ...qa(root, '#process [class*="processSection__header"]'),
       ...qa(root, '#recent-projects [class*="projectArea__headerIntro"], #recent-projects [class*="projectArea__headerAside"], #recent-projects [class*="projectArea__carouselRow"]'),
       ...qa(root, '#technologies [class*="tech__kicker"], #technologies .heading'),

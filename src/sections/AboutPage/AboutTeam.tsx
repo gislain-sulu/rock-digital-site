@@ -1,12 +1,52 @@
+'use client';
+
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { useRef } from 'react';
+
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
-import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
+import { GSAP_EASE } from '@/lib/gsap/constants';
+import { prefersReducedMotion } from '@/lib/gsap/motion';
+import { registerGsap } from '@/lib/gsap/registerGsap';
 import { aboutTeam } from '@/lib/aboutPageContent';
 
 import styles from './AboutTeam.module.scss';
 
 export function AboutTeam() {
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const grid = gridRef.current;
+      if (!grid) return;
+
+      registerGsap();
+      if (prefersReducedMotion()) return;
+
+      const cards = grid.querySelectorAll('[class*="aboutTeam__card"]');
+
+      if (cards.length) {
+        gsap.from(cards, {
+          y: 44,
+          autoAlpha: 0,
+          duration: 0.9,
+          stagger: 0.08,
+          ease: GSAP_EASE.out,
+          clearProps: 'transform,opacity,visibility',
+          scrollTrigger: {
+            trigger: grid,
+            start: 'top 85%',
+            once: true,
+            toggleActions: 'play none none none',
+          },
+        });
+      }
+    },
+    { scope: gridRef, dependencies: [], revertOnUpdate: true }
+  );
+
   return (
     <Section tone="subtle" size="lg" id="equipe" className={styles.aboutTeam}>
       <Container>
@@ -18,17 +58,17 @@ export function AboutTeam() {
           </h2>
         </header>
 
-        <StaggerGroup className={styles.aboutTeam__grid} stagger={0.06}>
+        <div ref={gridRef} className={styles.aboutTeam__grid}>
           {aboutTeam.map((member) => (
-            <StaggerItem key={member.name} as="article" className={styles.aboutTeam__card}>
+            <article key={member.name} className={styles.aboutTeam__card}>
               <span className={styles.aboutTeam__avatar} aria-hidden="true">
                 {member.initials}
               </span>
               <h3 className={styles.aboutTeam__name}>{member.name}</h3>
               <p className={styles.aboutTeam__role}>{member.role}</p>
-            </StaggerItem>
+            </article>
           ))}
-        </StaggerGroup>
+        </div>
       </Container>
     </Section>
   );

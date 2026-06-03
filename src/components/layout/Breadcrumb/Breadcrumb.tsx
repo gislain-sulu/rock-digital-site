@@ -1,7 +1,7 @@
-import Link from 'next/link';
-
 import { Container } from '@/components/ui/Container';
 
+import { BreadcrumbBackground } from './BreadcrumbBackground';
+import { BreadcrumbContent } from './BreadcrumbContent';
 import styles from './Breadcrumb.module.scss';
 
 export type BreadcrumbItem = {
@@ -12,33 +12,25 @@ export type BreadcrumbItem = {
 type BreadcrumbProps = {
   title: string;
   items: BreadcrumbItem[];
+  /** Image de fond (ex. `/bg-services-rock-digital.png`) */
+  backgroundImage?: string;
 };
 
-export function Breadcrumb({ title, items }: BreadcrumbProps) {
+export function Breadcrumb({ title, items, backgroundImage }: BreadcrumbProps) {
+  const areaClassName = backgroundImage
+    ? `${styles.breadcrumbArea} ${styles.breadcrumbArea_hasImage}`
+    : styles.breadcrumbArea;
+
   return (
-    <section className={styles.breadcrumbArea} aria-label="Fil d'Ariane">
-      <Container>
-        <div className={styles.breadcrumbArea__content}>
-          <h1 className={styles.breadcrumbArea__title}>{title}</h1>
-          <nav aria-label="Fil d'Ariane">
-            <ol className={styles.breadcrumbArea__list}>
-              {items.map((item, index) => (
-                <li key={`${item.label}-${index}`}>
-                  {item.href ? (
-                    <Link href={item.href}>{item.label}</Link>
-                  ) : (
-                    <span aria-current="page">{item.label}</span>
-                  )}
-                  {index < items.length - 1 && (
-                    <span className={styles.breadcrumbArea__sep} aria-hidden="true">
-                      &lt;
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </nav>
-        </div>
+    <section
+      className={areaClassName}
+      aria-label="Fil d'Ariane"
+      data-gsap-region="breadcrumb"
+    >
+      {backgroundImage ? <BreadcrumbBackground src={backgroundImage} /> : null}
+
+      <Container className={styles.breadcrumbArea__container}>
+        <BreadcrumbContent title={title} items={items} />
       </Container>
     </section>
   );

@@ -1,5 +1,7 @@
 import gsap from 'gsap';
 
+import { HERO_ENTRANCE_TARGETS, HERO_SELECTORS } from './heroSelectors';
+
 const EASE_OUT = 'power3.out';
 const EASE_EXPO = 'expo.out';
 const EASE_SMOOTH = 'power2.inOut';
@@ -76,27 +78,27 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   const hero = q<HTMLElement>(root, '#hero');
   const siteHeader = document.querySelector('[data-layout="site-header"]');
 
-  const titleLines = hero ? qa(hero, '.hero__titleLine') : [];
-  const words = hero ? qa(hero, '.hero__word') : [];
-  const leadChunks = hero ? qa(hero, '.hero__leadChunk') : [];
-  const lead = hero ? q(hero, '.hero__lead') : null;
-  const actions = hero ? qa(hero, '.hero__actions > *') : [];
-  const visualCol = hero ? q(hero, '.hero__visualCol') : null;
-  const scrollIndicator = hero ? q(hero, '.hero__scroll') : null;
-  const heroMedia = hero ? q(hero, '.hero__media') : null;
-  const heroImageWrap = hero ? q(hero, '.hero__imageWrap') : null;
-  const heroGlow = hero ? q(hero, '.hero__glow') : null;
-  const visualFigure = hero ? q(hero, '.visual__figure') : null;
-  const digitalWord = hero ? q(hero, '.hero__titleHighlight') : null;
+  const titleLines = hero ? qa(hero, HERO_SELECTORS.titleLine) : [];
+  const words = hero ? qa(hero, HERO_SELECTORS.word) : [];
+  const leadChunks = hero ? qa(hero, HERO_SELECTORS.leadChunk) : [];
+  const lead = hero ? q(hero, HERO_SELECTORS.lead) : null;
+  const actions = hero ? qa(hero, HERO_SELECTORS.actionsChild) : [];
+  const visualCol = hero ? q(hero, HERO_SELECTORS.visualCol) : null;
+  const scrollIndicator = hero ? q(hero, HERO_SELECTORS.scroll) : null;
+  const heroMedia = hero ? q(hero, HERO_SELECTORS.media) : null;
+  const heroImageWrap = hero ? q(hero, HERO_SELECTORS.imageWrap) : null;
+  const heroGlow = hero ? q(hero, HERO_SELECTORS.glow) : null;
+  const visualFigure = hero ? q(hero, '[class*="visual__figure"]') : null;
+  const digitalWord = hero ? q(hero, HERO_SELECTORS.titleHighlight) : null;
 
-  const navBrand = siteHeader?.querySelector('.navbar__brand');
+  const navBrand = siteHeader?.querySelector('[class*="navbar__brand"]');
   const navLinks = siteHeader
-    ? Array.from(siteHeader.querySelectorAll('.navbar__navLink'))
+    ? Array.from(siteHeader.querySelectorAll('[class*="navbar__navLink"]'))
     : [];
-  const navActions = siteHeader?.querySelector('.navbar__actions');
-  const navCta = siteHeader?.querySelector('.navbar__cta');
-  const navBurger = siteHeader?.querySelector('.navbar__burger');
-  const headerHalo = siteHeader?.querySelector('.header__halo');
+  const navActions = siteHeader?.querySelector('[class*="navbar__actions"]');
+  const navCta = siteHeader?.querySelector('[class*="navbar__cta"]');
+  const navBurger = siteHeader?.querySelector('[class*="navbar__burger"]');
+  const headerHalo = siteHeader?.querySelector('[class*="header__halo"]');
 
   const entranceTargets = [
     headerHalo,
@@ -199,7 +201,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   const titleStart = 0.32;
 
   titleLines.forEach((line, index) => {
-    const lineWords = Array.from(line.querySelectorAll('.hero__word'));
+    const lineWords = Array.from(line.querySelectorAll(HERO_SELECTORS.word));
     const lineTime = titleStart + index * 0.22;
 
     revealTitleLine(tl, line, lineTime);
@@ -256,6 +258,18 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
       scale: 1,
       y: 0,
     });
+
+    tl.add(() => {
+      actions.forEach((action) => {
+        gsap.to(action, {
+          y: -5,
+          duration: 2.6,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+      });
+    }, titleStart + 1.1);
   }
 
   if (scrollIndicator) {
@@ -302,16 +316,12 @@ export function buildHomeHeroEntranceReduced(root: HomeRoot): void {
   const siteHeader = document.querySelector('[data-layout="site-header"]');
 
   const targets = [
-    ...(hero
-      ? qa(
-          hero,
-          '.hero__titleLine, .hero__word, .hero__leadChunk, .hero__lead, .hero__actions > *, .hero__visualCol, .hero__scroll, .hero__media, .hero__layout'
-        )
-      : []),
+    ...(hero ? qa(hero, HERO_ENTRANCE_TARGETS) : []),
+    ...(hero ? qa(hero, `#hero ${HERO_SELECTORS.layout}`) : []),
     ...(siteHeader
       ? Array.from(
           siteHeader.querySelectorAll(
-            '.header__halo, .navbar__brand, .navbar__navLink, .navbar__cta, .navbar__burger, .navbar__actions'
+            '[class*="header__halo"], [class*="navbar__brand"], [class*="navbar__navLink"], [class*="navbar__cta"], [class*="navbar__burger"], [class*="navbar__actions"]'
           )
         )
       : []),

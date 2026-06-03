@@ -1,13 +1,23 @@
+'use client';
+
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, type ReactNode } from 'react';
+
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
-import { StaggerGroup, StaggerItem } from '@/components/motion/StaggerGroup';
+import { GSAP_EASE } from '@/lib/gsap/constants';
+import { scrollVarsWithInViewFix } from '@/lib/gsap/effects';
+import { prefersReducedMotion } from '@/lib/gsap/motion';
+import { registerGsap } from '@/lib/gsap/registerGsap';
 
 import styles from './ValueProps.module.scss';
 
 type Value = {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
 };
 
 const values: Value[] = [
@@ -58,15 +68,57 @@ const values: Value[] = [
   },
 ];
 
+const VALUE_CARD_SELECTOR = '[data-value-card]';
+
 export function ValueProps() {
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const grid = gridRef.current;
+      if (!grid) return;
+
+      registerGsap();
+      if (prefersReducedMotion()) return;
+
+      const cards = grid.querySelectorAll<HTMLElement>(VALUE_CARD_SELECTOR);
+
+      if (!cards.length) return;
+
+      const cardsTween = gsap.from(cards, {
+        autoAlpha: 0,
+        y: 48,
+        scale: 0.94,
+        duration: 0.95,
+        stagger: 0.1,
+        ease: GSAP_EASE.out,
+        clearProps: 'transform,opacity,visibility',
+        scrollTrigger: scrollVarsWithInViewFix({
+          trigger: grid,
+          start: 'top 82%',
+          once: true,
+          toggleActions: 'play none none none',
+        }),
+      });
+
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+
+      return () => {
+        cardsTween.scrollTrigger?.kill();
+        cardsTween.kill?.();
+      };
+    },
+    { scope: gridRef, dependencies: [], revertOnUpdate: true }
+  );
+
   return (
     <Section tone="light" size="md" id="values" className={styles.valuesSection}>
       <Container>
-        <StaggerGroup className={styles.values} stagger={0.08}>
+        <div ref={gridRef} className={styles.values}>
           {values.map((value) => (
-            <StaggerItem
+            <article
               key={value.title}
-              as="article"
+              data-value-card
               className={styles.values__card}
               tabIndex={0}
             >
@@ -75,9 +127,9 @@ export function ValueProps() {
               </span>
               <h3 className={styles.values__title}>{value.title}</h3>
               <p className={styles.values__description}>{value.description}</p>
-            </StaggerItem>
+            </article>
           ))}
-        </StaggerGroup>
+        </div>
       </Container>
     </Section>
   );

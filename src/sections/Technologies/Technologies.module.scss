@@ -13,6 +13,9 @@
   }
 
   &__marqueeWrap {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.35rem, 0.9vh, 0.75rem);
     margin-top: $space-12;
     margin-bottom: $space-12;
     padding-block: $space-6;
@@ -21,6 +24,8 @@
 
   &__marquee {
     overflow: hidden;
+    flex-shrink: 0;
+    line-height: 1;
   }
 
   &__track {

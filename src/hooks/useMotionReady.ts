@@ -1,14 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
-/** True after client mount — use to avoid SSR/hydration hiding content via motion initial states. */
+/** True après montage client — évite de masquer le contenu côté SSR. */
 export function useMotionReady(): boolean {
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    setReady(true);
+  useLayoutEffect(() => {
     document.documentElement.classList.add('motion-hydrated');
+    setReady(true);
   }, []);
 
   return ready;

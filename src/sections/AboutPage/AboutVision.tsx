@@ -16,6 +16,7 @@ export function AboutVision() {
       featureTitle="Fondations solides & durables"
       imageBadge="Rock Digital"
       showCta={false}
+      motion="gsap"
       imageAlt="Vision Rock Digital — transformation digitale"
     />
   );

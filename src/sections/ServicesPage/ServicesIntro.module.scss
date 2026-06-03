@@ -6,6 +6,20 @@
   padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(1.5rem, 3vw, 2.5rem);
   background: $bg-base;
 
+  &--enterPending [data-services-enter],
+  &--enterPending &__actions {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &--enterPending [data-services-enter],
+    &--enterPending &__actions {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   &__inner {
     display: flex;
     flex-direction: column;

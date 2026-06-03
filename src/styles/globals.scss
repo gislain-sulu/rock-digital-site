@@ -38,14 +38,15 @@ html {
 }
 
 // Contenu visible avant hydratation React (évite l'écran blanc si le JS est lent ou bloqué)
+// Exclut les zones GSAP des pages internes pour ne pas bloquer les entrées animées.
 html:not(.motion-hydrated) {
-  [style*='opacity:0'],
-  [style*='opacity: 0'] {
+  [style*='opacity:0']:not([data-gsap-region] *):not([data-gsap-region]),
+  [style*='opacity: 0']:not([data-gsap-region] *):not([data-gsap-region]) {
     opacity: 1 !important;
   }
 
-  [style*='translateY(-'],
-  [style*='translateY(-3'] {
+  [style*='translateY(-']:not([data-gsap-region] *):not([data-gsap-region]),
+  [style*='translateY(-3']:not([data-gsap-region] *):not([data-gsap-region]) {
     transform: none !important;
   }
 
@@ -55,6 +56,23 @@ html:not(.motion-hydrated) {
 
   [class*='split__token'] {
     transform: none !important;
+  }
+}
+
+// Breadcrumb uniquement — la section contact gère sa propre entrée (client)
+main.gsap-inner-active:not(.gsap-page-ready) [data-gsap-region='breadcrumb'] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+main.gsap-inner-active.gsap-page-ready [data-gsap-region='breadcrumb'] {
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main.gsap-inner-active [data-gsap-region='breadcrumb'] {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 }
 
@@ -122,19 +140,21 @@ body:has(#main [data-home-boot-screen]) {
 
 // Avant la timeline d'entrée GSAP — évite le flash de texte visible
 body.home-gsap-active:not(.home-hero-entered) {
-  #hero .hero__titleLine,
-  #hero .hero__word,
-  #hero .hero__lead,
-  #hero .hero__leadChunk,
-  #hero .hero__actions,
-  #hero .hero__visualCol,
-  #hero .hero__scroll,
-  [data-layout='site-header'] .header__halo,
-  [data-layout='site-header'] .navbar__brand,
-  [data-layout='site-header'] .navbar__navLink,
-  [data-layout='site-header'] .navbar__cta,
-  [data-layout='site-header'] .navbar__burger,
-  [data-layout='site-header'] .navbar__actions {
+  #hero [class*='hero__titleLine'],
+  #hero [class*='hero__word'],
+  #hero [class*='hero__lead'],
+  #hero [class*='hero__leadChunk'],
+  #hero [class*='hero__actions'],
+  #hero [class*='hero__visualCol'],
+  #hero [data-hero-visual],
+  #hero [data-hero-visual] img,
+  #hero [class*='hero__scroll'],
+  [data-layout='site-header'] [class*='header__halo'],
+  [data-layout='site-header'] [class*='navbar__brand'],
+  [data-layout='site-header'] [class*='navbar__navLink'],
+  [data-layout='site-header'] [class*='navbar__cta'],
+  [data-layout='site-header'] [class*='navbar__burger'],
+  [data-layout='site-header'] [class*='navbar__actions'] {
     opacity: 0;
     visibility: hidden;
   }
@@ -142,19 +162,21 @@ body.home-gsap-active:not(.home-hero-entered) {
 
 @media (prefers-reduced-motion: reduce) {
   body.home-gsap-active:not(.home-hero-entered) {
-    #hero .hero__titleLine,
-    #hero .hero__word,
-    #hero .hero__lead,
-    #hero .hero__leadChunk,
-    #hero .hero__actions,
-    #hero .hero__visualCol,
-    #hero .hero__scroll,
-    [data-layout='site-header'] .header__halo,
-    [data-layout='site-header'] .navbar__brand,
-    [data-layout='site-header'] .navbar__navLink,
-    [data-layout='site-header'] .navbar__cta,
-    [data-layout='site-header'] .navbar__burger,
-    [data-layout='site-header'] .navbar__actions {
+    #hero [class*='hero__titleLine'],
+    #hero [class*='hero__word'],
+    #hero [class*='hero__lead'],
+    #hero [class*='hero__leadChunk'],
+    #hero [class*='hero__actions'],
+    #hero [class*='hero__visualCol'],
+    #hero [data-hero-visual],
+    #hero [data-hero-visual] img,
+    #hero [class*='hero__scroll'],
+    [data-layout='site-header'] [class*='header__halo'],
+    [data-layout='site-header'] [class*='navbar__brand'],
+    [data-layout='site-header'] [class*='navbar__navLink'],
+    [data-layout='site-header'] [class*='navbar__cta'],
+    [data-layout='site-header'] [class*='navbar__burger'],
+    [data-layout='site-header'] [class*='navbar__actions'] {
       opacity: 1;
       visibility: visible;
     }

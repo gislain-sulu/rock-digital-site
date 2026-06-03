@@ -5,6 +5,7 @@ import { type ReactNode, useEffect, useState } from 'react';
 import { HomeScrollOrchestrator } from '@/components/motion/HomeScrollOrchestrator';
 import { PageLoader } from '@/components/ui/PageLoader';
 import { HomeGsapProvider } from '@/contexts/HomeGsapContext';
+import { markHomeHeroEntered } from '@/lib/gsap/homeEntranceReveal';
 import {
   isHomeBootComplete,
   markHomeBootComplete,
@@ -62,14 +63,29 @@ export function HomeBootGate({ children }: HomeBootGateProps) {
   }, [ready]);
 
   useEffect(() => {
-    if (ready && domStable) {
-      document.body.classList.add('home-gsap-active');
-      return () => {
-        document.body.classList.remove('home-gsap-active', 'home-hero-entered');
-      };
+    if (!ready || !domStable) {
+      document.body.classList.remove('home-gsap-active', 'home-hero-entered');
+      return undefined;
     }
-    document.body.classList.remove('home-gsap-active', 'home-hero-entered');
-    return undefined;
+
+    document.body.classList.add('home-gsap-active');
+
+    const failSafe = window.setTimeout(() => {
+      if (
+        document.body.classList.contains('home-gsap-active') &&
+        !document.body.classList.contains('home-hero-entered')
+      ) {
+        const root = document.querySelector('[data-home-boot-content]');
+        if (root) markHomeHeroEntered(root);
+      }
+    }, 3200);
+
+    return () => {
+      clearTimeout(failSafe);
+      if (!document.body.classList.contains('home-hero-entered')) {
+        document.body.classList.remove('home-gsap-active', 'home-hero-entered');
+      }
+    };
   }, [ready, domStable]);
 
   const showLoader = !ready;

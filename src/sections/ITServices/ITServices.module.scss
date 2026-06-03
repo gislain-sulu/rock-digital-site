@@ -11,6 +11,11 @@
   border-bottom-left-radius: $hero-corner-radius;
   border-bottom-right-radius: $hero-corner-radius;
 
+  &__root {
+    position: relative;
+    width: 100%;
+  }
+
   &__shapeLeft {
     position: absolute;
     left: -4%;

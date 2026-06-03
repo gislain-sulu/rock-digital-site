@@ -8,6 +8,18 @@
   padding: clamp(4rem, 8vw, 7.5rem) 0;
   background: transparent;
 
+  &--enterPending [data-contact-enter] {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &--enterPending [data-contact-enter] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   &__layout {
     display: grid;
     grid-template-columns: 1fr;

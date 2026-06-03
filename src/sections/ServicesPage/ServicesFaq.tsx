@@ -1,8 +1,16 @@
+'use client';
+
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
+import { GSAP_EASE } from '@/lib/gsap/constants';
+import { prefersReducedMotion } from '@/lib/gsap/motion';
+import { registerGsap } from '@/lib/gsap/registerGsap';
 
 import styles from './ServicesFaq.module.scss';
 
@@ -40,10 +48,76 @@ const faqs = [
 ];
 
 export function ServicesFaq() {
+  const layoutRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const layout = layoutRef.current;
+      if (!layout) return;
+
+      registerGsap();
+      if (prefersReducedMotion()) return;
+
+      const header = layout.querySelector('[class*="servicesFaq__header"]');
+      const imageWrap = layout.querySelector('[class*="servicesFaq__imageWrap"]');
+      const cards = layout.querySelectorAll('[class*="servicesFaq__card"], details');
+
+      if (header) {
+        gsap.from(header, {
+          y: 36,
+          autoAlpha: 0,
+          duration: 0.95,
+          ease: GSAP_EASE.out,
+          clearProps: 'transform,opacity,visibility',
+          scrollTrigger: {
+            trigger: layout,
+            start: 'top 85%',
+            once: true,
+            toggleActions: 'play none none none',
+          },
+        });
+      }
+
+      if (imageWrap) {
+        gsap.from(imageWrap, {
+          clipPath: 'inset(0 100% 0 0)',
+          autoAlpha: 0,
+          duration: 1.05,
+          ease: GSAP_EASE.expo,
+          clearProps: 'clip-path,opacity,visibility',
+          scrollTrigger: {
+            trigger: layout,
+            start: 'top 82%',
+            once: true,
+            toggleActions: 'play none none none',
+          },
+        });
+      }
+
+      if (cards.length) {
+        gsap.from(cards, {
+          y: 40,
+          autoAlpha: 0,
+          duration: 0.9,
+          stagger: 0.08,
+          ease: GSAP_EASE.out,
+          clearProps: 'transform,opacity,visibility',
+          scrollTrigger: {
+            trigger: layout,
+            start: 'top 82%',
+            once: true,
+            toggleActions: 'play none none none',
+          },
+        });
+      }
+    },
+    { scope: layoutRef, dependencies: [], revertOnUpdate: true }
+  );
+
   return (
     <Section tone="subtle" size="lg" id="faq" className={styles.servicesFaq}>
       <Container>
-        <div className={styles.servicesFaq__layout}>
+        <div ref={layoutRef} className={styles.servicesFaq__layout}>
           <header className={styles.servicesFaq__header}>
             <SectionSubTitle>Questions fréquentes</SectionSubTitle>
             <h2 className={styles.servicesFaq__title}>
@@ -64,20 +138,20 @@ export function ServicesFaq() {
 
           <div className={`${styles.servicesFaq__tabContent} tab_content`} id="tab1">
             <div className={`${styles.servicesFaq__list} accordion`}>
-            {faqs.map((item, idx) => (
-              <details
-                key={item.question}
-                className={`${styles.servicesFaq__card} card`}
-                open={idx === 0}
-              >
-                <summary className={`${styles.servicesFaq__cardHeader} card-header`}>
-                  <span className={styles.servicesFaq__question}>{item.question}</span>
-                </summary>
-                <div className={`${styles.servicesFaq__cardBody} card-body`}>
-                  <p>{item.answer}</p>
-                </div>
-              </details>
-            ))}
+              {faqs.map((item, idx) => (
+                <details
+                  key={item.question}
+                  className={`${styles.servicesFaq__card} card`}
+                  open={idx === 0}
+                >
+                  <summary className={`${styles.servicesFaq__cardHeader} card-header`}>
+                    <span className={styles.servicesFaq__question}>{item.question}</span>
+                  </summary>
+                  <div className={`${styles.servicesFaq__cardBody} card-body`}>
+                    <p>{item.answer}</p>
+                  </div>
+                </details>
+              ))}
             </div>
           </div>
         </div>

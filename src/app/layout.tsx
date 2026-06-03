@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { GoTopButton } from '@/components/layout/GoTopButton';
 import { Header } from '@/components/layout/Header';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
+import { AppMotionProvider } from '@/components/providers/AppMotionProvider';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import { createMetadata, organizationJsonLd, websiteJsonLd } from '@/lib/seo';
 
@@ -70,11 +71,13 @@ export default function RootLayout({
           Aller au contenu principal
         </a>
         <SmoothScrollProvider>
-          <ScrollProgress />
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-          <GoTopButton />
+          <AppMotionProvider>
+            <ScrollProgress />
+            <Header />
+            <main id="main">{children}</main>
+            <Footer />
+            <GoTopButton />
+          </AppMotionProvider>
         </SmoothScrollProvider>
       </body>
     </html>

@@ -19,6 +19,7 @@ export default function ServicesPage() {
     <>
       <Breadcrumb
         title="Services"
+        backgroundImage="/bg-services-rock-digital.png"
         items={[
           { label: 'Accueil', href: '/' },
           { label: 'Services' },
@@ -29,7 +30,7 @@ export default function ServicesPage() {
         sectionId="offer-list"
         showHeading={false}
         withBullets
-        getHref={() => '/contact'}
+        ctaHref="/contact"
         ctaLabel="Démarrer ce service"
       />
       <Process />

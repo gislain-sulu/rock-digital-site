@@ -7,12 +7,30 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
-import { technologies } from '@/lib/content';
+import { technologies, type Technology } from '@/lib/content';
 
 import styles from './Technologies.module.scss';
 
+const MARQUEE_ROW_COUNT = 3;
+const MIDDLE_MARQUEE_ROW_INDEX = Math.floor(MARQUEE_ROW_COUNT / 2);
+
+function buildMarqueeRowItems(rowIndex: number): Technology[] {
+  const offset = rowIndex % technologies.length;
+  const rotated = [
+    ...technologies.slice(offset),
+    ...technologies.slice(0, offset),
+  ];
+  return [...rotated, ...rotated];
+}
+
 export function Technologies() {
-  const marqueeItems = useMemo(() => [...technologies, ...technologies], []);
+  const marqueeRows = useMemo(
+    () =>
+      Array.from({ length: MARQUEE_ROW_COUNT }, (_, rowIndex) =>
+        buildMarqueeRowItems(rowIndex)
+      ),
+    []
+  );
 
   return (
     <Section tone="subtle" size="lg" id="technologies" className={styles.techSection}>
@@ -33,20 +51,30 @@ export function Technologies() {
       </Container>
 
       <div className={styles.tech__marqueeWrap} aria-hidden="true">
-        <div className={styles.tech__marquee}>
-          <motion.ul
-            className={styles.tech__track}
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ ease: 'linear', duration: 36, repeat: Infinity }}
-          >
-            {marqueeItems.map((tech, idx) => (
-              <li key={`${tech.name}-${idx}`} className={styles.tech__item}>
-                <span className={styles.tech__dot} />
-                {tech.name}
-              </li>
-            ))}
-          </motion.ul>
-        </div>
+        {marqueeRows.map((rowItems, rowIndex) => {
+          const reverse = rowIndex === MIDDLE_MARQUEE_ROW_INDEX;
+          const duration = 30 + (rowIndex % 7) * 2;
+
+          return (
+            <div key={`marquee-row-${rowIndex}`} className={styles.tech__marquee}>
+              <motion.ul
+                className={styles.tech__track}
+                animate={{ x: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
+                transition={{ ease: 'linear', duration, repeat: Infinity }}
+              >
+                {rowItems.map((tech, idx) => (
+                  <li
+                    key={`${rowIndex}-${tech.name}-${idx}`}
+                    className={styles.tech__item}
+                  >
+                    <span className={styles.tech__dot} />
+                    {tech.name}
+                  </li>
+                ))}
+              </motion.ul>
+            </div>
+          );
+        })}
       </div>
     </Section>
   );

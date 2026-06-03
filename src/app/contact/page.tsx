@@ -16,6 +16,7 @@ export default function ContactPage() {
     <>
       <Breadcrumb
         title="Contact"
+        backgroundImage="/bg-contact-rock-digital.png"
         items={[
           { label: 'Accueil', href: '/' },
           { label: 'Contact' },

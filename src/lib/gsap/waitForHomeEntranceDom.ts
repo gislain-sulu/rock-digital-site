@@ -10,8 +10,8 @@ function nextFrame(): Promise<void> {
 function hasEntranceTargets(root: Element): boolean {
   const hero = root.querySelector('#hero');
   const header = document.querySelector('[data-layout="site-header"] .navbar');
-  const words = root.querySelectorAll('#hero .hero__word');
-  const leadChunks = root.querySelectorAll('#hero .hero__leadChunk');
+  const words = root.querySelectorAll('#hero [class*="hero__word"]');
+  const leadChunks = root.querySelectorAll('#hero [class*="hero__leadChunk"]');
 
   return Boolean(hero && header && words.length > 0 && leadChunks.length > 0);
 }

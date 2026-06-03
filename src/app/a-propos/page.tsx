@@ -25,6 +25,7 @@ export default function AboutPage() {
     <>
       <Breadcrumb
         title="À propos"
+        backgroundImage="/bg-about-me-rock-digital.png"
         items={[
           { label: 'Accueil', href: '/' },
           { label: 'À propos' },
@@ -33,7 +34,7 @@ export default function AboutPage() {
       <AboutIntro />
       <AboutVision />
       <AboutValues />
-      <Stats />
+      <Stats motion="gsap" />
       <AboutHistory />
       <AboutTeam />
       <AboutCareers />

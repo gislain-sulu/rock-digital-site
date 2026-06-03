@@ -3,6 +3,10 @@
 
 .breadcrumbArea {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom-left-radius: $hero-corner-radius;
+  border-bottom-right-radius: $hero-corner-radius;
   padding: clamp(7rem, 14vw, 10rem) 0 clamp(4rem, 8vw, 6rem);
   background:
     radial-gradient(
@@ -11,6 +15,45 @@
       transparent 55%
     ),
     $color-blue-night;
+
+  &_hasImage {
+    background: $color-blue-night;
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__mediaImage {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse at 50% 0%,
+        rgba($brand-primary, 0.22) 0%,
+        transparent 55%
+      ),
+      linear-gradient(
+        180deg,
+        rgba($color-blue-night, 0.25) 0%,
+        rgba($color-blue-night, 0.5) 100%
+      );
+  }
+
+  &__container {
+    position: relative;
+    z-index: 2;
+  }
 
   &__content {
     text-align: center;
@@ -23,7 +66,7 @@
     font-weight: $fw-semibold;
     line-height: 1.1;
     letter-spacing: $ls-tight;
-    text-transform: uppercase;
+    text-transform: lowercase;
     color: $text-on-dark;
   }
 

@@ -8,6 +8,11 @@ import {
   buildHomeHeroEntrance,
   buildHomeHeroEntranceReduced,
 } from '@/lib/gsap/homeHeroEntrance';
+import { buildGlobalAnimations } from '@/lib/gsap/buildGlobalAnimations';
+import {
+  forceRevealHomeEntrance,
+  markHomeHeroEntered,
+} from '@/lib/gsap/homeEntranceReveal';
 import {
   buildHomeReducedMotion,
   buildHomeScrollAnimations,
@@ -20,28 +25,6 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-function forceRevealHomeEntrance(root: Element): void {
-  const heroSelectors =
-    '#hero .hero__titleLine, #hero .hero__word, #hero .hero__leadChunk, #hero .hero__lead, #hero .hero__actions > *, #hero .hero__visualCol, #hero .hero__scroll, #hero .hero__media';
-  const headerSelectors =
-    '[data-layout="site-header"] .header__halo, [data-layout="site-header"] .navbar__brand, [data-layout="site-header"] .navbar__navLink, [data-layout="site-header"] .navbar__cta, [data-layout="site-header"] .navbar__burger, [data-layout="site-header"] .navbar__actions';
-
-  const targets = [
-    ...Array.from(root.querySelectorAll(heroSelectors)),
-    ...Array.from(document.querySelectorAll(headerSelectors)),
-  ];
-
-  gsap.set(targets, {
-    autoAlpha: 1,
-    visibility: 'visible',
-    x: 0,
-    y: 0,
-    scale: 1,
-    rotateX: 0,
-    clearProps: 'transform',
-  });
-}
-
 export function HomeScrollOrchestrator() {
   useGSAP(
     () => {
@@ -50,46 +33,62 @@ export function HomeScrollOrchestrator() {
       let cancelled = false;
       let entranceTimeline: gsap.core.Timeline | null = null;
       let safetyTimer: ReturnType<typeof setTimeout> | null = null;
+      let globalCleanup: (() => void) | null = null;
 
       const finishScrollSetup = (root: Element) => {
-        buildHomeScrollAnimations(root);
-        ScrollTrigger.refresh();
+        try {
+          buildHomeScrollAnimations(root);
+          globalCleanup = buildGlobalAnimations(document);
+          ScrollTrigger.refresh();
+        } catch (error) {
+          console.error('[HomeScrollOrchestrator] scroll setup failed:', error);
+        }
       };
 
       const run = async () => {
-        const root = await waitForHomeEntranceDom();
-        if (cancelled || !root) return;
+        try {
+          const root = await waitForHomeEntranceDom();
+          if (cancelled || !root) return;
 
-        document.body.classList.add('home-gsap-active');
+          if (document.body.classList.contains('home-hero-entered')) {
+            finishScrollSetup(root);
+            return;
+          }
 
-        if (prefersReducedMotion()) {
-          buildHomeHeroEntranceReduced(root);
-          buildHomeReducedMotion(root);
-          document.body.classList.add('home-hero-entered');
-          finishScrollSetup(root);
-          return;
+          document.body.classList.add('home-gsap-active');
+
+          if (prefersReducedMotion()) {
+            buildHomeHeroEntranceReduced(root);
+            buildHomeReducedMotion(root);
+            markHomeHeroEntered(root);
+            finishScrollSetup(root);
+            return;
+          }
+
+          entranceTimeline = buildHomeHeroEntrance(root);
+
+          entranceTimeline.eventCallback('onComplete', () => {
+            if (cancelled) return;
+            if (safetyTimer) clearTimeout(safetyTimer);
+            markHomeHeroEntered(root);
+            finishScrollSetup(root);
+          });
+
+          entranceTimeline.play(0);
+
+          safetyTimer = window.setTimeout(() => {
+            if (cancelled || document.body.classList.contains('home-hero-entered')) return;
+            entranceTimeline?.progress(1);
+            markHomeHeroEntered(root);
+            finishScrollSetup(root);
+          }, 2500);
+        } catch (error) {
+          console.error('[HomeScrollOrchestrator] entrance failed:', error);
+          const root = document.querySelector('[data-home-boot-content]');
+          if (root && !cancelled) {
+            markHomeHeroEntered(root);
+          }
         }
-
-        entranceTimeline = buildHomeHeroEntrance(root);
-
-        entranceTimeline.eventCallback('onComplete', () => {
-          if (cancelled) return;
-          if (safetyTimer) clearTimeout(safetyTimer);
-          document.body.classList.add('home-hero-entered');
-          finishScrollSetup(root);
-        });
-
-        entranceTimeline.play(0);
-
-        safetyTimer = window.setTimeout(() => {
-          if (cancelled || document.body.classList.contains('home-hero-entered')) return;
-          entranceTimeline?.progress(1);
-          forceRevealHomeEntrance(root);
-          document.body.classList.add('home-hero-entered');
-          finishScrollSetup(root);
-        }, 4000);
-
-        ScrollTrigger.refresh();
       };
 
       void run();
@@ -102,7 +101,16 @@ export function HomeScrollOrchestrator() {
         if (safetyTimer) clearTimeout(safetyTimer);
         window.removeEventListener('load', onLoadRefresh);
         entranceTimeline?.kill();
-        document.body.classList.remove('home-gsap-active', 'home-hero-entered');
+        globalCleanup?.();
+        globalCleanup = null;
+
+        const root = document.querySelector('[data-home-boot-content]');
+        if (root) forceRevealHomeEntrance(root);
+
+        const entranceDone = document.body.classList.contains('home-hero-entered');
+        if (!entranceDone) {
+          document.body.classList.remove('home-gsap-active', 'home-hero-entered');
+        }
       };
     },
     { dependencies: [], revertOnUpdate: false }
