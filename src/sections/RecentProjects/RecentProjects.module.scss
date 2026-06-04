@@ -1,3 +1,4 @@
+@use 'sass:color' as sass-color;
 @use '@/styles/tokens' as *;
 @use '@/styles/mixins' as *;
 @use '@/styles/breakpoints' as *;
@@ -6,10 +7,10 @@
 // project-area — SoluTek (https://solutek-html.netlify.app/)
 // =============================================================================
 
-$project-footer-bg: #171a2b;
-$project-tag-bg: #050a1e;
-$project-stage-bg: $project-tag-bg;
 $project-card-radius: 20px;
+// Harmonie charte : dérivés de $color-blue (fond section) via blue-deep / blue-night
+$project-content-bg: sass-color.mix($color-blue-deep, $color-blue, 58%);
+$project-tag-bg: sass-color.mix($color-blue-night, $color-blue-deep, 42%);
 $bandeau-radius: clamp(1.75rem, 3.2vw, 2.75rem);
 $project-header-x: clamp(1rem, 12vw, 18.5rem);
 $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
@@ -68,7 +69,7 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
     font-size: clamp(1.85rem, 3.8vw, 2.625rem);
     font-weight: $fw-bold;
     line-height: 1.2;
-    color: $project-tag-bg;
+    color: $color-blue-night;
 
     span {
       display: inline;
@@ -141,9 +142,12 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
   }
 
   &__cardLink {
+    position: relative;
     display: block;
+    overflow: hidden;
     text-decoration: none;
     color: inherit;
+    background: transparent;
     @include focus-ring($brand-accent, 4px);
   }
 
@@ -165,9 +169,13 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
   }
 
   &__content {
+    position: relative;
+    z-index: 1;
     padding: 33px 0 41px;
     text-align: center;
-    background: $project-footer-bg;
+    // Même famille que --color-blue, plus profond que le fond de section (structure SoluTek)
+    background: $project-content-bg;
+    background: color-mix(in srgb, var(--color-blue) 42%, var(--color-blue-deep) 58%);
     border-radius: 0 0 $project-card-radius $project-card-radius;
   }
 
@@ -177,7 +185,7 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
     font-size: clamp(1.1rem, 1.6vw, 1.375rem);
     font-weight: $fw-semibold;
     line-height: 1.27;
-    color: #fefefe;
+    color: $text-on-dark;
     transition: color $duration-slow $ease-out-quart;
   }
 
@@ -194,12 +202,14 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
     padding: 7px 35px;
     border-radius: $project-card-radius;
     background-color: $project-tag-bg;
+    background-color: color-mix(in srgb, var(--color-blue-deep) 58%, #{$color-blue-night} 42%);
     font-family: $font-ui;
     font-size: $fs-sm;
     font-weight: $fw-regular;
     line-height: 1.4;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: #fefefe;
+    color: $text-on-dark;
     cursor: pointer;
     transition: color $duration-slow $ease-out-quart;
 
@@ -209,10 +219,15 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
       inset: 0;
       z-index: -1;
       border-radius: $project-card-radius;
-      background: $brand-accent;
+      background: $gradient-orange;
       transform: scale(0);
       transition: transform $duration-slow $ease-out-quart;
     }
+  }
+
+  &__cardLink:hover &__tag,
+  &__cardLink:focus-visible &__tag {
+    color: $color-black;
   }
 
   &__cardLink:hover &__tag::before,
