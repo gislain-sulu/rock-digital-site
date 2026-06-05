@@ -9,7 +9,10 @@
 
 $project-card-radius: 20px;
 // Harmonie charte : dérivés de $color-blue (fond section) via blue-deep / blue-night
-$project-content-bg: sass-color.mix($color-blue-deep, $color-blue, 58%);
+$project-content-bg: sass-color.change(
+  sass-color.mix($color-blue-deep, $color-blue, 58%),
+  $alpha: 0.9
+);
 $project-tag-bg: sass-color.mix($color-blue-night, $color-blue-deep, 42%);
 $bandeau-radius: clamp(1.75rem, 3.2vw, 2.75rem);
 $project-header-x: clamp(1rem, 12vw, 18.5rem);
@@ -175,7 +178,11 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
     text-align: center;
     // Même famille que --color-blue, plus profond que le fond de section (structure SoluTek)
     background: $project-content-bg;
-    background: color-mix(in srgb, var(--color-blue) 42%, var(--color-blue-deep) 58%);
+    background: color-mix(
+      in srgb,
+      color-mix(in srgb, var(--color-blue) 42%, var(--color-blue-deep) 58%) 90%,
+      transparent
+    );
     border-radius: 0 0 $project-card-radius $project-card-radius;
   }
 

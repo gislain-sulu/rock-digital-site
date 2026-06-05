@@ -86,28 +86,11 @@ export function CTA() {
           </StaggerGroup>
 
           <div className={styles.ctaSection__visualCol}>
-            <div className={styles.ctaSection__backdrop} aria-hidden="true">
-              <div className={styles.ctaSection__bgImage} />
-              <div className={styles.ctaSection__overlay} />
-              <span className={styles.ctaSection__orb} />
-              <span
-                className={`${styles.ctaSection__orb} ${styles['ctaSection__orb--accent']}`}
-              />
-              <span className={styles.ctaSection__grid} />
-            </div>
-
             <FadeIn y={40} delay={0.15} className={styles.ctaSection__metaWrap}>
               <aside
                 className={styles.ctaSection__meta}
                 aria-label="Coordonnées"
               >
-                <header className={styles.ctaSection__metaHeader}>
-                  <span className={styles.ctaSection__metaBadge}>Coordonnées</span>
-                  <p className={styles.ctaSection__metaIntro}>
-                    Une équipe disponible pour concrétiser votre vision digitale.
-                  </p>
-                </header>
-
                 <div className={styles.ctaSection__metaList}>
                   {metaItems.map(({ icon: Icon, label, value, ...rest }) => (
                     <div key={label} className={styles.ctaSection__metaItem}>

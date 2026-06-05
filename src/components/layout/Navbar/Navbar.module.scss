@@ -4,11 +4,11 @@
 
 .navbar {
   position: fixed;
-  top: clamp(0.45rem, 1.2vh, 0.95rem);
+  top: 0;
   left: 0;
   right: 0;
   z-index: $z-header;
-  height: var(--header-height, 88px);
+  height: var(--header-height, 96px);
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -26,7 +26,7 @@
   border-bottom: 1px solid transparent;
 
   &--scrolled {
-    height: 78px;
+    height: 84px;
     background: transparent;
     backdrop-filter: blur(0);
     -webkit-backdrop-filter: blur(0);
@@ -123,7 +123,7 @@
     gap: clamp(0.75rem, 2vw, 1.5rem);
     min-width: 0;
     margin-top: 0.42rem;
-    padding: clamp(0.34rem, 0.95vw, 0.48rem) clamp(0.55rem, 1.45vw, 0.92rem);
+    padding: clamp(0.55rem, 1.25vw, 0.72rem) clamp(0.55rem, 1.45vw, 0.92rem);
     border-radius: 999px;
     border: 1px solid rgba(9, 30, 66, 0.12);
     background:
@@ -144,7 +144,7 @@
     }
 
     @media (min-width: 1440px) {
-      padding: 0.38rem clamp(0.9rem, 1.7vw, 1.4rem);
+      padding: 0.6rem clamp(0.9rem, 1.7vw, 1.4rem);
       gap: clamp(1rem, 2vw, 2rem);
     }
   }
@@ -177,7 +177,7 @@
   }
 
   &__logo {
-    width: clamp(96px, 10.5vw, 136px);
+    width: clamp(72px, 7.5vw, 104px);
     height: auto;
     display: block;
     flex-shrink: 0;

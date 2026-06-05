@@ -21,6 +21,6 @@ export const HOME_PRELOAD_ASSETS = [
   '/project-area-bg.png',
   '/testi-bg.png',
   '/testi1.png',
-  '/logo-rock-digital-blanc-v1.svg',
-  '/logo-rock-digital-color-v1.svg',
+  '/logo-rock-digital-white.png',
+  '/logo-rock-digital-color-v3.png',
 ] as const;

@@ -58,8 +58,8 @@ export function Navbar() {
             <Image
               src={
                 heroMode
-                  ? '/logo-rock-digital-blanc-v1.svg'
-                  : '/logo-rock-digital-color-v1.svg'
+                  ? '/logo-rock-digital-white.png'
+                  : '/logo-rock-digital-color-v3.png'
               }
               alt="Rock Digital"
               className={styles.navbar__logo}

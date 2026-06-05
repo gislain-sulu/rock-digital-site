@@ -1,5 +1,13 @@
+@use 'sass:color' as sass-color;
 @use '@/styles/tokens' as *;
 @use '@/styles/breakpoints' as *;
+
+// Harmonie charte — même logique que RecentProjects (fond section ≈ --color-blue)
+$testimonial-box-bg: sass-color.change(
+  sass-color.mix($color-blue-deep, $color-blue, 58%),
+  $alpha: 0.9
+);
+$testimonial-divider: sass-color.mix($color-blue-night, $color-blue-deep, 28%);
 
 .testimonialArea {
   width: 100%;
@@ -63,7 +71,12 @@
   }
 
   &__singleBox {
-    background: #171a2b;
+    background: $testimonial-box-bg;
+    background: color-mix(
+      in srgb,
+      color-mix(in srgb, var(--color-blue) 42%, var(--color-blue-deep) 58%) 90%,
+      transparent
+    );
     border-radius: 20px;
     padding: 39px 27px 32px;
     text-align: center;
@@ -77,8 +90,7 @@
   }
 
   &__text {
-    color: $color-white;
-    opacity: 0.702;
+    color: $text-on-dark-soft;
     padding: 35px 0 29px;
     margin: 0;
     position: relative;
@@ -89,7 +101,9 @@
       content: '';
       height: 1px;
       width: 100%;
-      border: 1px solid #292c3b;
+      border: 0;
+      background: $testimonial-divider;
+      background: color-mix(in srgb, var(--color-blue-deep) 72%, #{$color-blue-night} 28%);
       bottom: 0;
       left: 0;
     }
@@ -101,7 +115,7 @@
     gap: 8px;
     padding: 28px 0 13px;
     margin: 0;
-    color: #ffc600;
+    color: $color-orange-bright;
     line-height: 1;
 
     svg {
@@ -124,7 +138,7 @@
       display: inline-block;
       font-size: 15px;
       line-height: 28px;
-      color: #ff3c00;
+      color: $brand-accent;
       font-weight: 400;
       margin-left: 14px;
     }

@@ -113,7 +113,7 @@ export function Footer() {
             <div className={styles.footer__brand}>
               <Link href="/" aria-label="Rock Digital — Accueil">
                 <Image
-                  src="/logo-rock-digital-blanc-v1.svg"
+                  src="/logo-rock-digital-white.png"
                   alt="Rock Digital"
                   className={styles.footer__logo}
                   width={314}
