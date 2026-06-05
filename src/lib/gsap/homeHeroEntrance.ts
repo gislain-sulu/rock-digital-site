@@ -79,7 +79,9 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   const siteHeader = document.querySelector('[data-layout="site-header"]');
 
   const titleLines = hero ? qa(hero, HERO_SELECTORS.titleLine) : [];
-  const words = hero ? qa(hero, HERO_SELECTORS.word) : [];
+  const words = hero
+    ? qa(hero, HERO_SELECTORS.word).filter((el) => !el.closest('[data-hero-digital]'))
+    : [];
   const leadChunks = hero ? qa(hero, HERO_SELECTORS.leadChunk) : [];
   const lead = hero ? q(hero, HERO_SELECTORS.lead) : null;
   const actions = hero ? qa(hero, HERO_SELECTORS.actionsChild) : [];
@@ -89,7 +91,9 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   const heroImageWrap = hero ? q(hero, HERO_SELECTORS.imageWrap) : null;
   const heroGlow = hero ? q(hero, HERO_SELECTORS.glow) : null;
   const visualFigure = hero ? q(hero, '[class*="visual__figure"]') : null;
-  const digitalWord = hero ? q(hero, HERO_SELECTORS.titleHighlight) : null;
+  const digitalWord = hero
+    ? q(hero, `[data-hero-digital], ${HERO_SELECTORS.titleHighlight}`)
+    : null;
 
   const navBrand = siteHeader?.querySelector('[class*="navbar__brand"]');
   const navLinks = siteHeader
@@ -110,6 +114,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     heroMedia,
     ...titleLines,
     ...words,
+    digitalWord,
     ...leadChunks,
     lead,
     ...actions,
@@ -124,6 +129,9 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   }
   if (words.length) {
     gsap.set(words, { ...FADE_FROM, y: 36 });
+  }
+  if (digitalWord) {
+    gsap.set(digitalWord, { autoAlpha: 0, y: 14, scale: 0.92 });
   }
   if (leadChunks.length) {
     gsap.set(leadChunks, { ...FADE_FROM, y: 24 });
@@ -201,33 +209,37 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   const titleStart = 0.32;
 
   titleLines.forEach((line, index) => {
-    const lineWords = Array.from(line.querySelectorAll(HERO_SELECTORS.word));
-    const lineTime = titleStart + index * 0.22;
+    const lineWords = Array.from(line.querySelectorAll(HERO_SELECTORS.word)).filter(
+      (el) => !el.closest('[data-hero-digital]')
+    );
+    const lineTime = titleStart + index * 0.28;
 
     revealTitleLine(tl, line, lineTime);
 
     if (lineWords.length) {
-      fadeInUp(tl, lineWords, lineTime + 0.12, {
-        duration: 0.82,
-        stagger: 0.07,
+      fadeInUp(tl, lineWords, lineTime + 0.14, {
+        duration: 0.88,
+        stagger: 0.09,
         y: 0,
       });
     }
   });
 
-  // Accent sur « digital »
+  // Accent cinématique sur « digital » (sans filter — incompatible avec background-clip: text)
   if (digitalWord) {
     tl.fromTo(
       digitalWord,
-      { scale: 0.92, filter: 'blur(6px)' },
+      { scale: 0.9, y: 14, autoAlpha: 0.4 },
       {
         scale: 1,
-        filter: 'blur(0px)',
-        duration: 0.65,
-        ease: 'back.out(1.4)',
-        clearProps: 'filter',
+        y: 0,
+        autoAlpha: 1,
+        filter: 'none',
+        duration: 0.78,
+        ease: 'back.out(1.35)',
+        clearProps: 'transform,filter',
       },
-      titleStart + 0.55
+      titleStart + 0.58
     );
   }
 

@@ -12,6 +12,7 @@ export const HERO_SELECTORS = {
   glow: '[class*="hero__glow"]',
   layout: '[class*="hero__layout"]',
   titleHighlight: '[class*="hero__titleHighlight"]',
+  titleDigital: '[data-hero-digital]',
 } as const;
 
-export const HERO_ENTRANCE_TARGETS = `#hero ${HERO_SELECTORS.titleLine}, #hero ${HERO_SELECTORS.word}, #hero ${HERO_SELECTORS.leadChunk}, #hero ${HERO_SELECTORS.lead}, #hero ${HERO_SELECTORS.actionsChild}, #hero ${HERO_SELECTORS.visualCol}, #hero [data-hero-visual], #hero [data-hero-visual] img, #hero ${HERO_SELECTORS.scroll}, #hero ${HERO_SELECTORS.media}`;
+export const HERO_ENTRANCE_TARGETS = `#hero ${HERO_SELECTORS.titleLine}, #hero ${HERO_SELECTORS.word}, #hero ${HERO_SELECTORS.titleDigital}, #hero ${HERO_SELECTORS.leadChunk}, #hero ${HERO_SELECTORS.lead}, #hero ${HERO_SELECTORS.actionsChild}, #hero ${HERO_SELECTORS.visualCol}, #hero [data-hero-visual], #hero [data-hero-visual] img, #hero ${HERO_SELECTORS.scroll}, #hero ${HERO_SELECTORS.media}`;

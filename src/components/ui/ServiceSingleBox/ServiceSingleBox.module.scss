@@ -52,9 +52,6 @@
       }
     }
 
-    .serviceSingleBox__icon img {
-      filter: brightness(0) invert(1);
-    }
   }
 }
 
@@ -70,7 +67,7 @@
     display: inline-block;
     width: auto;
     height: auto;
-    max-width: 64px;
+    max-width: clamp(72px, 5.2vw, 86px);
     transition: 0.5s;
   }
 }

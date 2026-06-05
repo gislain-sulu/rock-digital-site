@@ -5,6 +5,7 @@ import { RockDigitalButton } from '@/components/ui/RockDigitalButton';
 
 import { HeroBackground } from './components/HeroBackground';
 import { HeroScrollIndicator } from './components/HeroScrollIndicator';
+import { HeroTitle } from './components/HeroTitle';
 import { HeroVisual } from './components/HeroVisual';
 import styles from './Hero.module.scss';
 
@@ -21,22 +22,7 @@ export function HeroSection() {
       <Container className={styles.hero__container}>
         <div className={styles.hero__layout}>
           <div className={styles.hero__main}>
-            <h1 id="hero-title" className={styles.hero__title}>
-              <span className={styles.hero__titleLine}>
-                <span className={styles.hero__word}>Construisons </span>
-                <span className={styles.hero__word}>aujourd&apos;hui </span>
-              </span>
-              <span className={styles.hero__titleLine}>
-                <span className={styles.hero__word}>le </span>
-                <span className={`${styles.hero__titleHighlight} ${styles.hero__word}`}>
-                  digital
-                </span>
-                <span className={`${styles.hero__titleAccent} ${styles.hero__word}`}>
-                  {' '}
-                  de demain.
-                </span>
-              </span>
-            </h1>
+            <HeroTitle />
 
             <p className={styles.hero__lead}>
               <span className={styles.hero__leadChunk}>

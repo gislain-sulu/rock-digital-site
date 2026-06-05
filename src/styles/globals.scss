@@ -142,6 +142,8 @@ body:has(#main [data-home-boot-screen]) {
 body.home-gsap-active:not(.home-hero-entered) {
   #hero [class*='hero__titleLine'],
   #hero [class*='hero__word'],
+  #hero [data-hero-digital],
+  #hero [class*='hero__titleHighlight'],
   #hero [class*='hero__lead'],
   #hero [class*='hero__leadChunk'],
   #hero [class*='hero__actions'],

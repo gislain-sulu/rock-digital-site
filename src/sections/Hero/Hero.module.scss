@@ -197,26 +197,85 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
     will-change: transform, opacity, filter;
   }
 
+  // Mouvement très léger sur le texte blanc (après entrée GSAP)
+  &__wordAmbient {
+    :global(body.home-hero-entered) & {
+      animation: hero-word-breathe 7s ease-in-out infinite;
+
+      &:nth-child(2) {
+        animation-delay: 0.35s;
+      }
+    }
+  }
+
+  &__titleHighlightWrap {
+    display: inline-block;
+    position: relative;
+    vertical-align: baseline;
+
+    :global(body.home-hero-entered) & {
+      animation: hero-digital-pulse 5.2s ease-in-out infinite;
+    }
+  }
+
   &__titleHighlight {
     display: inline-block;
-    background: linear-gradient(135deg, $hero-cyan 0%, $hero-cyan-deep 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
     position: relative;
+    overflow: hidden;
+    color: $hero-cyan;
+    text-shadow: 0 0 18px rgba($hero-cyan, 0.35);
 
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0.06em;
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, $hero-cyan, transparent);
-      opacity: 0.65;
-      transform-origin: left;
-      animation: hero-underline 2.4s ease-in-out infinite alternate;
+    :global(body.home-hero-entered) & {
+      animation:
+        hero-digital-color 6.5s ease-in-out infinite,
+        hero-digital-glow 4.2s ease-in-out infinite;
+    }
+  }
+
+  &__titleHighlightShimmer {
+    position: absolute;
+    inset: -15% -35%;
+    z-index: 1;
+    background: linear-gradient(
+      105deg,
+      transparent 38%,
+      rgba($color-white, 0.08) 44%,
+      rgba($color-white, 0.55) 50%,
+      rgba($color-white, 0.08) 56%,
+      transparent 62%
+    );
+    transform: translateX(-120%) skewX(-12deg);
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    opacity: 0;
+
+    :global(body.home-hero-entered) & {
+      animation: hero-digital-shimmer 4.8s ease-in-out infinite;
+    }
+  }
+
+  &__titleHighlightAura {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.04em;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($hero-cyan, 0.85) 35%,
+      rgba($hero-cyan, 1) 50%,
+      rgba($hero-cyan, 0.85) 65%,
+      transparent 100%
+    );
+    transform: scaleX(0.4);
+    transform-origin: center;
+    opacity: 0.5;
+    box-shadow: 0 0 10px rgba($hero-cyan, 0.45);
+
+    :global(body.home-hero-entered) & {
+      animation: hero-digital-aura 3.6s ease-in-out infinite;
     }
   }
 
@@ -329,14 +388,110 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
     animation: hero-scroll-fill 2.2s ease-in-out infinite;
   }
 
-  @keyframes hero-underline {
-    from {
-      transform: scaleX(0.35);
-      opacity: 0.4;
+  @keyframes hero-digital-glow {
+    0%,
+    100% {
+      text-shadow:
+        0 0 12px rgba($hero-cyan, 0.32),
+        0 0 24px rgba($hero-cyan, 0.18);
     }
-    to {
-      transform: scaleX(1);
+
+    50% {
+      text-shadow:
+        0 0 18px rgba($hero-cyan, 0.55),
+        0 0 36px rgba($hero-cyan, 0.28);
+    }
+  }
+
+  @keyframes hero-digital-color {
+    0%,
+    100% {
+      color: $hero-cyan;
+    }
+
+    50% {
+      color: #7ddcff;
+    }
+  }
+
+  @keyframes hero-digital-shimmer {
+    0%,
+    12% {
+      transform: translateX(-120%) skewX(-12deg);
+      opacity: 0;
+    }
+
+    28% {
       opacity: 0.85;
+    }
+
+    42%,
+    100% {
+      transform: translateX(120%) skewX(-12deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-digital-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.018);
+    }
+  }
+
+  @keyframes hero-digital-aura {
+    0%,
+    100% {
+      transform: scaleX(0.45);
+      opacity: 0.45;
+      box-shadow: 0 0 8px rgba($hero-cyan, 0.35);
+    }
+
+    50% {
+      transform: scaleX(1);
+      opacity: 0.95;
+      box-shadow:
+        0 0 14px rgba($hero-cyan, 0.65),
+        0 0 28px rgba($hero-cyan, 0.25);
+    }
+  }
+
+  @keyframes hero-word-breathe {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    50% {
+      transform: translateY(-2px);
+      opacity: 0.94;
+    }
+  }
+
+  @include reduce-motion {
+    &__wordAmbient,
+    &__titleHighlightWrap,
+    &__titleHighlight,
+    &__titleHighlightShimmer,
+    &__titleHighlightAura {
+      animation: none !important;
+    }
+
+    &__titleHighlight {
+      color: $hero-cyan;
+      -webkit-text-fill-color: currentColor;
+      background: none;
+      text-shadow: none;
+    }
+
+    &__titleHighlightAura {
+      transform: scaleX(0.85);
+      opacity: 0.7;
     }
   }
 

@@ -9,6 +9,7 @@ const HEADER_ENTRANCE_SELECTORS =
 export function forceRevealHomeEntrance(root: Element): void {
   const targets = [
     ...Array.from(root.querySelectorAll(HERO_ENTRANCE_TARGETS)),
+    ...Array.from(root.querySelectorAll('#hero [data-hero-digital]')),
     ...Array.from(root.querySelectorAll('#hero [data-hero-visual], #hero [data-hero-visual] img')),
     ...Array.from(document.querySelectorAll(HEADER_ENTRANCE_SELECTORS)),
   ];
