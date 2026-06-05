@@ -7,6 +7,10 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
+import {
+  hasTechnologyIcon,
+  TechnologyIcon,
+} from '@/components/icons/TechnologyIcons';
 import { technologies, type Technology } from '@/lib/content';
 
 import styles from './Technologies.module.scss';
@@ -14,11 +18,15 @@ import styles from './Technologies.module.scss';
 const MARQUEE_ROW_COUNT = 3;
 const MIDDLE_MARQUEE_ROW_INDEX = Math.floor(MARQUEE_ROW_COUNT / 2);
 
+const technologiesWithIcons = technologies.filter((tech) =>
+  hasTechnologyIcon(tech.name)
+);
+
 function buildMarqueeRowItems(rowIndex: number): Technology[] {
-  const offset = rowIndex % technologies.length;
+  const offset = rowIndex % technologiesWithIcons.length;
   const rotated = [
-    ...technologies.slice(offset),
-    ...technologies.slice(0, offset),
+    ...technologiesWithIcons.slice(offset),
+    ...technologiesWithIcons.slice(0, offset),
   ];
   return [...rotated, ...rotated];
 }
@@ -66,9 +74,12 @@ export function Technologies() {
                   <li
                     key={`${rowIndex}-${tech.name}-${idx}`}
                     className={styles.tech__item}
+                    title={tech.name}
                   >
-                    <span className={styles.tech__dot} />
-                    {tech.name}
+                    <TechnologyIcon
+                      name={tech.name}
+                      className={styles.tech__icon}
+                    />
                   </li>
                 ))}
               </motion.ul>

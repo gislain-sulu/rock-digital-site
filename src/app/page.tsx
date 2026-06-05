@@ -4,7 +4,7 @@ import { CTA } from '@/sections/CTA';
 import { Hero } from '@/sections/Hero';
 import { ITServices } from '@/sections/ITServices';
 import { Portfolio } from '@/sections/Portfolio';
-import { Process } from '@/sections/Process';
+// import { Process } from '@/sections/Process';
 import { RecentProjects } from '@/sections/RecentProjects';
 // import { Services } from '@/sections/Services';
 import { Stats } from '@/sections/Stats';
@@ -20,7 +20,7 @@ export default function HomePage() {
       <About />
       <ITServices />
       {/* <Services /> */}
-      <Process />
+      {/* <Process /> */}
       <RecentProjects auto />
       {/* <Portfolio /> */}
       <Technologies />

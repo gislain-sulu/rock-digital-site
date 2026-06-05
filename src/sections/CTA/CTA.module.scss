@@ -3,52 +3,48 @@
 @use '@/styles/breakpoints' as *;
 
 // =============================================================================
-// CTA — colonne gauche contenu / colonne droite visuelle immersive
+// CTA — contenu + bloc contact collé au footer
 // =============================================================================
-
-$meta-glass-radius: clamp(2rem, 4.5vw, 2.25rem); // 32px → 36px
-$meta-glass-blur: clamp(20px, 3vw, 32px);
 
 .ctaSection {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow-x: clip;
   background: $bg-subtle;
-  border-bottom-left-radius: $hero-corner-radius;
-  border-bottom-right-radius: $hero-corner-radius;
+  padding-block-start: $section-py-md !important;
+  padding-block-end: 0 !important;
+  padding-bottom: 0 !important;
 
-  &__container {
+  &__layout {
     position: relative;
     z-index: $z-content;
-  }
-
-  // ---------------------------------------------------------------------------
-  // Layout principal
-  // ---------------------------------------------------------------------------
-  &__panel {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(2rem, 4vw, 3rem);
-    align-items: stretch;
+    gap: $space-8;
+    align-items: end;
 
     @include bp-up(lg) {
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-      gap: clamp(2.5rem, 5vw, 4rem);
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: clamp($space-8, 4vw, $space-12);
     }
   }
 
   &__mainGroup {
     min-width: 0;
+    max-width: 52rem;
+    margin: 0;
+    padding: 0;
+    align-self: start;
   }
 
   &__main {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     min-width: 0;
-    min-height: 100%;
-    padding: clamp(0.5rem, 2vw, 1rem) 0;
+    margin: 0;
+    padding: 0 0 $space-8;
   }
 
   &__eyebrow {
@@ -68,7 +64,7 @@ $meta-glass-blur: clamp(20px, 3vw, 32px);
 
   &__lead {
     @include body-lg;
-    margin: 0 0 $space-8;
+    margin: 0 0 $space-6;
     color: $text-secondary;
     max-width: 48ch;
     text-wrap: pretty;
@@ -81,146 +77,79 @@ $meta-glass-blur: clamp(20px, 3vw, 32px);
     align-items: center;
   }
 
-  // ---------------------------------------------------------------------------
-  // Colonne droite — fond immersif + carte glassmorphism
-  // ---------------------------------------------------------------------------
-  &__visualCol {
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: clamp(22rem, 52vw, 32rem);
-    padding: clamp(1.5rem, 3.5vw, 2.5rem);
-    border-radius: $hero-corner-radius;
-    overflow: hidden;
-    background: transparent;
+  &__metaWrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    justify-self: end;
 
     @include bp-up(lg) {
-      min-height: clamp(26rem, 38vw, 34rem);
+      align-self: end;
+      max-width: 420px;
     }
   }
 
-  &__metaWrap {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    min-width: 0;
-  }
-
-  // ---------------------------------------------------------------------------
-  // Carte glass — fond clair de section, textes lisibles
-  // ---------------------------------------------------------------------------
   &__meta {
     position: relative;
     width: 100%;
-    max-width: 420px;
     margin: 0;
-    padding: clamp(1.625rem, 3.5vw, 2.125rem);
-    border-radius: $meta-glass-radius;
-    overflow: hidden;
-    background: transparent;
-    border: none;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    padding-top: clamp(2rem, 4vw, 3rem);
+    border-radius: $hero-corner-radius $hero-corner-radius 0 0;
+    background: $color-black;
+    color: $color-white;
     box-shadow: none;
-    transform: translateY(0);
-    transition: transform $duration-slow $ease-out-expo;
-
-    @include bp-up(lg) {
-      transform: translateY(-8px);
-    }
+    transform: none;
+    transition: none;
 
     &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      border-radius: inherit;
-      background:
-        linear-gradient(
-          165deg,
-          rgba($color-white, 0.96) 0%,
-          rgba($color-blue-soft, 0.35) 100%
-        );
-      backdrop-filter: blur($meta-glass-blur) saturate(120%);
-      -webkit-backdrop-filter: blur($meta-glass-blur) saturate(120%);
-      border: 1px solid $border-default;
-      box-shadow: none;
-      pointer-events: none;
+      content: none;
     }
 
     &:hover {
-      transform: translateY(-4px);
-
-      @include bp-up(lg) {
-        transform: translateY(-14px);
-      }
-
-      &::before {
-        background:
-          linear-gradient(
-            165deg,
-            rgba($color-white, 0.98) 0%,
-            rgba($color-blue-soft, 0.45) 100%
-          );
-      }
-    }
-
-    @include reduce-motion {
-      transition: none;
-
-      &:hover {
-        transform: translateY(0);
-
-        @include bp-up(lg) {
-          transform: translateY(-8px);
-        }
-      }
+      transform: none;
     }
   }
 
+  &__metaTitle {
+    margin: 0 0 clamp(1rem, 2vw, 1.25rem);
+    font-family: $font-display;
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    font-weight: $fw-bold;
+    letter-spacing: $ls-widest;
+    text-transform: uppercase;
+    color: $color-white;
+  }
+
   &__metaList {
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: clamp(0.5rem, 1.2vw, 0.625rem);
+    gap: 0;
   }
 
   &__metaItem {
     display: flex;
     align-items: flex-start;
     gap: clamp(0.75rem, 2vw, 1rem);
-    padding: clamp(0.75rem, 2vw, 0.875rem) 0;
+    padding: clamp(0.85rem, 2vw, 1rem) 0;
     border: none;
     background: none;
-    border-radius: 0;
-    transition:
-      color $duration-base $ease-out-quart,
-      transform $duration-base $ease-out-quart;
+    transition: color $duration-base $ease-out-quart;
 
     &:not(:last-child) {
-      border-bottom: 1px solid $border-subtle;
+      border-bottom: 1px solid rgba($color-white, 0.1);
     }
 
     &:hover {
-      transform: translateX(4px);
+      transform: none;
 
       .ctaSection__metaIcon {
         color: $brand-accent;
+        border-color: rgba($brand-accent, 0.35);
       }
 
       .ctaSection__metaValue:is(a) {
         color: $brand-accent;
-      }
-    }
-
-    @include reduce-motion {
-      transition: color $duration-base $ease-out-quart;
-
-      &:hover {
-        transform: none;
       }
     }
   }
@@ -230,14 +159,15 @@ $meta-glass-blur: clamp(20px, 3vw, 32px);
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: clamp(2rem, 4.5vw, 2.25rem);
-    height: clamp(2rem, 4.5vw, 2.25rem);
-    border-radius: 0;
-    color: $brand-primary;
-    background: none;
-    border: none;
-    box-shadow: none;
-    transition: color $duration-base $ease-out-quart;
+    width: clamp(2.5rem, 4vw, 2.75rem);
+    height: clamp(2.5rem, 4vw, 2.75rem);
+    border-radius: 50%;
+    color: $brand-accent;
+    background: rgba($color-white, 0.06);
+    border: 1px solid rgba($color-white, 0.08);
+    transition:
+      color $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart;
 
     svg {
       width: 1.1rem;
@@ -250,7 +180,7 @@ $meta-glass-blur: clamp(20px, 3vw, 32px);
     flex-direction: column;
     gap: $space-1;
     min-width: 0;
-    padding-top: 0.125rem;
+    padding-top: 0.35rem;
   }
 
   &__metaLabel {
@@ -259,25 +189,22 @@ $meta-glass-blur: clamp(20px, 3vw, 32px);
     font-weight: $fw-semibold;
     letter-spacing: $ls-widest;
     text-transform: uppercase;
-    color: $text-muted;
+    color: rgba($color-white, 0.55);
   }
 
   &__metaValue {
     font-family: $font-ui;
     font-size: clamp($fs-sm, 1.5vw, $fs-base);
     font-weight: $fw-medium;
-    color: $text-primary;
+    color: rgba($color-white, 0.92);
     line-height: 1.5;
     text-decoration: none;
     transition: color $duration-base $ease-out-quart;
+    white-space: pre-line;
 
     &:is(a):hover {
       color: $brand-accent;
     }
   }
-}
 
-// Priorité sur .section { overflow-x: clip } du composant Section
-:global(section).ctaSection {
-  overflow: hidden;
 }

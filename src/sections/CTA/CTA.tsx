@@ -28,16 +28,16 @@ const arrowIcon = (
 
 const metaItems = [
   {
-    icon: EmailIcon,
-    label: 'Email',
-    value: contactInfo.email,
-    href: contactLinks.email,
-  },
-  {
     icon: PhoneIcon,
     label: 'Téléphone',
     value: contactInfo.phone,
     href: contactLinks.phone,
+  },
+  {
+    icon: EmailIcon,
+    label: 'Email',
+    value: contactInfo.email,
+    href: contactLinks.email,
   },
   {
     icon: AddressIcon,
@@ -49,79 +49,71 @@ const metaItems = [
 export function CTA() {
   return (
     <Section tone="light" size="lg" id="contact" className={styles.ctaSection}>
-      <Container className={styles.ctaSection__container}>
-        <div className={styles.ctaSection__panel}>
-          <StaggerGroup className={styles.ctaSection__mainGroup} stagger={0.12}>
-            <StaggerItem className={styles.ctaSection__main}>
-              <SectionSubTitle className={styles.ctaSection__eyebrow}>
-                Contact
-              </SectionSubTitle>
+      <Container className={styles.ctaSection__layout}>
+        <StaggerGroup className={styles.ctaSection__mainGroup} stagger={0.12}>
+          <StaggerItem className={styles.ctaSection__main}>
+            <SectionSubTitle className={styles.ctaSection__eyebrow}>
+              Contact
+            </SectionSubTitle>
 
-              <h2 className={styles.ctaSection__title}>
-                Construisons ensemble la{' '}
-                <span className="u-text-gradient-blue">fondation digitale</span>{' '}
-                de demain.
-              </h2>
+            <h2 className={styles.ctaSection__title}>
+              Construisons ensemble la{' '}
+              <span className="u-text-gradient-blue">fondation digitale</span>{' '}
+              de demain.
+            </h2>
 
-              <p className={styles.ctaSection__lead}>
-                Parlons de votre site, application ou plateforme. Deux parcours :
-                une demande de devis structurée ou une discussion directe avec
-                l&apos;équipe.
-              </p>
+            <p className={styles.ctaSection__lead}>
+              Parlons de votre site, application ou plateforme. Deux parcours :
+              une demande de devis structurée ou une discussion directe avec
+              l&apos;équipe.
+            </p>
 
-              <div className={styles.ctaSection__actions}>
-                <RockDigitalButton
-                  href="/contact"
-                  variant="default"
-                  icon={arrowIcon}
-                  iconPosition="right"
-                >
-                  Démarrer un projet
-                </RockDigitalButton>
-                <RockDigitalButton href="/contact#devis" variant="outline">
-                  Demander un devis
-                </RockDigitalButton>
-              </div>
-            </StaggerItem>
-          </StaggerGroup>
-
-          <div className={styles.ctaSection__visualCol}>
-            <FadeIn y={40} delay={0.15} className={styles.ctaSection__metaWrap}>
-              <aside
-                className={styles.ctaSection__meta}
-                aria-label="Coordonnées"
+            <div className={styles.ctaSection__actions}>
+              <RockDigitalButton
+                href="/contact"
+                variant="default"
+                icon={arrowIcon}
+                iconPosition="right"
               >
-                <div className={styles.ctaSection__metaList}>
-                  {metaItems.map(({ icon: Icon, label, value, ...rest }) => (
-                    <div key={label} className={styles.ctaSection__metaItem}>
-                      <span
-                        className={styles.ctaSection__metaIcon}
-                        aria-hidden="true"
-                      >
-                        <Icon />
+                Démarrer un projet
+              </RockDigitalButton>
+              <RockDigitalButton href="/contact#devis" variant="outline">
+                Demander un devis
+              </RockDigitalButton>
+            </div>
+          </StaggerItem>
+        </StaggerGroup>
+
+        <FadeIn y={32} delay={0.1} className={styles.ctaSection__metaWrap}>
+          <aside className={styles.ctaSection__meta} aria-label="Coordonnées">
+            <h3 className={styles.ctaSection__metaTitle}>Contact</h3>
+
+            <div className={styles.ctaSection__metaList}>
+              {metaItems.map(({ icon: Icon, label, value, ...rest }) => (
+                <div key={label} className={styles.ctaSection__metaItem}>
+                  <span
+                    className={styles.ctaSection__metaIcon}
+                    aria-hidden="true"
+                  >
+                    <Icon />
+                  </span>
+                  <div className={styles.ctaSection__metaContent}>
+                    <span className={styles.ctaSection__metaLabel}>{label}</span>
+                    {'href' in rest && rest.href ? (
+                      <a href={rest.href} className={styles.ctaSection__metaValue}>
+                        {value}
+                      </a>
+                    ) : (
+                      <span className={styles.ctaSection__metaValue}>
+                        {value}
                       </span>
-                      <div className={styles.ctaSection__metaContent}>
-                        <span className={styles.ctaSection__metaLabel}>{label}</span>
-                        {'href' in rest && rest.href ? (
-                          <a
-                            href={rest.href}
-                            className={styles.ctaSection__metaValue}
-                          >
-                            {value}
-                          </a>
-                        ) : (
-                          <span className={styles.ctaSection__metaValue}>
-                            {value}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+                    )}
+                  </div>
                 </div>
-              </aside>
-            </FadeIn>
-          </div>
-        </div>
+              ))}
+            </div>
+          </aside>
+        </FadeIn>
       </Container>
     </Section>
   );

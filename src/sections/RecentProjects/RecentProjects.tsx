@@ -65,10 +65,10 @@ export function RecentProjects({ auto = true }: RecentProjectsProps) {
             <div className={styles.projectArea__projectCol}>
               <div className={styles.projectArea__headerAside}>
                 <RockDigitalButton
-                  href="/portfolio"
+                  href="/contact"
                   className={styles.projectArea__cta}
                 >
-                  Voir les projets
+                  Démarrer un projet
                 </RockDigitalButton>
               </div>
             </div>

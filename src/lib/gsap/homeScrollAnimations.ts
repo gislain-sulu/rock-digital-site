@@ -283,8 +283,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
   // —— CTA contact — split dramatique ——
   if (contact) {
     const main = q(contact, '[class*="ctaSection__main"]');
-    const visual = q(contact, '[class*="ctaSection__visualCol"]');
-    const meta = q(contact, '[class*="ctaSection__meta"]');
+    const metaWrap = q(contact, '[class*="ctaSection__metaWrap"]');
 
     const ctaTl = gsap.timeline({
       scrollTrigger: {
@@ -302,19 +301,11 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
         0
       );
     }
-    if (visual) {
+    if (metaWrap) {
       ctaTl.from(
-        visual,
-        { autoAlpha: 0, x: 64, scale: 0.92, duration: 1.15, ease: EASE_EXPO },
+        metaWrap,
+        { autoAlpha: 0, y: 40, duration: 1.1, ease: EASE_EXPO },
         0.06
-      );
-      parallaxY(visual, 36, contact, 'top bottom', 'bottom top');
-    }
-    if (meta) {
-      ctaTl.from(
-        meta,
-        { autoAlpha: 0, y: 48, scale: 0.9, duration: 1.05, ease: EASE_OUT },
-        0.18
       );
     }
   }
@@ -368,7 +359,7 @@ export function buildHomeReducedMotion(root: HomeRoot): void {
       ...qa(root, '#recent-projects [class*="projectArea__headerIntro"], #recent-projects [class*="projectArea__headerAside"], #recent-projects [class*="projectArea__carouselRow"]'),
       ...qa(root, '#technologies [class*="tech__kicker"], #technologies .heading'),
       ...qa(root, '#testimonials [class*="testimonialArea__sectionTitle"] *, #testimonials [class*="testimonialArea__viewport"]'),
-      ...qa(root, '#contact [class*="ctaSection__main"], #contact [class*="ctaSection__visualCol"], #contact [class*="ctaSection__meta"]'),
+      ...qa(root, '#contact [class*="ctaSection__main"], #contact [class*="ctaSection__metaWrap"]'),
     ],
     { autoAlpha: 1, x: 0, y: 0, scale: 1, clearProps: 'all' }
   );
