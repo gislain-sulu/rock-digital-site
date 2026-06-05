@@ -1,7 +1,6 @@
 /** Images et logos utilisés sur la page d'accueil (hero → CTA). */
 export const HOME_PRELOAD_ASSETS = [
   '/background-hero.png',
-  '/rock-2.png',
   '/bg-hero.png',
   '/about-thumb.png',
   '/about5.png',

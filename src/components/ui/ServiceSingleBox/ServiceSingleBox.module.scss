@@ -3,111 +3,217 @@
 
 // .service-single-box
 .serviceSingleBox {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
   position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 330px;
+  margin-left: auto;
+  margin-right: auto;
 
   &[id] {
     scroll-margin-top: calc(var(--header-height, 88px) + 1.5rem);
   }
-  z-index: 1;
-  overflow: hidden;
-  padding: clamp(1.4rem, 2.4vw, 2rem);
-  text-align: left;
-  background: $color-white;
-  border-radius: $radius-md;
-  box-shadow: 0 0 30px rgba(15, 23, 42, 0.08);
-  transition: 0.5s;
 
-  &::before {
-    position: absolute;
-    content: '';
-    height: 100%;
-    width: 100%;
-    background: var(--service-hover-bg) center / cover no-repeat;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    clip-path: polygon(50% 0, 50% 0, 50% 50%, 50% 100%, 50% 100%, 50% 50%);
-    transition: 0.4s;
+  &:hover,
+  &:focus-within {
+    cursor: pointer;
   }
 
   &:hover {
-    &::before {
-      clip-path: polygon(25% -70%, 75% -70%, 120% 50%, 75% 170%, 25% 170%, -20% 50%);
+    .serviceSingleBox__inner {
+      background: $color-orange-bright;
     }
 
-    .serviceSingleBox__title,
-    .serviceSingleBox__text,
-    .serviceSingleBox__btnLink {
-      color: $color-white;
+    .serviceSingleBox__hoverOverlay {
+      opacity: 1;
+      visibility: visible;
     }
 
-    .serviceSingleBox__bullets li {
-      color: rgba(255, 255, 255, 0.92);
-
-      span {
-        color: $color-white;
-      }
+    .serviceSingleBox__thumbImg {
+      transform: scale(1.1);
     }
 
+    .serviceSingleBox__thumb::after {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }
 
-// .service-icon
+
+// Structure “service-card-two”
+.serviceSingleBox__inner {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  background: $color-white;
+  max-height: 100%;
+  height: 377px;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
+  @include focus-ring;
+}
+
+.serviceSingleBox__content {
+  width: 100%;
+  height: 252px;
+  padding-top: 25px;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+
+  // Fond noir en pseudo-élément : le clip-path ne coupe plus les coins arrondis de l'icône.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: $color-black;
+    clip-path: polygon(0 0, 100% 0, 100% 55%, 0 75%);
+  }
+}
+
 .serviceSingleBox__icon {
   position: relative;
   z-index: 1;
+  width: 110px;
+  height: 110px;
+  background: $color-white;
+  border: 8px solid $color-black;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: center;
-  margin-bottom: clamp(1rem, 2vw, 1.6rem);
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+}
 
-  img {
-    display: inline-block;
-    width: auto;
-    height: auto;
-    max-width: clamp(72px, 5.2vw, 86px);
-    transition: 0.5s;
-  }
+.serviceSingleBox__iconSvg {
+  width: 40px;
+  height: 40px;
+  color: $color-orange;
+  flex-shrink: 0;
+}
+
+.serviceSingleBox__thumb {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 251px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.serviceSingleBox__thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: all 0.4s ease-in-out;
+}
+
+.serviceSingleBox__thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(35, 36, 41, 0.7);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.serviceSingleBox__hoverOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 251px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: $space-2;
+  padding: $space-4 $space-5;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity $duration-base $ease-out-quart,
+    visibility $duration-base $ease-out-quart;
+}
+
+.serviceSingleBox__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $space-4;
+}
+
+.serviceSingleBox__number {
+  font-family: $font-display;
+  font-weight: $fw-bold;
+  font-size: $fs-xl;
+  color: rgba(35, 31, 32, 0.18);
+  letter-spacing: $ls-tight;
+  transition: color $duration-base $ease-out-quart;
 }
 
 // .service-content
-.serviceSingleBox__content {
+.serviceSingleBox__body {
   display: flex;
   flex-direction: column;
-  flex: 1;
   gap: $space-3;
+  flex: 1;
   position: relative;
   z-index: 1;
 }
 
 // .service-title
 .serviceSingleBox__title {
-  margin: 0;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 14px;
   text-align: center;
-  align-self: center;
-  font-family: $font-display;
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
-  font-weight: $fw-semibold;
-  line-height: 1.25;
-  color: $color-black;
-  transition: color 0.4s;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 125%;
+  color: $color-white;
+
+}
+
+// .service-description (visible au hover, centré sur l'image)
+.serviceSingleBox__description {
+  margin: 0;
+  max-width: 28ch;
+  font-family: $font-ui;
+  font-size: $fs-sm;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: $lh-relaxed;
 }
 
 // .service-text
 .serviceSingleBox__text {
   margin: 0;
   font-family: $font-ui;
-  font-size: clamp(0.9rem, 1vw, 1rem);
-  line-height: 1.6;
   color: $text-secondary;
-  transition: color 0.4s;
+  line-height: $lh-relaxed;
 }
 
 .serviceSingleBox__bullets {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: $space-2;
   margin: 0;
   padding: 0;
@@ -116,8 +222,9 @@
   li {
     font-family: $font-ui;
     font-size: $fs-sm;
-    color: $color-blue-slate;
+    color: rgba(255, 255, 255, 0.9);
     display: flex;
+    justify-content: center;
     gap: $space-2;
     transition: color 0.4s;
 
@@ -130,37 +237,24 @@
   }
 }
 
-// .service-btn
-.serviceSingleBox__btn {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  margin-top: clamp(0.4rem, 1vw, 0.6rem);
-}
-
-.serviceSingleBox__btnLink {
+.serviceSingleBox__link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
+  gap: $space-2;
   font-family: $font-ui;
-  font-size: clamp(0.82rem, 0.95vw, 0.94rem);
+  font-size: $fs-sm;
   font-weight: $fw-semibold;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: $brand-accent;
-  transition: color 0.4s;
+  color: $color-blue;
+  margin-top: auto;
+  padding-top: $space-3;
+  border-top: 1px solid $border-default;
+  transition: color $duration-base $ease-out-quart;
   @include focus-ring;
-}
+  border-radius: $radius-xs;
 
-.serviceSingleBox__btnIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1;
+  svg {
+    width: 16px;
+    height: 16px;
+    transition: transform $duration-base $ease-out-quart;
+  }
 }

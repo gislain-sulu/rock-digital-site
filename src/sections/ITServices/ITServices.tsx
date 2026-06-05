@@ -16,7 +16,7 @@ import { scrollVarsWithInViewFix } from '@/lib/gsap/effects';
 import { prefersReducedMotion } from '@/lib/gsap/motion';
 import { registerGsap } from '@/lib/gsap/registerGsap';
 import { services } from '@/lib/content';
-import { getServiceImage } from '@/lib/serviceImages';
+import { getServiceThumbImage } from '@/lib/serviceImages';
 
 import styles from './ITServices.module.scss';
 
@@ -31,7 +31,7 @@ export type ITServicesProps = {
 
 const SERVICE_BOX_SELECTOR = '[data-service-box]';
 
-const defaultServiceHref = (serviceId: string) => `/services#${serviceId}`;
+const defaultServiceHref = () => '/contact';
 
 export function ITServices({
   showHeading = true,
@@ -40,7 +40,7 @@ export function ITServices({
   ctaLabel = 'En savoir plus',
   sectionId = 'it-services',
 }: ITServicesProps = {}) {
-  const hrefFor = (serviceId: string) => ctaHref ?? defaultServiceHref(serviceId);
+  const hrefFor = () => ctaHref ?? defaultServiceHref();
   const rootRef = useRef<HTMLDivElement>(null);
   const Box = withBullets ? ServiceSingleBoxWithBullets : ServiceSingleBox;
 
@@ -179,10 +179,10 @@ export function ITServices({
                 title={service.title}
                 description={service.description}
                 bullets={service.bullets}
-                href={hrefFor(service.id)}
-                image={getServiceImage(service.id)}
-                imageAlt={service.title}
-                ctaLabel={ctaLabel}
+                href={hrefFor()}
+                icon={service.icon}
+                thumbSrc={getServiceThumbImage(service.id)}
+                thumbAlt={service.title}
               />
             ))}
           </div>

@@ -28,14 +28,19 @@ export function HomeBootGate({ children }: HomeBootGateProps) {
 
     let cancelled = false;
 
-    void waitForHomeSiteReady().then(() => {
+    const reveal = () => {
       if (cancelled) return;
       markHomeBootComplete();
       setReady(true);
-    });
+    };
+
+    void waitForHomeSiteReady().then(reveal).catch(reveal);
+
+    const hardFailSafe = window.setTimeout(reveal, 10000);
 
     return () => {
       cancelled = true;
+      window.clearTimeout(hardFailSafe);
     };
   }, []);
 

@@ -76,7 +76,7 @@ export const services: Service[] = [
   {
     id: 'automatisation',
     number: '06',
-    title: 'Automatisation',
+    title: 'IA & automatisation',
     description:
       'Workflows internes, intégrations métiers, pipelines de données. Reprenez le contrôle de votre productivité.',
     bullets: [

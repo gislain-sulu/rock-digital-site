@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import { type CSSProperties, type ElementType } from 'react';
+import { type ElementType } from 'react';
 
+import { ServiceIcon } from '@/components/icons/ServiceIcons';
+import type { Service } from '@/lib/content';
 import { cn } from '@/utils/cn';
 
 import styles from './ServiceSingleBox.module.scss';
@@ -8,40 +10,32 @@ import styles from './ServiceSingleBox.module.scss';
 export type ServiceSingleBoxVariant = 'with-bullets' | 'without-bullets';
 
 export type ServiceSingleBoxProps = {
+  icon: Service['icon'];
   title: string;
   description: string;
   href: string;
-  image: string;
-  imageAlt: string;
+  thumbSrc: string;
+  thumbAlt: string;
   bullets?: string[];
   variant?: ServiceSingleBoxVariant;
-  ctaLabel?: string;
-  hoverBackgroundImage?: string;
   className?: string;
   as?: ElementType;
   id?: string;
 };
 
-const DEFAULT_HOVER_BG = '/service6.png';
-
 export function ServiceSingleBox({
+  icon,
   title,
   description,
   href,
-  image,
-  imageAlt,
+  thumbSrc,
+  thumbAlt,
   bullets = [],
   variant = 'without-bullets',
-  ctaLabel = 'En savoir plus',
-  hoverBackgroundImage = DEFAULT_HOVER_BG,
   className,
   as: Component = 'article',
   id,
 }: ServiceSingleBoxProps) {
-  const boxStyle = {
-    '--service-hover-bg': `url(${hoverBackgroundImage})`,
-  } as CSSProperties;
-
   const shouldRenderBullets = variant === 'with-bullets' && bullets.length > 0;
 
   return (
@@ -49,35 +43,34 @@ export function ServiceSingleBox({
       id={id}
       data-service-box
       className={cn(styles.serviceSingleBox, className)}
-      style={boxStyle}
     >
-      <div className={styles.serviceSingleBox__icon}>
-        <img src={image} alt={imageAlt} />
-      </div>
+      <Link href={href} className={styles.serviceSingleBox__inner} aria-label={title}>
+        <div className={styles.serviceSingleBox__content}>
+          <h4 className={styles.serviceSingleBox__title}>{title}</h4>
 
-      <div className={styles.serviceSingleBox__content}>
-        <h3 className={styles.serviceSingleBox__title}>{title}</h3>
-        <p className={styles.serviceSingleBox__text}>{description}</p>
-
-        {shouldRenderBullets && (
-          <ul className={styles.serviceSingleBox__bullets}>
-            {bullets.map((bullet) => (
-              <li key={bullet}>
-                <span aria-hidden="true">→</span> {bullet}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className={styles.serviceSingleBox__btn}>
-          <Link href={href} className={styles.serviceSingleBox__btnLink}>
-            <span className={styles.serviceSingleBox__btnIcon} aria-hidden="true">
-              +
-            </span>
-            {ctaLabel}
-          </Link>
+          <div className={styles.serviceSingleBox__icon}>
+            <ServiceIcon name={icon} className={styles.serviceSingleBox__iconSvg} />
+          </div>
         </div>
-      </div>
+
+        <div className={styles.serviceSingleBox__hoverOverlay}>
+          <p className={styles.serviceSingleBox__description}>{description}</p>
+
+          {shouldRenderBullets && (
+            <ul className={styles.serviceSingleBox__bullets}>
+              {bullets.map((bullet) => (
+                <li key={bullet}>
+                  <span aria-hidden="true">→</span> {bullet}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className={styles.serviceSingleBox__thumb} aria-hidden="true">
+          <img className={styles.serviceSingleBox__thumbImg} src={thumbSrc} alt={thumbAlt} />
+        </div>
+      </Link>
     </Component>
   );
 }
