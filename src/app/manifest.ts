@@ -12,7 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#2e6ebb',
     icons: [
       {
-        src: '/icon.svg',
+        src: '/rockdigital-favicon.svg',
         sizes: 'any',
         type: 'image/svg+xml',
       },

@@ -80,6 +80,11 @@ export function createMetadata({
       images: [image],
       creator: '@rockdigital',
     },
+    icons: {
+      icon: '/rockdigital-favicon.svg',
+      shortcut: '/rockdigital-favicon.svg',
+      apple: '/rockdigital-favicon.svg',
+    },
   };
 }
 
