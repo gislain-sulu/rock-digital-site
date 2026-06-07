@@ -17,7 +17,22 @@
     min-height: 0;
   }
 
+  &__logoWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: page-loader-logo-enter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  &__logo {
+    width: min(220px, 72vw);
+    height: auto;
+    animation: page-loader-logo-breathe 2.6s ease-in-out 0.85s infinite;
+  }
+
   &__label {
+    animation: page-loader-fade-up 0.65s ease-out 0.4s both;
     font-family: $font-ui;
     font-size: $fs-xs;
     font-weight: $fw-semibold;
@@ -32,6 +47,7 @@
     background: rgba(46, 110, 187, 0.15);
     border-radius: 999px;
     overflow: hidden;
+    animation: page-loader-fade-up 0.65s ease-out 0.55s both;
 
     span {
       display: block;
@@ -49,6 +65,50 @@
     }
     100% {
       transform: translateX(350%);
+    }
+  }
+
+  @keyframes page-loader-logo-enter {
+    0% {
+      opacity: 0;
+      transform: translateY(14px) scale(0.9);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes page-loader-logo-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.035);
+    }
+  }
+
+  @keyframes page-loader-fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__logoWrap,
+    &__logo,
+    &__label,
+    &__bar {
+      animation: none;
     }
   }
 }
