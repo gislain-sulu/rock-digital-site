@@ -1,7 +1,7 @@
 import { HOME_PRELOAD_ASSETS } from '@/lib/homePreloadAssets';
 
 const HOME_BOOT_MIN_MS = 500;
-const HOME_BOOT_MAX_MS = 8000;
+const HOME_BOOT_MAX_MS = 4000;
 const HOME_BOOT_STORAGE_KEY = 'rock-home-boot';
 
 function withTimeout<T>(promise: Promise<T>, ms: number, fallback: T): Promise<T> {

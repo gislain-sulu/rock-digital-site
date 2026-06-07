@@ -119,23 +119,13 @@ html.lenis {
 
 
 // Masque le header pendant l’UI de chargement (src/app/loading.tsx dans #main)
-body:has(#main [data-page-loading]) [data-layout='site-header'] {
+body:has(#main [data-page-loading]:not([data-home-boot-screen])) [data-layout='site-header'] {
   visibility: hidden;
   pointer-events: none;
 }
 
-// Premier chargement accueil — masque chrome + contenu tant que l'écran boot est monté
-body:has(#main [data-home-boot-screen]) {
+body.home-boot-loading {
   overflow: hidden;
-
-  [data-layout='site-header'],
-  [data-layout='site-footer'],
-  [data-layout='scroll-progress'],
-  [data-layout='go-top'],
-  [data-home-boot-content] {
-    visibility: hidden;
-    pointer-events: none;
-  }
 }
 
 // Avant la timeline d'entrée GSAP — évite le flash de texte visible

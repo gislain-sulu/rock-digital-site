@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Montserrat, Open_Sans } from 'next/font/google';
 
+import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Footer } from '@/components/layout/Footer';
 import { GoTopButton } from '@/components/layout/GoTopButton';
 import { Header } from '@/components/layout/Header';
@@ -54,6 +55,11 @@ export default function RootLayout({
     >
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `window.setTimeout(function(){var boot=document.querySelector('[data-home-boot-screen]');if(boot){boot.remove();}document.body.classList.add('home-hero-entered');document.body.classList.remove('home-gsap-active');},4500);`,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationJsonLd()),
@@ -72,6 +78,7 @@ export default function RootLayout({
         </a>
         <SmoothScrollProvider>
           <AppMotionProvider>
+            <CustomCursor />
             <ScrollProgress />
             <Header />
             <main id="main">{children}</main>

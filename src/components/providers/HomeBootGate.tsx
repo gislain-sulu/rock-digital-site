@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useLayoutEffect, useState } from 'react';
 
 import { HomeScrollOrchestrator } from '@/components/motion/HomeScrollOrchestrator';
 import { PageLoader } from '@/components/ui/PageLoader';
@@ -16,11 +16,21 @@ type HomeBootGateProps = {
   children: ReactNode;
 };
 
+const BOOT_FAILSAFE_MS = 3500;
+const ENTRANCE_FAILSAFE_MS = 3200;
+
 export function HomeBootGate({ children }: HomeBootGateProps) {
+  const [mounted, setMounted] = useState(false);
   const [ready, setReady] = useState(false);
   const [domStable, setDomStable] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!mounted) return;
+
     if (isHomeBootComplete()) {
       setReady(true);
       return;
@@ -36,15 +46,15 @@ export function HomeBootGate({ children }: HomeBootGateProps) {
 
     void waitForHomeSiteReady().then(reveal).catch(reveal);
 
-    const hardFailSafe = window.setTimeout(reveal, 10000);
+    const hardFailSafe = window.setTimeout(reveal, BOOT_FAILSAFE_MS);
 
     return () => {
       cancelled = true;
       window.clearTimeout(hardFailSafe);
     };
-  }, []);
+  }, [mounted]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!ready) {
       setDomStable(false);
       return;
@@ -67,7 +77,7 @@ export function HomeBootGate({ children }: HomeBootGateProps) {
     };
   }, [ready]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!ready || !domStable) {
       document.body.classList.remove('home-gsap-active', 'home-hero-entered');
       return undefined;
@@ -83,7 +93,7 @@ export function HomeBootGate({ children }: HomeBootGateProps) {
         const root = document.querySelector('[data-home-boot-content]');
         if (root) markHomeHeroEntered(root);
       }
-    }, 3200);
+    }, ENTRANCE_FAILSAFE_MS);
 
     return () => {
       clearTimeout(failSafe);
@@ -93,7 +103,21 @@ export function HomeBootGate({ children }: HomeBootGateProps) {
     };
   }, [ready, domStable]);
 
-  const showLoader = !ready;
+  const showLoader = mounted && !ready;
+
+  useLayoutEffect(() => {
+    if (!mounted) return undefined;
+
+    if (showLoader) {
+      document.body.classList.add('home-boot-loading');
+    } else {
+      document.body.classList.remove('home-boot-loading');
+    }
+
+    return () => {
+      document.body.classList.remove('home-boot-loading');
+    };
+  }, [mounted, showLoader]);
 
   return (
     <>
