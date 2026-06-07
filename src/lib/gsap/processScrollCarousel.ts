@@ -58,14 +58,14 @@ function waitForLayoutReady(): Promise<void> {
 
   if (ready) {
     return new Promise((resolve) => {
-      requestAnimationFrame(() => requestAnimationFrame(resolve));
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
     });
   }
 
   return new Promise((resolve) => {
     const finish = () => {
       observer.disconnect();
-      requestAnimationFrame(() => requestAnimationFrame(resolve));
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
     };
 
     const observer = new MutationObserver(() => {

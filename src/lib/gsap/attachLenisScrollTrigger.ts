@@ -13,8 +13,8 @@ export function attachLenisScrollTrigger(lenis: Lenis): void {
   const root = document.documentElement;
 
   ScrollTrigger.scrollerProxy(root, {
-    scrollTop(value) {
-      if (arguments.length) {
+    scrollTop(value?: number) {
+      if (typeof value === 'number') {
         lenis.scrollTo(value, { immediate: true });
       }
       return lenis.scroll;

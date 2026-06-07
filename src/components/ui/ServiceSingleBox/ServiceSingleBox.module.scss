@@ -9,6 +9,8 @@
   max-width: 330px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: $radius-lg;
+  overflow: hidden;
 
   &[id] {
     scroll-margin-top: calc(var(--header-height, 88px) + 1.5rem);
@@ -66,7 +68,7 @@
   z-index: 1;
   overflow: visible;
 
-  // Fond noir en pseudo-élément : le clip-path ne coupe plus les coins arrondis de l'icône.
+  // Découpe diagonale Ostech — pseudo-élément pour ne pas couper l'icône arrondie.
   &::before {
     content: '';
     position: absolute;
@@ -103,11 +105,9 @@
 
 .serviceSingleBox__thumb {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   width: 100%;
-  height: 251px;
+  height: 100%;
   overflow: hidden;
   z-index: 0;
 }

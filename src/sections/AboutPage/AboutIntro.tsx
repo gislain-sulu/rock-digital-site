@@ -14,6 +14,8 @@ import { cn } from '@/utils/cn';
 
 import styles from './AboutIntro.module.scss';
 
+const enterPendingClass = styles['aboutIntro--enterPending'] as string;
+
 const arrowIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,7 @@ export function AboutIntro() {
       animatedRef.current = true;
 
       if (prefersReducedMotion()) {
-        section.classList.remove(styles['aboutIntro--enterPending']);
+        section.classList.remove(enterPendingClass);
         return;
       }
 
@@ -53,7 +55,7 @@ export function AboutIntro() {
       const tl = gsap.timeline({
         defaults: { ease: GSAP_EASE.expo },
         onStart: () =>
-          section.classList.remove(styles['aboutIntro--enterPending']),
+          section.classList.remove(enterPendingClass),
       });
 
       if (enterEls.length) {
@@ -87,7 +89,7 @@ export function AboutIntro() {
 
       return () => {
         animatedRef.current = false;
-        section.classList.remove(styles['aboutIntro--enterPending']);
+        section.classList.remove(enterPendingClass);
       };
     },
     { scope: sectionRef, dependencies: [], revertOnUpdate: true }
@@ -96,7 +98,7 @@ export function AboutIntro() {
   return (
     <section
       ref={sectionRef}
-      className={cn(styles.aboutIntro, styles['aboutIntro--enterPending'])}
+      className={cn(styles.aboutIntro, enterPendingClass)}
       aria-labelledby="about-intro-title"
       data-page-section="about-intro"
     >

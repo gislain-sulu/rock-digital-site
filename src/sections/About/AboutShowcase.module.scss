@@ -5,6 +5,12 @@
 .aboutShowcase {
   position: relative;
 
+  &--soft {
+    margin-inline: clamp(1rem, 3.2vw, 3rem);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
   &__inner {
     width: 100%;
     padding-inline: clamp(1rem, 3.2vw, 3rem);

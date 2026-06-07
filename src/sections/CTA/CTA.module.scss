@@ -1,9 +1,8 @@
 @use '@/styles/tokens' as *;
 @use '@/styles/mixins' as *;
-@use '@/styles/breakpoints' as *;
 
 // =============================================================================
-// CTA — contenu + bloc contact collé au footer
+// CTA — contenu principal
 // =============================================================================
 
 .ctaSection {
@@ -11,44 +10,31 @@
   isolation: isolate;
   overflow-x: clip;
   background: $bg-subtle;
-  padding-block-start: $section-py-md !important;
-  padding-block-end: 0 !important;
-  padding-bottom: 0 !important;
 
   &__layout {
     position: relative;
     z-index: $z-content;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $space-8;
-    align-items: end;
-
-    @include bp-up(lg) {
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
-      gap: clamp($space-8, 4vw, $space-12);
-    }
+    display: flex;
+    justify-content: center;
   }
 
   &__mainGroup {
     min-width: 0;
+    width: 100%;
     max-width: 52rem;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-    align-self: start;
   }
 
   &__main {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
+    text-align: center;
     min-width: 0;
     margin: 0;
-    padding: 0 0 $space-8;
-  }
-
-  &__eyebrow {
-    box-shadow: $shadow-sm;
+    padding: 0;
   }
 
   &__title {
@@ -58,7 +44,7 @@
     line-height: 1.1;
     letter-spacing: $ls-tight;
     color: $text-primary;
-    max-width: 16ch;
+    max-width: 22ch;
     text-wrap: balance;
   }
 
@@ -66,7 +52,7 @@
     @include body-lg;
     margin: 0 0 $space-6;
     color: $text-secondary;
-    max-width: 48ch;
+    max-width: 52ch;
     text-wrap: pretty;
   }
 
@@ -75,136 +61,7 @@
     flex-wrap: wrap;
     gap: $space-3;
     align-items: center;
-  }
-
-  &__metaWrap {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    justify-self: end;
-
-    @include bp-up(lg) {
-      align-self: end;
-      max-width: 420px;
-    }
-  }
-
-  &__meta {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    padding: clamp(1.5rem, 3vw, 2rem);
-    padding-top: clamp(2rem, 4vw, 3rem);
-    border-radius: $hero-corner-radius $hero-corner-radius 0 0;
-    background: $color-black;
-    color: $color-white;
-    box-shadow: none;
-    transform: none;
-    transition: none;
-
-    &::before {
-      content: none;
-    }
-
-    &:hover {
-      transform: none;
-    }
-  }
-
-  &__metaTitle {
-    margin: 0 0 clamp(1rem, 2vw, 1.25rem);
-    font-family: $font-display;
-    font-size: clamp(1.125rem, 2vw, 1.375rem);
-    font-weight: $fw-bold;
-    letter-spacing: $ls-widest;
-    text-transform: uppercase;
-    color: $color-white;
-  }
-
-  &__metaList {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  &__metaItem {
-    display: flex;
-    align-items: flex-start;
-    gap: clamp(0.75rem, 2vw, 1rem);
-    padding: clamp(0.85rem, 2vw, 1rem) 0;
-    border: none;
-    background: none;
-    transition: color $duration-base $ease-out-quart;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba($color-white, 0.1);
-    }
-
-    &:hover {
-      transform: none;
-
-      .ctaSection__metaIcon {
-        color: $brand-accent;
-        border-color: rgba($brand-accent, 0.35);
-      }
-
-      .ctaSection__metaValue:is(a) {
-        color: $brand-accent;
-      }
-    }
-  }
-
-  &__metaIcon {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
     justify-content: center;
-    width: clamp(2.5rem, 4vw, 2.75rem);
-    height: clamp(2.5rem, 4vw, 2.75rem);
-    border-radius: 50%;
-    color: $brand-accent;
-    background: rgba($color-white, 0.06);
-    border: 1px solid rgba($color-white, 0.08);
-    transition:
-      color $duration-base $ease-out-quart,
-      border-color $duration-base $ease-out-quart;
-
-    svg {
-      width: 1.1rem;
-      height: 1.1rem;
-    }
-  }
-
-  &__metaContent {
-    display: flex;
-    flex-direction: column;
-    gap: $space-1;
-    min-width: 0;
-    padding-top: 0.35rem;
-  }
-
-  &__metaLabel {
-    font-family: $font-ui;
-    font-size: $fs-xs;
-    font-weight: $fw-semibold;
-    letter-spacing: $ls-widest;
-    text-transform: uppercase;
-    color: rgba($color-white, 0.55);
-  }
-
-  &__metaValue {
-    font-family: $font-ui;
-    font-size: clamp($fs-sm, 1.5vw, $fs-base);
-    font-weight: $fw-medium;
-    color: rgba($color-white, 0.92);
-    line-height: 1.5;
-    text-decoration: none;
-    transition: color $duration-base $ease-out-quart;
-    white-space: pre-line;
-
-    &:is(a):hover {
-      color: $brand-accent;
-    }
   }
 
 }

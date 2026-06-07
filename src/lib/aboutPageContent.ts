@@ -30,12 +30,36 @@ export const aboutWhyChooseItems = [
 ] as const;
 
 export const aboutTeam = [
-  { name: 'Yassine M.', role: 'Co-fondateur · CEO', initials: 'YM' },
-  { name: 'Camille R.', role: 'Co-fondatrice · CTO', initials: 'CR' },
-  { name: 'Thomas L.', role: 'Lead Designer', initials: 'TL' },
-  { name: 'Imane B.', role: 'Lead Engineer', initials: 'IB' },
-  { name: 'Hugo P.', role: 'Architecte Cloud', initials: 'HP' },
-  { name: 'Sara D.', role: 'Product Strategist', initials: 'SD' },
+  {
+    name: 'Jordan Mosongo',
+    role: 'CEO',
+    image: '/team-1.png',
+    socials: {
+      facebook: 'https://www.facebook.com',
+      github: 'https://github.com',
+      twitter: 'https://twitter.com',
+    },
+  },
+  {
+    name: 'Arslene Kabinga',
+    role: 'Développeur fullstack',
+    image: '/team-2.png',
+    socials: {
+      facebook: 'https://www.facebook.com',
+      github: 'https://github.com',
+      twitter: 'https://twitter.com',
+    },
+  },
+  {
+    name: 'Gislain Sulu',
+    role: 'Développeur fullstack',
+    image: '/team-3.png',
+    socials: {
+      facebook: 'https://www.facebook.com',
+      github: 'https://github.com',
+      twitter: 'https://twitter.com',
+    },
+  },
 ] as const;
 
 export const aboutMilestones = [

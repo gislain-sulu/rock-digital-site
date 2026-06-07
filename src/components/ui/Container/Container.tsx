@@ -1,4 +1,4 @@
-import { type ElementType, type HTMLAttributes } from 'react';
+import { type ElementType, forwardRef, type HTMLAttributes } from 'react';
 
 import { cn } from '@/utils/cn';
 
@@ -11,19 +11,17 @@ type ContainerProps = HTMLAttributes<HTMLElement> & {
   size?: ContainerSize;
 };
 
-export function Container({
-  as: Component = 'div',
-  size = '2xl',
-  className,
-  children,
-  ...rest
-}: ContainerProps) {
+export const Container = forwardRef<HTMLElement, ContainerProps>(function Container(
+  { as: Component = 'div', size = '2xl', className, children, ...rest },
+  ref
+) {
   return (
     <Component
+      ref={ref}
       className={cn(styles.container, styles[`container--${size}`], className)}
       {...rest}
     >
       {children}
     </Component>
   );
-}
+});

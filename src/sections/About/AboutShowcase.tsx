@@ -12,6 +12,7 @@ import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
 import { GSAP_EASE } from '@/lib/gsap/constants';
 import { prefersReducedMotion } from '@/lib/gsap/motion';
 import { registerGsap } from '@/lib/gsap/registerGsap';
+import { cn } from '@/utils/cn';
 
 import styles from './AboutShowcase.module.scss';
 
@@ -30,6 +31,7 @@ export type AboutShowcaseProps = {
   showCta?: boolean;
   /** `gsap` : révélation au scroll (page À propos). `framer` : StaggerGroup (accueil). */
   motion?: 'framer' | 'gsap';
+  sectionTone?: 'light' | 'subtle' | 'soft' | 'deep' | 'dark';
 };
 
 function ShowcaseMedia({
@@ -122,6 +124,7 @@ export function AboutShowcase({
   ctaLabel = 'En savoir plus',
   showCta = true,
   motion = 'framer',
+  sectionTone = 'light',
 }: AboutShowcaseProps) {
   const innerRef = useRef<HTMLDivElement>(null);
   const animatedRef = useRef(false);
@@ -202,7 +205,15 @@ export function AboutShowcase({
   );
 
   return (
-    <Section tone="light" size="lg" id={sectionId} className={styles.aboutShowcase}>
+    <Section
+      tone={sectionTone}
+      size="lg"
+      id={sectionId}
+      className={cn(
+        styles.aboutShowcase,
+        sectionTone === 'soft' && styles['aboutShowcase--soft']
+      )}
+    >
       <div ref={innerRef} className={styles.aboutShowcase__inner}>
         {motion === 'framer' ? (
           <StaggerGroup className={styles.aboutShowcase__layout} stagger={0.08}>

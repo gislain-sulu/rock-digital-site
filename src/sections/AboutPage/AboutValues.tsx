@@ -134,7 +134,6 @@ export function AboutValues() {
               Nous combinons créativité, technologie et stratégie pour livrer des
               solutions digitales qui génèrent des résultats concrets.
             </p>
-            <span className={styles.aboutValues__panelDecor} aria-hidden="true" />
           </aside>
 
           <div className={styles.aboutValues__grid}>

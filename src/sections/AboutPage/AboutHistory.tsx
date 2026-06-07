@@ -5,7 +5,6 @@ import gsap from 'gsap';
 import { useRef } from 'react';
 
 import { Container } from '@/components/ui/Container';
-import { Section } from '@/components/ui/Section';
 import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
 import { GSAP_EASE } from '@/lib/gsap/constants';
 import { prefersReducedMotion } from '@/lib/gsap/motion';
@@ -48,7 +47,7 @@ export function AboutHistory() {
   );
 
   return (
-    <Section tone="light" size="lg" id="histoire" className={styles.aboutHistory}>
+    <section className={styles.aboutHistory} data-page-section="about-history">
       <Container>
         <header className={styles.aboutHistory__header}>
           <SectionSubTitle>Notre histoire</SectionSubTitle>
@@ -68,6 +67,6 @@ export function AboutHistory() {
           ))}
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }

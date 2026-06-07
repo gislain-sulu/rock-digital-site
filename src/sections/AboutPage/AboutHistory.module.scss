@@ -4,6 +4,8 @@
 @use './about-section' as section;
 
 .aboutHistory {
+  padding-block: $section-py-lg;
+
   &__header {
     @include section.about-section-header;
   }

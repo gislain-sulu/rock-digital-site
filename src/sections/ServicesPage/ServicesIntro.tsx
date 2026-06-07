@@ -14,6 +14,8 @@ import { cn } from '@/utils/cn';
 
 import styles from './ServicesIntro.module.scss';
 
+const enterPendingClass = styles['servicesIntro--enterPending'] as string;
+
 const arrowIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,7 @@ export function ServicesIntro() {
       animatedRef.current = true;
 
       if (prefersReducedMotion()) {
-        section.classList.remove(styles['servicesIntro--enterPending']);
+        section.classList.remove(enterPendingClass);
         return;
       }
 
@@ -53,7 +55,7 @@ export function ServicesIntro() {
       const tl = gsap.timeline({
         defaults: { ease: GSAP_EASE.expo },
         onStart: () =>
-          section.classList.remove(styles['servicesIntro--enterPending']),
+          section.classList.remove(enterPendingClass),
       });
 
       if (enterEls.length) {
@@ -87,7 +89,7 @@ export function ServicesIntro() {
 
       return () => {
         animatedRef.current = false;
-        section.classList.remove(styles['servicesIntro--enterPending']);
+        section.classList.remove(enterPendingClass);
       };
     },
     { scope: sectionRef, dependencies: [], revertOnUpdate: true }
@@ -96,7 +98,7 @@ export function ServicesIntro() {
   return (
     <section
       ref={sectionRef}
-      className={cn(styles.servicesIntro, styles['servicesIntro--enterPending'])}
+      className={cn(styles.servicesIntro, enterPendingClass)}
       aria-labelledby="services-intro-title"
       data-page-section="services-intro"
     >
@@ -122,9 +124,6 @@ export function ServicesIntro() {
           <div className={styles.servicesIntro__actions}>
             <RockDigitalButton href="/contact" icon={arrowIcon} iconPosition="right">
               Discuter de votre projet
-            </RockDigitalButton>
-            <RockDigitalButton href="#offer-list" variant="outline">
-              Voir les offres
             </RockDigitalButton>
           </div>
         </div>

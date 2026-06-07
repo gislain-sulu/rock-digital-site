@@ -7,6 +7,7 @@ import { useRef } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { SectionSubTitle } from '@/components/ui/SectionSubTitle';
+import { TeamCard } from '@/components/ui/TeamCard';
 import { GSAP_EASE } from '@/lib/gsap/constants';
 import { prefersReducedMotion } from '@/lib/gsap/motion';
 import { registerGsap } from '@/lib/gsap/registerGsap';
@@ -25,7 +26,7 @@ export function AboutTeam() {
       registerGsap();
       if (prefersReducedMotion()) return;
 
-      const cards = grid.querySelectorAll('[class*="aboutTeam__card"]');
+      const cards = grid.querySelectorAll('[data-team-card]');
 
       if (cards.length) {
         gsap.from(cards, {
@@ -60,13 +61,13 @@ export function AboutTeam() {
 
         <div ref={gridRef} className={styles.aboutTeam__grid}>
           {aboutTeam.map((member) => (
-            <article key={member.name} className={styles.aboutTeam__card}>
-              <span className={styles.aboutTeam__avatar} aria-hidden="true">
-                {member.initials}
-              </span>
-              <h3 className={styles.aboutTeam__name}>{member.name}</h3>
-              <p className={styles.aboutTeam__role}>{member.role}</p>
-            </article>
+            <TeamCard
+              key={member.name}
+              name={member.name}
+              role={member.role}
+              imageSrc={member.image}
+              socials={member.socials}
+            />
           ))}
         </div>
       </Container>

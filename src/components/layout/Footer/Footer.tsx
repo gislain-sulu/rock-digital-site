@@ -107,6 +107,27 @@ export function Footer() {
         Pied de page
       </h2>
 
+      <div className={styles.footer__shape} aria-hidden="true">
+        <Image
+          src="/footer-shape.png"
+          alt=""
+          width={1920}
+          height={600}
+          className={styles.footer__shapeImg}
+          sizes="100vw"
+        />
+      </div>
+
+      <div className={styles.footer__earth} aria-hidden="true">
+        <Image
+          src="/earth-footer.png"
+          alt=""
+          width={520}
+          height={520}
+          className={styles.footer__earthImg}
+        />
+      </div>
+
       <div className={styles.footer__top}>
         <div className={styles.footer__inner}>
           <div className={styles.footer__grid}>

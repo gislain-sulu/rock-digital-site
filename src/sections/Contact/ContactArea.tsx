@@ -15,6 +15,8 @@ import { cn } from '@/utils/cn';
 import { ContactForm } from './ContactForm';
 import styles from './ContactArea.module.scss';
 
+const enterPendingClass = styles['contactArea--enterPending'] as string;
+
 export function ContactArea() {
   const sectionRef = useRef<HTMLElement>(null);
   const animatedRef = useRef(false);
@@ -28,7 +30,7 @@ export function ContactArea() {
       animatedRef.current = true;
 
       if (prefersReducedMotion()) {
-        section.classList.remove(styles.contactArea_enterPending);
+        section.classList.remove(enterPendingClass);
         return;
       }
 
@@ -44,7 +46,7 @@ export function ContactArea() {
       const tl = gsap.timeline({
         defaults: { ease: GSAP_EASE.expo },
         onStart: () => {
-          section.classList.remove(styles.contactArea_enterPending);
+          section.classList.remove(enterPendingClass);
         },
       });
 
@@ -131,7 +133,7 @@ export function ContactArea() {
 
       return () => {
         animatedRef.current = false;
-        section.classList.remove(styles.contactArea_enterPending);
+        section.classList.remove(enterPendingClass);
       };
     },
     { scope: sectionRef, dependencies: [], revertOnUpdate: true }
@@ -140,7 +142,7 @@ export function ContactArea() {
   return (
     <section
       ref={sectionRef}
-      className={cn(styles.contactArea, styles.contactArea_enterPending)}
+      className={cn(styles.contactArea, enterPendingClass)}
       id="contact-form"
       data-page-section="contact"
     >

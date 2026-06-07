@@ -1,0 +1,186 @@
+@use '@/styles/tokens' as *;
+
+.teamCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: $color-white;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+  transition:
+    transform $duration-base $ease-out-quart,
+    box-shadow $duration-base $ease-out-quart;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.12);
+  }
+
+  &:hover &__imageEl {
+    transform: scale(1.05);
+  }
+
+  &__image {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: $color-blue-soft;
+  }
+
+  &__imageEl {
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.65s $ease-out-quart;
+  }
+
+  &__meta {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: min(88%, 320px);
+    z-index: 2;
+  }
+
+  &__info {
+    position: relative;
+    padding: clamp(1rem, 2vw, 1.35rem) clamp(1.1rem, 2.2vw, 1.5rem);
+    padding-right: clamp(2.75rem, 4vw, 3.25rem);
+    border-top-right-radius: $radius-sm;
+    background-color: $color-white;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba($brand-primary, 0.08) 0%, transparent 42%),
+      radial-gradient(circle at 88% 72%, rgba($brand-primary, 0.06) 0%, transparent 38%),
+      linear-gradient(90deg, rgba($brand-primary, 0.05) 1px, transparent 1px),
+      linear-gradient(rgba($brand-primary, 0.05) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      100% 100%,
+      22px 22px,
+      22px 22px;
+    background-position: center;
+  }
+
+  &__shareWrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    transform: translate(50%, -50%);
+  }
+
+  &__share {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(44px, 5vw, 52px);
+    height: clamp(44px, 5vw, 52px);
+    padding: 0;
+    border: none;
+    color: $color-black;
+    background: $brand-accent;
+    cursor: pointer;
+    transition:
+      background-color $duration-base $ease-out-quart,
+      transform $duration-base $ease-out-quart;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    &:hover {
+      background: $color-orange-bright;
+      transform: scale(1.05);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $brand-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__socials {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 0.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-width: 148px;
+    margin: 0;
+    padding: 0.45rem;
+    list-style: none;
+    background: $color-white;
+    border: 1px solid rgba($brand-primary, 0.12);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition:
+      opacity $duration-base $ease-out-quart,
+      visibility $duration-base $ease-out-quart,
+      transform $duration-base $ease-out-quart;
+  }
+
+  &__shareWrap:hover &__socials,
+  &__shareWrap:focus-within &__socials,
+  &__shareWrap--open &__socials {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  &__socialLink {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: $radius-xs;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $color-blue-night;
+    text-decoration: none;
+    transition:
+      background-color $duration-fast $ease-out-quart,
+      color $duration-fast $ease-out-quart;
+
+    svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      background: rgba($brand-primary, 0.08);
+      color: $brand-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $brand-primary;
+      outline-offset: 1px;
+    }
+  }
+
+  &__socialLabel {
+    line-height: 1.2;
+  }
+
+  &__name {
+    margin: 0;
+    font-family: $font-display;
+    font-weight: $fw-bold;
+    font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+    line-height: 1.25;
+    color: $color-blue-night;
+  }
+
+  &__role {
+    margin: 0.35rem 0 0;
+    font-family: $font-ui;
+    font-size: clamp(0.82rem, 1vw, 0.92rem);
+    line-height: 1.45;
+    color: $text-muted;
+  }
+}

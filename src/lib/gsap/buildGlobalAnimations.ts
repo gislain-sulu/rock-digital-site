@@ -16,7 +16,7 @@ const CARD_HOVER_SELECTORS = [
   '[class*="grid__card"]',
   '[class*="aboutHistory__card"]',
   '[class*="aboutValues__card"]',
-  '[class*="aboutTeam__card"]',
+  '[data-team-card]',
 ].join(', ');
 
 export type GlobalAnimationsCleanup = () => void;

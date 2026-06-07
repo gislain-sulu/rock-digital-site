@@ -3,7 +3,7 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
@@ -49,6 +49,7 @@ const faqs = [
 
 export function ServicesFaq() {
   const layoutRef = useRef<HTMLDivElement>(null);
+  const [openIndex, setOpenIndex] = useState(0);
 
   useGSAP(
     () => {
@@ -142,9 +143,15 @@ export function ServicesFaq() {
                 <details
                   key={item.question}
                   className={`${styles.servicesFaq__card} card`}
-                  open={idx === 0}
+                  open={openIndex === idx}
                 >
-                  <summary className={`${styles.servicesFaq__cardHeader} card-header`}>
+                  <summary
+                    className={`${styles.servicesFaq__cardHeader} card-header`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setOpenIndex((current) => (current === idx ? null : idx));
+                    }}
+                  >
                     <span className={styles.servicesFaq__question}>{item.question}</span>
                   </summary>
                   <div className={`${styles.servicesFaq__cardBody} card-body`}>

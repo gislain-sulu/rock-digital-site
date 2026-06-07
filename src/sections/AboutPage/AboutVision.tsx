@@ -17,6 +17,7 @@ export function AboutVision() {
       imageBadge="Rock Digital"
       showCta={false}
       motion="gsap"
+      sectionTone="soft"
       imageAlt="Vision Rock Digital — transformation digitale"
     />
   );

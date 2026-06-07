@@ -3,14 +3,12 @@ import type { Metadata } from 'next';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import {
   AboutCareers,
-  AboutHistory,
   AboutIntro,
   AboutTeam,
   AboutValues,
   AboutVision,
 } from '@/sections/AboutPage';
 import { CTA } from '@/sections/CTA';
-import { Stats } from '@/sections/Stats';
 import { createMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = createMetadata({
@@ -34,8 +32,6 @@ export default function AboutPage() {
       <AboutIntro />
       <AboutVision />
       <AboutValues />
-      <Stats motion="gsap" />
-      <AboutHistory />
       <AboutTeam />
       <AboutCareers />
       <CTA />
