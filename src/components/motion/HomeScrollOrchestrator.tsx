@@ -32,7 +32,7 @@ export function HomeScrollOrchestrator() {
 
       let cancelled = false;
       let entranceTimeline: gsap.core.Timeline | null = null;
-      let safetyTimer: ReturnType<typeof window.setTimeout> | null = null;
+      let safetyTimer: number | null = null;
       let globalCleanup: (() => void) | null = null;
 
       const finishScrollSetup = (root: Element) => {

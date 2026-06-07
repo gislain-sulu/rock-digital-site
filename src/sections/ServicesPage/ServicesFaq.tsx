@@ -49,7 +49,7 @@ const faqs = [
 
 export function ServicesFaq() {
   const layoutRef = useRef<HTMLDivElement>(null);
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   useGSAP(
     () => {
