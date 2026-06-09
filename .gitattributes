@@ -1,0 +1,7 @@
+# Retire les commentaires à l'indexation (git add) — le dépôt distant reste sans commentaires.
+*.ts filter=strip-comments
+*.tsx filter=strip-comments
+*.js filter=strip-comments
+*.jsx filter=strip-comments
+*.scss filter=strip-comments
+*.css filter=strip-comments
