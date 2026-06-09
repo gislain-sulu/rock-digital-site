@@ -169,7 +169,6 @@
   transition: color $duration-base $ease-out-quart;
 }
 
-// .service-content
 .serviceSingleBox__body {
   display: flex;
   flex-direction: column;
@@ -179,7 +178,6 @@
   z-index: 1;
 }
 
-// .service-title
 .serviceSingleBox__title {
   position: relative;
   z-index: 1;
@@ -192,7 +190,6 @@
 
 }
 
-// .service-description (visible au hover, centré sur l'image)
 .serviceSingleBox__description {
   margin: 0;
   max-width: 28ch;

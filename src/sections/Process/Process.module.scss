@@ -387,9 +387,8 @@ $process-carousel-gap: clamp(1.75rem, 3vw, 2.75rem);
     }
   }
 
-  // ---------------------------------------------------------------------------
-  // Item — colonne : node → connecteur → carte (hauteur uniforme)
-  // ---------------------------------------------------------------------------
+
+
   &__item {
     position: relative;
     display: flex;
@@ -463,9 +462,8 @@ $process-carousel-gap: clamp(1.75rem, 3vw, 2.75rem);
     transition: opacity $duration-base $ease-out-quart;
   }
 
-  // ---------------------------------------------------------------------------
-  // Node — indicateur premium + état actif scroll
-  // ---------------------------------------------------------------------------
+
+
   &__node {
     position: relative;
     z-index: 3;
@@ -561,9 +559,8 @@ $process-carousel-gap: clamp(1.75rem, 3vw, 2.75rem);
       0 0 20px rgba(46, 110, 187, 0.28);
   }
 
-  // ---------------------------------------------------------------------------
-  // Card — glassmorphism + hover 3D + gradient border
-  // ---------------------------------------------------------------------------
+
+
   &__card {
     position: relative;
     display: flex;
@@ -604,7 +601,6 @@ $process-carousel-gap: clamp(1.75rem, 3vw, 2.75rem);
       opacity $duration-base $ease-out-quart,
       filter $duration-slow $ease-out-quart;
 
-    // Halo externe — effet verre sur le pourtour
     &::before {
       content: '';
       position: absolute;

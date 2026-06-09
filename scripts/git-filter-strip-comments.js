@@ -12,5 +12,14 @@ process.stdin.on('data', (chunk) => {
   input += chunk;
 });
 process.stdin.on('end', () => {
-  process.stdout.write(strip(input, { preserveNewlines: true }));
+  process.stdout.write(stripSourceComments(input));
 });
+
+function stripSourceComments(content) {
+  let output = strip(content, { preserveNewlines: true });
+
+  output = output.replace(/\/\*[\s\S]*?\*\//g, '');
+  output = output.replace(/^\s*\/\/.*$/gm, '');
+
+  return output;
+}

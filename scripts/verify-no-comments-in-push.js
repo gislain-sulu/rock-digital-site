@@ -53,7 +53,7 @@ if (offenders.length > 0) {
   console.error('\n[pre-push] Push refusé : commentaires détectés dans les fichiers suivants :\n');
   offenders.forEach((file) => console.error(`  - ${file}`));
   console.error(
-    '\nRéindexez sans commentaires :\n  git add --renormalize .\n  git commit --amend --no-edit   # ou un nouveau commit\n'
+    '\nRéindexez sans commentaires :\n  npm run git:renormalize\n  git commit --amend --no-edit   # ou un nouveau commit\n'
   );
   process.exit(1);
 }

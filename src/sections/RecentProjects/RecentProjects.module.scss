@@ -113,7 +113,6 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
     display: inline-flex;
   }
 
-  // row carousel — gouttière alignée sur le carousel, plus étroite que l'en-tête
   &__carouselRow {
     margin-top: 0;
     padding-inline: $project-carousel-x;
@@ -288,7 +287,6 @@ $project-carousel-x: clamp(1rem, 2.4vw, 2.3rem);
     }
   }
 
-  // brand-area — sous les owl-dots (projectArea__dots)
   &__bandeau {
     margin: 0;
     padding: 0;
