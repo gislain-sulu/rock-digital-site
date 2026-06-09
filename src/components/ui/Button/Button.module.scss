@@ -82,7 +82,7 @@
     pointer-events: none;
   }
 
-  // ---- Variants ----
+  
   &--primary {
     --btn-bg: #{$color-orange};
     --btn-bg-hover: #{$color-black};
@@ -129,7 +129,7 @@
     }
   }
 
-  // ---- Sizes ----
+  
   &--size-sm {
     height: 40px;
     padding-inline: $space-4;

@@ -13,7 +13,7 @@ function qa(selector: string, root: ParentNode = document): Element[] {
   return Array.from(root.querySelectorAll(selector));
 }
 
-/** Timeline d'entrée cinématique — Hero + header (page d'accueil). */
+
 export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline | null {
   const hero = q('#hero', root);
   if (!hero) return null;
@@ -71,7 +71,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     },
   });
 
-  // —— Header ——
+  
   if (header) {
     tl.to(header, { autoAlpha: 1, duration: 0.5 }, 0);
   }
@@ -106,7 +106,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     );
   }
 
-  // —— Fond Hero ——
+  
   if (heroMedia) {
     tl.fromTo(
       heroMedia,
@@ -122,7 +122,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     tl.to(heroGlow, { autoAlpha: 1, duration: 1.2, ease: 'sine.inOut' }, 0.35);
   }
 
-  // —— Titre mot par mot ——
+  
   if (titleWords.length) {
     tl.to(
       titleWords,
@@ -138,7 +138,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     );
   }
 
-  // —— Accroche ——
+  
   if (heroLead) {
     tl.fromTo(
       heroLead,
@@ -148,7 +148,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     );
   }
 
-  // —— Boutons ——
+  
   if (heroButtons.length) {
     tl.fromTo(
       heroButtons,
@@ -165,7 +165,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     );
   }
 
-  // —— Visuel droit ——
+  
   if (heroVisual) {
     tl.fromTo(
       heroVisual,
@@ -175,7 +175,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     );
   }
 
-  // —— Indicateur scroll ——
+  
   if (scrollIndicator) {
     tl.fromTo(
       scrollIndicator,
@@ -185,7 +185,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     );
   }
 
-  // Flottement visuel (après l'entrée)
+  
   if (heroVisualFigure) {
     tl.add(() => {
       gsap.to(heroVisualFigure, {
@@ -198,7 +198,7 @@ export function buildHeroIntroAnimations(root: ParentNode): gsap.core.Timeline |
     }, 1.15);
   }
 
-  // Pulsation glow hero
+  
   if (heroGlow) {
     tl.add(() => {
       gsap.to(heroGlow, {

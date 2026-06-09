@@ -6,7 +6,7 @@ $process-glass-blur: clamp(16px, 2.4vw, 26px);
 $process-glass-blur-media: 0px;
 $process-glass-blur-panel: clamp(8px, 1.2vw, 12px);
 
-// Frost pleine carte (sans photo)
+
 @mixin process-card-glass-frost($strength: 1) {
   background:
     linear-gradient(
@@ -25,7 +25,7 @@ $process-glass-blur-panel: clamp(8px, 1.2vw, 12px);
     inset 0 0 0 1px rgba(255, 255, 255, 0.35 + 0.12 * $strength);
 }
 
-// Carte avec photo — pas de flou global, image nette
+
 @mixin process-card-glass-media($strength: 1) {
   background: transparent;
   backdrop-filter: none;
@@ -35,7 +35,7 @@ $process-glass-blur-panel: clamp(8px, 1.2vw, 12px);
     inset 0 0 0 1px rgba(255, 255, 255, 0.12 + 0.06 * $strength);
 }
 
-// Panneau texte — glass transparent, contraste texte constant
+
 @mixin process-card-glass-panel($strength: 1) {
   background:
     linear-gradient(
@@ -75,9 +75,9 @@ $process-glass-blur-panel: clamp(8px, 1.2vw, 12px);
   );
 }
 
-// -----------------------------------------------------------------------------
-// Section wrapper — fond immersif + hiérarchie
-// -----------------------------------------------------------------------------
+
+
+
 .processSection {
   position: relative;
   width: 100%;
@@ -112,7 +112,7 @@ $process-glass-blur-panel: clamp(8px, 1.2vw, 12px);
     overflow-x: clip;
   }
 
-  // Ambient layers (profondeur sans distraire)
+  
   &__ambient {
     position: absolute;
     inset: 0;
@@ -171,9 +171,9 @@ $process-glass-blur-panel: clamp(8px, 1.2vw, 12px);
   }
 }
 
-// -----------------------------------------------------------------------------
-// Timeline — carrousel horizontal au scroll + rail de progression
-// -----------------------------------------------------------------------------
+
+
+
 $process-card-width: 22rem;
 $process-card-width-md: 23.5rem;
 $process-card-width-lg: 26.5rem;
@@ -855,9 +855,9 @@ $process-carousel-gap: clamp(1.75rem, 3vw, 2.75rem);
   }
 }
 
-// -----------------------------------------------------------------------------
-// Animations
-// -----------------------------------------------------------------------------
+
+
+
 @keyframes process-node-pulse {
   0%,
   100% {
@@ -871,9 +871,9 @@ $process-carousel-gap: clamp(1.75rem, 3vw, 2.75rem);
   }
 }
 
-// -----------------------------------------------------------------------------
-// Accessibilité — réduction des mouvements
-// -----------------------------------------------------------------------------
+
+
+
 @include reduce-motion {
   .processSection__orb,
   .process__nodePulse {

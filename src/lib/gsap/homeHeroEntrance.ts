@@ -32,7 +32,7 @@ function qa(root: HomeRoot, selector: string): Element[] {
   return Array.from(root.querySelectorAll(selector));
 }
 
-/** Fade in + montée + défloutage — effet premium lisible. */
+
 function fadeInUp(
   tl: gsap.core.Timeline,
   targets: gsap.TweenTarget,
@@ -54,7 +54,7 @@ function fadeInUp(
   );
 }
 
-/** Révélation par masque (ligne de titre). */
+
 function revealTitleLine(
   tl: gsap.core.Timeline,
   line: Element,
@@ -73,7 +73,7 @@ function revealTitleLine(
   );
 }
 
-/** Séquence d'entrée cinématique — Hero + header (page d'accueil). */
+
 export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   const hero = q<HTMLElement>(root, '#hero');
   const siteHeader = document.querySelector('[data-layout="site-header"]');
@@ -176,7 +176,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     },
   });
 
-  // —— Header : fade in dégradé ——
+  
   if (headerHalo) {
     fadeInUp(tl, headerHalo, 0, { duration: 0.85, y: 0, filter: 'blur(0px)' });
   }
@@ -196,7 +196,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     fadeInUp(tl, navActions, 0.26, { duration: 0.65, y: 0 });
   }
 
-  // —— Fond hero : fondu doux ——
+  
   if (heroMedia) {
     tl.to(
       heroMedia,
@@ -205,7 +205,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     );
   }
 
-  // —— Titre : ligne par ligne (masque) + mots en fade stagger ——
+  
   const titleStart = 0.32;
 
   titleLines.forEach((line, index) => {
@@ -225,7 +225,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     }
   });
 
-  // Accent cinématique sur « digital » (sans filter — incompatible avec background-clip: text)
+  
   if (digitalWord) {
     tl.fromTo(
       digitalWord,
@@ -243,7 +243,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     );
   }
 
-  // —— Paragraphe : deux vagues de fade in ——
+  
   if (leadChunks.length) {
     fadeInUp(tl, leadChunks, titleStart + 0.48, {
       duration: 1,
@@ -254,7 +254,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     fadeInUp(tl, lead, titleStart + 0.48, { duration: 1, y: 0 });
   }
 
-  // —— Visuel + CTA ——
+  
   if (visualCol) {
     fadeInUp(tl, visualCol, titleStart + 0.38, {
       duration: 1.1,

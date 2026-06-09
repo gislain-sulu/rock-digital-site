@@ -8,7 +8,7 @@ type SiteGsapProviderProps = {
   children: ReactNode;
 };
 
-/** Indique que les animations scroll sont gérées par GSAP (pages internes). */
+
 export function SiteGsapProvider({ children }: SiteGsapProviderProps) {
   return <SiteGsapContext.Provider value>{children}</SiteGsapContext.Provider>;
 }

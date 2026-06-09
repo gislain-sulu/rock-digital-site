@@ -1,10 +1,10 @@
 @use '@/styles/tokens' as *;
 
-.solutekBtn {
+.rock-digital-btn {
   display: inline-block;
 }
 
-.solutekBtn__link {
+.rock-digital-btn__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -26,23 +26,23 @@
   transition: $duration-slow;
 }
 
-.solutekBtn__link--default {
+.rock-digital-btn__link--default {
   background: $brand-accent;
   color: $color-white;
 }
 
-.solutekBtn__link--dark {
+.rock-digital-btn__link--dark {
   background: $color-blue-night;
   color: $color-white;
 }
 
-.solutekBtn__link--outline {
+.rock-digital-btn__link--outline {
   background: transparent;
   color: $brand-accent;
   border-color: rgba($brand-accent, 0.45);
 }
 
-.solutekBtn__link--plain {
+.rock-digital-btn__link--plain {
   padding: 0;
   border-radius: 0;
   border: 0;
@@ -54,29 +54,29 @@
   line-height: inherit;
 }
 
-.solutekBtn__link--default:hover,
-.solutekBtn__link--dark:hover {
+.rock-digital-btn__link--default:hover,
+.rock-digital-btn__link--dark:hover {
   color: $brand-accent;
 }
 
-.solutekBtn__link--outline:hover {
+.rock-digital-btn__link--outline:hover {
   background: $brand-accent;
   color: $color-white;
 }
 
-.solutekBtn__link:disabled {
+.rock-digital-btn__link:disabled {
   opacity: 0.65;
   cursor: not-allowed;
 }
 
-.solutekBtn__link--default:hover .solutekHoverBtn,
-.solutekBtn__link--dark:hover .solutekHoverBtn {
+.rock-digital-btn__link--default:hover .rock-digital-hover-btn,
+.rock-digital-btn__link--dark:hover .rock-digital-hover-btn {
   opacity: 1;
   -webkit-transform: scale(1);
   transform: scale(1);
 }
 
-.solutekBtn__label {
+.rock-digital-btn__label {
   position: relative;
   z-index: 2;
   display: inline-flex;
@@ -84,7 +84,7 @@
   white-space: nowrap;
 }
 
-.solutekBtn__icon {
+.rock-digital-btn__icon {
   position: relative;
   z-index: 2;
   display: inline-flex;
@@ -98,7 +98,7 @@
   }
 }
 
-.solutekHoverBtn {
+.rock-digital-hover-btn {
   background-color: $color-blue-night;
   height: 100%;
   top: 0;

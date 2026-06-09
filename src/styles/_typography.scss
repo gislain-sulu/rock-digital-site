@@ -1,9 +1,9 @@
 @use 'tokens' as *;
 @use 'mixins' as *;
 
-// =============================================================================
-// Typographie de base
-// =============================================================================
+
+
+
 
 html {
   font-family: $font-body;
@@ -65,7 +65,7 @@ samp {
   font-size: 0.9em;
 }
 
-// Utilitaires de texte
+
 .u-text-balance {
   text-wrap: balance;
 }

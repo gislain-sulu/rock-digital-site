@@ -16,9 +16,9 @@ type BreadcrumbBackgroundProps = {
   src: string;
 };
 
-/**
- * Fond breadcrumb — animation GSAP scopée au client (évite l'hydratation).
- */
+
+
+
 export function BreadcrumbBackground({ src }: BreadcrumbBackgroundProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const mediaRef = useRef<HTMLDivElement>(null);

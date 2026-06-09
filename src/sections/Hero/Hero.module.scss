@@ -26,9 +26,9 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
   border-bottom-left-radius: $hero-corner-radius;
   clip-path: inset(0 round 0 0 $hero-corner-radius $hero-corner-radius);
 
-  // ---------------------------------------------------------------------------
-  // Arrière-plan cinématique + parallax
-  // ---------------------------------------------------------------------------
+  
+  
+  
   &__media {
     position: absolute;
     inset: 0;
@@ -91,9 +91,9 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
     pointer-events: none;
   }
 
-  // ---------------------------------------------------------------------------
-  // Grille 2 colonnes : texte (gauche) + visuel (droite)
-  // ---------------------------------------------------------------------------
+  
+  
+  
   &__container {
     position: relative;
     z-index: 1;
@@ -197,7 +197,7 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
     will-change: transform, opacity, filter;
   }
 
-  // Mouvement très léger sur le texte blanc (après entrée GSAP)
+  
   &__wordAmbient {
     :global(body.home-hero-entered) & {
       animation: hero-word-breathe 7s ease-in-out infinite;
@@ -337,9 +337,9 @@ $hero-bottom-space: clamp(4.6rem, 10vh, 8.2rem);
     }
   }
 
-  // ---------------------------------------------------------------------------
-  // Indicateur scroll (droite)
-  // ---------------------------------------------------------------------------
+  
+  
+  
   &__scroll {
     display: none;
 

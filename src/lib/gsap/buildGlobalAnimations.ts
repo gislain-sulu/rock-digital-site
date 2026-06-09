@@ -21,7 +21,7 @@ const CARD_HOVER_SELECTORS = [
 
 export type GlobalAnimationsCleanup = () => void;
 
-/** Header, footer, hovers cartes, révélations data-gsap — toutes les pages. */
+
 export function buildGlobalAnimations(root: GsapRoot): GlobalAnimationsCleanup {
   buildDataRevealAnimations(root);
   initStickyHeaderTransition(root);
@@ -29,7 +29,7 @@ export function buildGlobalAnimations(root: GsapRoot): GlobalAnimationsCleanup {
   const navHoverCleanup = initNavLinkHover(root);
   const cardHoverCleanup = initPremiumCardHovers(root, CARD_HOVER_SELECTORS);
 
-  // Footer — colonnes en cascade
+  
   const footer = q(root, '[data-layout="site-footer"]');
   if (footer) {
     const columns = qa(footer, '[class*="footer__brand"], [class*="footer__widget"]');

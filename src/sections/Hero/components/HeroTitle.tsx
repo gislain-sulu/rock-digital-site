@@ -1,8 +1,8 @@
 import styles from '../Hero.module.scss';
 
-/**
- * Titre hero — structure découpée pour l’entrée GSAP + boucles CSS sur « digital ».
- */
+
+
+
 export function HeroTitle() {
   return (
     <h1 id="hero-title" className={styles.hero__title}>

@@ -9,7 +9,7 @@ type AppMotionProviderProps = {
   children: ReactNode;
 };
 
-/** Provider motion global — GSAP pages internes + Lenis (via SmoothScrollProvider). */
+
 export function AppMotionProvider({ children }: AppMotionProviderProps) {
   return (
     <SiteGsapProvider>

@@ -29,7 +29,7 @@ export type AboutShowcaseProps = {
   ctaHref?: string;
   ctaLabel?: string;
   showCta?: boolean;
-  /** `gsap` : révélation au scroll (page À propos). `framer` : StaggerGroup (accueil). */
+  
   motion?: 'framer' | 'gsap';
   sectionTone?: 'light' | 'subtle' | 'soft' | 'deep' | 'dark';
 };

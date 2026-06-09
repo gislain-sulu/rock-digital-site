@@ -1,36 +1,36 @@
-// =============================================================================
-// Rock Digital — Design Tokens
-// Issus de la charte graphique officielle (v2 - Mai 2026)
-// =============================================================================
 
-// -----------------------------------------------------------------------------
-// Couleurs principales
-// -----------------------------------------------------------------------------
-$color-blue: #2e6ebb; // BLEU PRINCIPAL — confiance, technologie
-$color-orange: #f59e0b; // ORANGE PRINCIPAL — énergie, action
-$color-orange-bright: #fdba3a; // extrémité claire du dégradé orange officiel
-$color-black: #231f20; // NOIR PROFOND — élégance, expertise
-$color-gray-dark: #4d4d4d; // GRIS FONCÉ — stabilité
 
-// Couleurs secondaires
+
+
+
+
+
+
+$color-blue: #2e6ebb; 
+$color-orange: #f59e0b; 
+$color-orange-bright: #fdba3a; 
+$color-black: #231f20; 
+$color-gray-dark: #4d4d4d; 
+
+
 $color-blue-slate: #334155;
 $color-blue-gray: #64748b;
 $color-gray-light: #e5e7eb;
 $color-gray-lighter: #f3f4f6;
 $color-white: #ffffff;
 
-// Couleurs d'accentuation
+
 $color-blue-soft: #e6f0ff;
 $color-orange-soft: #fff4e0;
 $color-success: #22c55e;
 
-// Bleu marine profond (utilisé en arrière-plan de section)
+
 $color-blue-deep: #1e4fa1;
 $color-blue-night: #0b1b3a;
 
-// -----------------------------------------------------------------------------
-// Dégradés officiels
-// -----------------------------------------------------------------------------
+
+
+
 $gradient-blue: linear-gradient(135deg, #1e4fa1 0%, #2e6ebb 100%);
 $gradient-orange: linear-gradient(135deg, $color-orange 0%, $color-orange-bright 100%);
 $gradient-blue-deep: linear-gradient(180deg, #1e4fa1 0%, #0b1b3a 100%);
@@ -40,9 +40,9 @@ $gradient-hero: radial-gradient(
   rgba(255, 255, 255, 0) 60%
 );
 
-// -----------------------------------------------------------------------------
-// Tokens sémantiques (utilisés par les composants)
-// -----------------------------------------------------------------------------
+
+
+
 $bg-base: $color-white;
 $bg-subtle: $color-gray-lighter;
 $bg-accent-soft: $color-blue-soft;
@@ -64,34 +64,34 @@ $border-default: rgba(35, 31, 32, 0.08);
 $border-strong: rgba(35, 31, 32, 0.16);
 $border-on-dark: rgba(255, 255, 255, 0.08);
 
-// -----------------------------------------------------------------------------
-// Échelle d'espacement (base 4px)
-// -----------------------------------------------------------------------------
-$space-0: 0;
-$space-1: 0.25rem; //  4px
-$space-2: 0.5rem; //  8px
-$space-3: 0.75rem; // 12px
-$space-4: 1rem; // 16px
-$space-5: 1.25rem; // 20px
-$space-6: 1.5rem; // 24px
-$space-8: 2rem; // 32px
-$space-10: 2.5rem; // 40px
-$space-12: 3rem; // 48px
-$space-14: 3.5rem; // 56px
-$space-16: 4rem; // 64px
-$space-20: 5rem; // 80px
-$space-24: 6rem; // 96px
-$space-32: 8rem; // 128px
-$space-40: 10rem; // 160px
 
-// Padding vertical de section
+
+
+$space-0: 0;
+$space-1: 0.25rem; 
+$space-2: 0.5rem; 
+$space-3: 0.75rem; 
+$space-4: 1rem; 
+$space-5: 1.25rem; 
+$space-6: 1.5rem; 
+$space-8: 2rem; 
+$space-10: 2.5rem; 
+$space-12: 3rem; 
+$space-14: 3.5rem; 
+$space-16: 4rem; 
+$space-20: 5rem; 
+$space-24: 6rem; 
+$space-32: 8rem; 
+$space-40: 10rem; 
+
+
 $section-py-sm: clamp(3rem, 6vw, 5rem);
 $section-py-md: clamp(4rem, 8vw, 7rem);
 $section-py-lg: clamp(5rem, 10vw, 9rem);
 
-// -----------------------------------------------------------------------------
-// Container & Layout
-// -----------------------------------------------------------------------------
+
+
+
 $container-sm: 640px;
 $container-md: 768px;
 $container-lg: 1024px;
@@ -99,9 +99,9 @@ $container-xl: 1280px;
 $container-2xl: 1440px;
 $container-padding: clamp(1.25rem, 4vw, 2.5rem);
 
-// -----------------------------------------------------------------------------
-// Border radius
-// -----------------------------------------------------------------------------
+
+
+
 $radius-xs: 4px;
 $radius-sm: 8px;
 $radius-md: 12px;
@@ -111,9 +111,9 @@ $radius-2xl: 32px;
 $radius-pill: 999px;
 $hero-corner-radius: clamp(1.6rem, 4vw, 3.4rem);
 
-// -----------------------------------------------------------------------------
-// Ombres (douces, conformes au style minimaliste)
-// -----------------------------------------------------------------------------
+
+
+
 $shadow-xs: 0 1px 2px rgba(35, 31, 32, 0.04);
 $shadow-sm: 0 2px 8px rgba(35, 31, 32, 0.06);
 $shadow-md: 0 8px 24px rgba(35, 31, 32, 0.08);
@@ -122,9 +122,9 @@ $shadow-xl: 0 24px 64px rgba(35, 31, 32, 0.12);
 $shadow-blue: 0 12px 32px rgba(46, 110, 187, 0.2);
 $shadow-orange: 0 12px 32px rgba(245, 158, 11, 0.22);
 
-// -----------------------------------------------------------------------------
-// Z-index
-// -----------------------------------------------------------------------------
+
+
+
 $z-base: 1;
 $z-content: 10;
 $z-sticky: 80;
@@ -134,9 +134,9 @@ $z-modal: 110;
 $z-toast: 120;
 $z-cursor: 200;
 
-// -----------------------------------------------------------------------------
-// Transitions
-// -----------------------------------------------------------------------------
+
+
+
 $ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
 $ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 $ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -151,28 +151,28 @@ $transition-color: color $duration-base $ease-out-quart,
   background-color $duration-base $ease-out-quart,
   border-color $duration-base $ease-out-quart;
 
-// -----------------------------------------------------------------------------
-// Typographie (familles via next/font, déclarées en CSS custom properties)
-// -----------------------------------------------------------------------------
+
+
+
 $font-display: var(--font-display, 'Montserrat', system-ui, sans-serif);
 $font-body: var(--font-body, 'Open Sans', system-ui, sans-serif);
 $font-ui: var(--font-ui, 'Inter', system-ui, sans-serif);
 
-// Échelle typographique (fluide via clamp)
-$fs-xs: 0.75rem; // 12
-$fs-sm: 0.875rem; // 14
-$fs-base: 1rem; // 16
-$fs-md: 1.125rem; // 18
-$fs-lg: 1.25rem; // 20
-$fs-xl: 1.5rem; // 24
-$fs-2xl: clamp(1.5rem, 2.5vw, 2rem); // 24-32
-$fs-3xl: clamp(1.75rem, 3vw, 2.5rem); // 28-40
-$fs-4xl: clamp(2rem, 4vw, 3rem); // 32-48
-$fs-5xl: clamp(2.5rem, 5.5vw, 4rem); // 40-64
-$fs-6xl: clamp(3rem, 7vw, 5rem); // 48-80
-$fs-display: clamp(3.5rem, 9vw, 6.5rem); // 56-104
 
-// Graisses
+$fs-xs: 0.75rem; 
+$fs-sm: 0.875rem; 
+$fs-base: 1rem; 
+$fs-md: 1.125rem; 
+$fs-lg: 1.25rem; 
+$fs-xl: 1.5rem; 
+$fs-2xl: clamp(1.5rem, 2.5vw, 2rem); 
+$fs-3xl: clamp(1.75rem, 3vw, 2.5rem); 
+$fs-4xl: clamp(2rem, 4vw, 3rem); 
+$fs-5xl: clamp(2.5rem, 5.5vw, 4rem); 
+$fs-6xl: clamp(3rem, 7vw, 5rem); 
+$fs-display: clamp(3.5rem, 9vw, 6.5rem); 
+
+
 $fw-light: 300;
 $fw-regular: 400;
 $fw-medium: 500;
@@ -180,13 +180,13 @@ $fw-semibold: 600;
 $fw-bold: 700;
 $fw-extrabold: 800;
 
-// Line heights
+
 $lh-tight: 1.05;
 $lh-snug: 1.2;
 $lh-base: 1.5;
 $lh-relaxed: 1.65;
 
-// Letter spacing
+
 $ls-tighter: -0.04em;
 $ls-tight: -0.02em;
 $ls-normal: 0;

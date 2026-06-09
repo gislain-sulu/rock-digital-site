@@ -4,9 +4,9 @@
 @use 'breakpoints' as *;
 @use 'mixins' as *;
 
-// =============================================================================
-// CSS Custom Properties (pour transitions runtime & thèmes)
-// =============================================================================
+
+
+
 :root {
   --color-blue: #{$color-blue};
   --color-blue-deep: #{$color-blue-deep};
@@ -37,8 +37,8 @@ html {
   position: relative;
 }
 
-// Contenu visible avant hydratation React (évite l'écran blanc si le JS est lent ou bloqué)
-// Exclut les zones GSAP des pages internes pour ne pas bloquer les entrées animées.
+
+
 html:not(.motion-hydrated) {
   [style*='opacity:0']:not([data-gsap-region] *):not([data-gsap-region]),
   [style*='opacity: 0']:not([data-gsap-region] *):not([data-gsap-region]) {
@@ -59,7 +59,7 @@ html:not(.motion-hydrated) {
   }
 }
 
-// Breadcrumb uniquement — la section contact gère sa propre entrée (client)
+
 main.gsap-inner-active:not(.gsap-page-ready) [data-gsap-region='breadcrumb'] {
   opacity: 0;
   visibility: hidden;
@@ -91,7 +91,7 @@ main {
   overflow-x: clip;
 }
 
-// Désactive scroll-behavior natif quand Lenis prend la main
+
 html.lenis,
 html.lenis body {
   height: auto;
@@ -118,7 +118,7 @@ html.lenis {
 }
 
 
-// Masque le header pendant l’UI de chargement (src/app/loading.tsx dans #main)
+
 body:has(#main [data-page-loading]:not([data-home-boot-screen])) [data-layout='site-header'] {
   visibility: hidden;
   pointer-events: none;
@@ -128,7 +128,7 @@ body.home-boot-loading {
   overflow: hidden;
 }
 
-// Avant la timeline d'entrée GSAP — évite le flash de texte visible
+
 body.home-gsap-active:not(.home-hero-entered) {
   #hero [class*='hero__titleLine'],
   #hero [class*='hero__word'],
@@ -175,7 +175,7 @@ body.home-gsap-active:not(.home-hero-entered) {
   }
 }
 
-// Skip link accessible
+
 .skip-link {
   position: absolute;
   top: -100px;
@@ -194,13 +194,13 @@ body.home-gsap-active:not(.home-hero-entered) {
   }
 }
 
-// Sélection
+
 ::selection {
   background: rgba(46, 110, 187, 0.18);
   color: $color-black;
 }
 
-// Scrollbar (subtile, conforme charte minimaliste)
+
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
@@ -220,14 +220,14 @@ body.home-gsap-active:not(.home-hero-entered) {
   background: rgba(35, 31, 32, 0.3);
 }
 
-// Focus outline global
+
 :focus-visible {
   outline: 2px solid $brand-accent;
   outline-offset: 3px;
   border-radius: $radius-xs;
 }
 
-// prefers-reduced-motion
+
 @include reduce-motion {
   *,
   *::before,

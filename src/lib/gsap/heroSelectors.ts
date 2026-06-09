@@ -1,4 +1,4 @@
-/** Sélecteurs Hero compatibles CSS Modules (`Hero_hero__*` dans le DOM). */
+
 export const HERO_SELECTORS = {
   titleLine: '[class*="hero__titleLine"]',
   word: '[class*="hero__word"]',

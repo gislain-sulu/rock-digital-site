@@ -3,9 +3,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 let attachedLenis: Lenis | null = null;
 
-/**
- * Synchronise ScrollTrigger avec Lenis pour des triggers précis au scroll fluide.
- */
+
+
+
 export function attachLenisScrollTrigger(lenis: Lenis): void {
   if (attachedLenis === lenis) return;
   attachedLenis = lenis;

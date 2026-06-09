@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 let registered = false;
 
-/** Enregistrement unique GSAP + plugins (client uniquement). */
+
 export function registerGsap(): void {
   if (registered || typeof window === 'undefined') return;
 

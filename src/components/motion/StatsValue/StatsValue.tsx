@@ -10,9 +10,9 @@ type StatsValueProps = {
   className?: string;
 };
 
-/**
- * Affichage KPI — Counter (Framer) ou span data-gsap-counter (ScrollTrigger GSAP).
- */
+
+
+
 export function StatsValue({ value, prefix = '', suffix = '', className }: StatsValueProps) {
   const reduced = useReducedMotion();
 
@@ -40,7 +40,7 @@ export function StatsValue({ value, prefix = '', suffix = '', className }: Stats
   );
 }
 
-/** Variante accueil / Framer (inchangé). */
+
 export function StatsValueAnimated(props: StatsValueProps) {
   return (
     <Counter

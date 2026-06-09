@@ -68,7 +68,7 @@ function parallaxY(
   );
 }
 
-/** Animations scroll immersives — page d'accueil uniquement. */
+
 export function buildHomeScrollAnimations(root: HomeRoot): void {
   const hero = q(root, '#hero');
   const about = q(root, '#about');
@@ -78,7 +78,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
   const testimonials = q(root, '#testimonials');
   const contact = q(root, '#contact');
 
-  // —— Hero : parallax scroll (entrée gérée par homeHeroEntrance) ——
+  
   if (hero) {
     const heroMedia = q(hero, HERO_SELECTORS.media);
     const heroImageWrap = q(hero, HERO_SELECTORS.imageWrap);
@@ -155,9 +155,9 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  // —— Value props : animations dans ValueProps.tsx (client) ——
+  
 
-  // —— About : split média / contenu ——
+  
   if (about) {
     const media = q(about, '[class*="aboutShowcase__media"]');
     const content = q(about, '[class*="aboutShowcase__content"]');
@@ -184,9 +184,9 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  // —— IT Services : animations dans ITServices.tsx (client) ——
+  
 
-  // —— Process — en-tête + léger lift de la timeline ——
+  
   if (process) {
     const header = q(process, '[class*="processSection__header"]');
 
@@ -195,7 +195,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  // —— Projets récents ——
+  
   if (projects) {
     const intro = q(projects, '[class*="projectArea__headerIntro"]');
     const aside = q(projects, '[class*="projectArea__headerAside"]');
@@ -234,7 +234,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     parallaxY(projects, 50, projects);
   }
 
-  // —— Technologies ——
+  
   if (technologies) {
     const heading = q(technologies, '.heading');
     const kicker = q(technologies, '[class*="tech__kicker"]');
@@ -255,7 +255,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  // —— Témoignages ——
+  
   if (testimonials) {
     const titleBlock = q(testimonials, '[class*="testimonialArea__sectionTitle"]');
     const viewport = q(testimonials, '[class*="testimonialArea__viewport"]');
@@ -280,7 +280,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  // —— CTA contact — split dramatique ——
+  
   if (contact) {
     const main = q(contact, '[class*="ctaSection__main"]');
     const metaWrap = q(contact, '[class*="ctaSection__metaWrap"]');
@@ -310,7 +310,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  // —— Sections : lift global très subtil ——
+  
   const sectionIds = [
     '#values',
     '#about',

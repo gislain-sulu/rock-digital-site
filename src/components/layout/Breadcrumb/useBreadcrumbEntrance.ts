@@ -10,7 +10,7 @@ function q<T extends Element>(root: Element, selector: string): T | null {
   return root.querySelector(selector) as T | null;
 }
 
-/** Animation titre + fil d'Ariane (client uniquement, post-hydratation). */
+
 export function useBreadcrumbEntrance(
   contentRef: RefObject<HTMLDivElement | null>,
   ready: boolean

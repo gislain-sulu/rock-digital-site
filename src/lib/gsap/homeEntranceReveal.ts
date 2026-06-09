@@ -5,7 +5,7 @@ import { HERO_ENTRANCE_TARGETS } from './heroSelectors';
 const HEADER_ENTRANCE_SELECTORS =
   '[data-layout="site-header"] [class*="header__halo"], [data-layout="site-header"] [class*="navbar__brand"], [data-layout="site-header"] [class*="navbar__navLink"], [data-layout="site-header"] [class*="navbar__cta"], [data-layout="site-header"] [class*="navbar__burger"], [data-layout="site-header"] [class*="navbar__actions"]';
 
-/** Annule les `gsap.set` d'entrée (évite un hero invisible après unmount Strict Mode). */
+
 export function forceRevealHomeEntrance(root: Element): void {
   const targets = [
     ...Array.from(root.querySelectorAll(HERO_ENTRANCE_TARGETS)),

@@ -12,7 +12,7 @@ export type BreadcrumbItem = {
 type BreadcrumbProps = {
   title: string;
   items: BreadcrumbItem[];
-  /** Image de fond (ex. `/bg-services-rock-digital.png`) */
+  
   backgroundImage?: string;
 };
 

@@ -26,7 +26,7 @@ export function markHomeBootComplete(): void {
   try {
     sessionStorage.setItem(HOME_BOOT_STORAGE_KEY, '1');
   } catch {
-    // sessionStorage indisponible (mode privé strict, etc.)
+    
   }
 }
 
@@ -55,7 +55,7 @@ function waitForWindowLoad(): Promise<void> {
   });
 }
 
-/** Attend polices, images d'accueil et fin de chargement document avant affichage. */
+
 export async function waitForHomeSiteReady(): Promise<void> {
   const startedAt = performance.now();
 
@@ -70,7 +70,7 @@ export async function waitForHomeSiteReady(): Promise<void> {
       undefined
     );
   } catch {
-    // Ne jamais bloquer l'accueil sur une erreur de préchargement.
+    
   }
 
   const elapsed = performance.now() - startedAt;

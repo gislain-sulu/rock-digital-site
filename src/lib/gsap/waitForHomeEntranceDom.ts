@@ -16,10 +16,10 @@ function hasEntranceTargets(root: Element): boolean {
   return Boolean(hero && header && words.length > 0 && leadChunks.length > 0);
 }
 
-/**
- * Attend que le Hero et le header soient dans le DOM et peints
- * (évite les courses après le PageLoader / hydration).
- */
+
+
+
+
 export async function waitForHomeEntranceDom(): Promise<Element | null> {
   if (typeof window === 'undefined') return null;
 

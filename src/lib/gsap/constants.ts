@@ -1,4 +1,4 @@
-/** Constantes partagées — timings & easings GSAP. */
+
 export const GSAP_EASE = {
   out: 'power3.out',
   expo: 'expo.out',

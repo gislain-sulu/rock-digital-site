@@ -23,7 +23,7 @@ import styles from './ITServices.module.scss';
 export type ITServicesProps = {
   showHeading?: boolean;
   withBullets?: boolean;
-  /** Lien fixe pour toutes les cartes (utilisable depuis une page serveur). */
+  
   ctaHref?: string;
   ctaLabel?: string;
   sectionId?: string;

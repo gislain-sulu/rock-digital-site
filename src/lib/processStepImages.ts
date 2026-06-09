@@ -1,4 +1,4 @@
-/** Fonds des cartes Process — une image par numéro d’étape (`01` … `06`). */
+
 export const PROCESS_STEP_BACKGROUNDS: Partial<Record<string, string>> = {
   '01': '/bg-process-rock-digital-1.png',
   '02': '/bg-process-rock-digital-strategie.png',

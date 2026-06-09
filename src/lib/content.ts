@@ -227,7 +227,7 @@ export const partnerBrands = [
   'Deluxon',
 ] as const;
 
-/** Jeux de logos synchronisés avec chaque slide du carousel projets (page d'accueil). */
+
 export const recentProjectPartnerSlides: readonly (readonly string[])[] = [
   ['AROUNDS', 'Technology', 'Grameen', 'Walmart', 'Deluxon'],
   ['Technology', 'Grameen', 'Walmart', 'Deluxon', 'AROUNDS'],
@@ -237,7 +237,7 @@ export const recentProjectPartnerSlides: readonly (readonly string[])[] = [
   ['AROUNDS', 'Grameen', 'Deluxon', 'Technology', 'Walmart'],
 ];
 
-/** Vignettes carousel project-area (SoluTek project1–5.png) */
+
 export const recentProjectImages: Record<string, string> = {
   'fintech-platform': '/project1.png',
   'health-app': '/project2.png',

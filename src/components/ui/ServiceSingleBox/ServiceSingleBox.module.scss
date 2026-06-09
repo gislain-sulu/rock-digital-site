@@ -1,7 +1,7 @@
 @use '@/styles/tokens' as *;
 @use '@/styles/mixins' as *;
 
-// .service-single-box
+
 .serviceSingleBox {
   position: relative;
   z-index: 1;
@@ -43,7 +43,7 @@
 }
 
 
-// Structure “service-card-two”
+
 .serviceSingleBox__inner {
   position: relative;
   z-index: 1;
@@ -68,7 +68,7 @@
   z-index: 1;
   overflow: visible;
 
-  // Découpe diagonale Ostech — pseudo-élément pour ne pas couper l'icône arrondie.
+  
   &::before {
     content: '';
     position: absolute;
@@ -202,7 +202,7 @@
   line-height: $lh-relaxed;
 }
 
-// .service-text
+
 .serviceSingleBox__text {
   margin: 0;
   font-family: $font-ui;

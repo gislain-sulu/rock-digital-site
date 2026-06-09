@@ -13,7 +13,7 @@ import { PartnerMarquee } from './PartnerMarquee';
 import { ProjectCarousel } from './ProjectCarousel';
 import styles from './RecentProjects.module.scss';
 
-/** Images SoluTek project-area (project1.png … project5.png) */
+
 const PROJECT_IMAGE_PATHS = [
   '/project1.png',
   '/project2.png',

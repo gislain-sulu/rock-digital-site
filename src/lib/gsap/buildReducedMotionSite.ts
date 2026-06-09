@@ -1,7 +1,7 @@
 import { type GsapRoot, qa } from './dom';
 import { resetGsapTargets } from './motion';
 
-/** Affichage immédiat sans motion — pages internes + globales. */
+
 export function buildReducedMotionSite(root: GsapRoot): void {
   resetGsapTargets([
     ...qa(root, '[data-gsap-region="breadcrumb"] *'),

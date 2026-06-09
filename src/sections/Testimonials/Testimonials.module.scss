@@ -2,7 +2,7 @@
 @use '@/styles/tokens' as *;
 @use '@/styles/breakpoints' as *;
 
-// Harmonie charte — même logique que RecentProjects (fond section ≈ --color-blue)
+
 $testimonial-box-bg: sass-color.change(
   sass-color.mix($color-blue-deep, $color-blue, 58%),
   $alpha: 0.9

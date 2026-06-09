@@ -1,4 +1,4 @@
-/** Sélecteurs des éléments déclenchant l'état hover du curseur. */
+
 export const CURSOR_INTERACTIVE_SELECTOR = [
   'a[href]',
   'button:not(:disabled)',

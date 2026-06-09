@@ -20,7 +20,7 @@ import { animateCountersInScope } from '@/sections/AboutPage/aboutGsap';
 import styles from './Stats.module.scss';
 
 type StatsProps = {
-  /** Animations GSAP au scroll (page À propos). Par défaut Framer StaggerGroup. */
+  
   motion?: 'framer' | 'gsap';
 };
 

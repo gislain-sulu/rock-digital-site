@@ -9,7 +9,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky && bash scripts/setup-git-filters.sh",
+    "git:setup-filters": "bash scripts/setup-git-filters.sh",
+    "git:renormalize": "git add --renormalize ."
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -27,9 +30,12 @@
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@types/strip-comments": "^2.0.4",
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.0.3",
+    "husky": "^9.1.7",
     "sass": "^1.81.0",
+    "strip-comments": "^2.0.1",
     "typescript": "^5.7.2"
   }
 }

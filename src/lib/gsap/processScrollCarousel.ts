@@ -4,9 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { processSteps } from '@/lib/content';
 
 export type ProcessCarouselElements = {
-  /** Colonne de scroll (hauteur = défilement horizontal + zone sticky) */
+  
   scroll: HTMLElement;
-  /** Panneau sticky — reste visible pendant le parcours */
+  
   sticky: HTMLElement;
   viewport: HTMLElement;
   list: HTMLElement;
@@ -81,10 +81,10 @@ function waitForLayoutReady(): Promise<void> {
   });
 }
 
-/**
- * Pattern « horizontal scroll » (sticky + scrub) — standard sur les sites premium,
- * compatible Lenis (pas de pin GSAP).
- */
+
+
+
+
 function buildStickyHorizontalScroll(
   els: ProcessCarouselElements,
   callbacks?: ProcessCarouselCallbacks
@@ -129,7 +129,7 @@ function buildStickyHorizontalScroll(
   };
 }
 
-/** Mobile — swipe horizontal natif, pas de capture du scroll vertical. */
+
 function buildNativeCarousel(
   els: ProcessCarouselElements,
   callbacks?: ProcessCarouselCallbacks

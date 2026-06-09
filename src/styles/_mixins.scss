@@ -2,9 +2,9 @@
 @use 'tokens' as *;
 @use 'breakpoints' as *;
 
-// =============================================================================
-// Mixins utilitaires
-// =============================================================================
+
+
+
 
 @mixin container($max: $container-2xl) {
   width: 100%;
@@ -54,7 +54,7 @@
   text-wrap: pretty;
 }
 
-// Truncate à n lignes
+
 @mixin line-clamp($lines: 2) {
   display: -webkit-box;
   -webkit-line-clamp: $lines;
@@ -62,7 +62,7 @@
   overflow: hidden;
 }
 
-// Glassmorphism subtil (mode clair, conforme charte)
+
 @mixin glass-light {
   background: rgba(255, 255, 255, 0.78);
   backdrop-filter: saturate(180%) blur(20px);
@@ -77,14 +77,14 @@
   border-bottom: 1px solid $border-on-dark;
 }
 
-// Grille auto-fit
+
 @mixin auto-grid($min: 280px, $gap: $space-6) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
   gap: $gap;
 }
 
-// Flex helpers
+
 @mixin flex($dir: row, $align: center, $justify: flex-start, $gap: 0) {
   display: flex;
   flex-direction: $dir;
@@ -101,12 +101,12 @@
   justify-content: center;
 }
 
-// Aspect ratio safe
+
 @mixin aspect($w: 16, $h: 9) {
   aspect-ratio: math.div($w, $h);
 }
 
-// Style des liens premium
+
 @mixin underline-grow($color: currentColor, $height: 1px) {
   position: relative;
   &::after {
@@ -128,7 +128,7 @@
   }
 }
 
-// Style "kicker" — petit label uppercase (souvent orange)
+
 @mixin kicker($color: $brand-accent) {
   display: inline-flex;
   align-items: center;
@@ -141,7 +141,7 @@
   color: $color;
 }
 
-// Tag chip
+
 @mixin chip($bg: $color-blue-soft, $color: $color-blue) {
   display: inline-flex;
   align-items: center;
@@ -156,7 +156,7 @@
   letter-spacing: $ls-wide;
 }
 
-// Surface premium (utilisée par les cartes)
+
 @mixin surface-card {
   background: $color-white;
   border: 1px solid $border-default;
@@ -169,7 +169,7 @@
   }
 }
 
-// Surface dark
+
 @mixin surface-card-dark {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid $border-on-dark;
@@ -181,7 +181,7 @@
   }
 }
 
-// Heading scale
+
 @mixin h-display {
   font-family: $font-display;
   font-weight: $fw-extrabold;

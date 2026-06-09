@@ -15,7 +15,7 @@ import { cn } from '@/utils/cn';
 
 import styles from './RecentProjects.module.scss';
 
-/** Owl Carousel SoluTek — project_list */
+
 const CAROUSEL_GAP = 30;
 const AUTOPLAY_MS = 2800;
 const TRANSITION_MS = 1500;

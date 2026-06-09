@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GSAP_DURATION, GSAP_EASE } from './constants';
 import { type GsapRoot, q, qa } from './dom';
 
-/** ScrollTrigger : joue l'animation si l'élément est déjà visible au chargement. */
+
 export function scrollVarsWithInViewFix(scrollVars: ScrollTrigger.Vars): ScrollTrigger.Vars {
   const userOnRefresh = scrollVars.onRefresh;
 
@@ -21,7 +21,7 @@ export function scrollVarsWithInViewFix(scrollVars: ScrollTrigger.Vars): ScrollT
   };
 }
 
-/** Rafraîchit ScrollTrigger après layout. */
+
 export function refreshScrollAnimations(): void {
   ScrollTrigger.refresh(true);
 }
@@ -141,7 +141,7 @@ export function staggerChildrenOnScroll(
   });
 }
 
-/** Compteurs numériques déclenchés au scroll (stats, KPI). */
+
 export function animateCountersInView(
   root: GsapRoot,
   selector = '[data-gsap-counter]'
@@ -173,7 +173,7 @@ export function animateCountersInView(
   });
 }
 
-/** Scan `[data-gsap-reveal]` — fade-up au scroll. */
+
 export function buildDataRevealAnimations(root: GsapRoot): void {
   const singles = qa(root, '[data-gsap-reveal]:not([data-gsap-reveal="stagger"])');
   singles.forEach((el) => {
@@ -195,7 +195,7 @@ export function buildDataRevealAnimations(root: GsapRoot): void {
 
 type CardHoverCleanup = () => void;
 
-/** Hover premium — transform GPU, zoom image léger. */
+
 export function initPremiumCardHovers(
   root: GsapRoot,
   selector: string

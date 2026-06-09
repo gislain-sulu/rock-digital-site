@@ -12,13 +12,13 @@ import { registerGsap } from '@/lib/gsap/registerGsap';
 import { prefersReducedMotion } from '@/lib/gsap/motion';
 
 type UseGsapPageOptions = {
-  /** Exclure l'accueil (géré par HomeScrollOrchestrator). */
+  
   skipOnHome?: boolean;
 };
 
-/**
- * Animations pages internes — useEffect après hydratation des composants client.
- */
+
+
+
 export function useGsapPage(options: UseGsapPageOptions = { skipOnHome: true }) {
   const pathname = usePathname();
   const cleanupRef = useRef<(() => void) | null>(null);

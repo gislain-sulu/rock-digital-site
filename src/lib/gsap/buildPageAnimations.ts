@@ -4,7 +4,7 @@ import { buildDataRevealAnimations } from './effects';
 
 const CLIENT_ANIMATED_ROUTES = ['/services', '/a-propos', '/contact'] as const;
 
-/** Animations spécifiques par route (hors accueil). */
+
 export function buildPageAnimations(pathname: string, root: GsapRoot): void {
   if (CLIENT_ANIMATED_ROUTES.some((route) => pathname.startsWith(route))) {
     return;
@@ -14,6 +14,6 @@ export function buildPageAnimations(pathname: string, root: GsapRoot): void {
     return;
   }
 
-  // Blog, pages légales — révélations génériques data-gsap uniquement
+  
   buildDataRevealAnimations(root);
 }

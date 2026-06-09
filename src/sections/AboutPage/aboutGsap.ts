@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 
-/** Compteurs KPI au scroll (Stats). */
+
 export function animateCountersInScope(
   scope: Element,
   selector = '[data-gsap-counter]'
