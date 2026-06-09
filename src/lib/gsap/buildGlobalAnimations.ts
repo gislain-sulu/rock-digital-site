@@ -1,5 +1,4 @@
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { GSAP_EASE } from './constants';
 import { type GsapRoot, q, qa } from './dom';

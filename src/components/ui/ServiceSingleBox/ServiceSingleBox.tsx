@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { type ElementType } from 'react';
 
@@ -68,7 +69,13 @@ export function ServiceSingleBox({
         </div>
 
         <div className={styles.serviceSingleBox__thumb} aria-hidden="true">
-          <img className={styles.serviceSingleBox__thumbImg} src={thumbSrc} alt={thumbAlt} />
+          <Image
+            className={styles.serviceSingleBox__thumbImg}
+            src={thumbSrc}
+            alt={thumbAlt}
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+          />
         </div>
       </Link>
     </Component>

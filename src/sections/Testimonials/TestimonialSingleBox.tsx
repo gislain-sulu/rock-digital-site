@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import styles from './Testimonials.module.scss';
 
 type TestimonialSingleBoxProps = {
@@ -17,10 +19,7 @@ export function TestimonialSingleBox({
     <div className={styles.testimonialArea__box}>
       <div className={styles.testimonialArea__singleBox}>
         <div className={styles.testimonialArea__icon} aria-hidden="true">
-          <img
-            src="/testi1.png"
-            alt=""
-          />
+          <Image src="/testi1.png" alt="" width={28} height={28} />
         </div>
         <div className={styles.testimonialArea__content}>
           <p className={styles.testimonialArea__text}>{quote}</p>

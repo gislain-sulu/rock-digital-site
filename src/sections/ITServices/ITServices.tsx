@@ -37,7 +37,7 @@ export function ITServices({
   showHeading = true,
   withBullets = false,
   ctaHref,
-  ctaLabel = 'En savoir plus',
+  ctaLabel: _ctaLabel = 'En savoir plus',
   sectionId = 'it-services',
 }: ITServicesProps = {}) {
   const hrefFor = () => ctaHref ?? defaultServiceHref();
