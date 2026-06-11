@@ -34,7 +34,7 @@ export function CTA() {
             </h2>
 
             <p className={styles.ctaSection__lead}>
-              Parlons de votre site, application ou plateforme. Deux parcours :
+              Parlons de votre site web ou application mobile, application ou plateforme. Deux parcours :
               une demande de devis structurée ou une discussion directe avec
               l&apos;équipe.
             </p>
