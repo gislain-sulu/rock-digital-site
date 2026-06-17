@@ -32,6 +32,13 @@ export function HomeBootGate({ children }: HomeBootGateProps) {
     if (!mounted) return;
 
     if (isHomeBootComplete()) {
+      const root = document.querySelector('[data-home-boot-content]');
+      if (root) {
+        markHomeHeroEntered(root);
+      } else {
+        document.body.classList.add('home-hero-entered');
+        document.body.classList.remove('home-gsap-active');
+      }
       setReady(true);
       return;
     }
@@ -79,7 +86,13 @@ export function HomeBootGate({ children }: HomeBootGateProps) {
 
   useLayoutEffect(() => {
     if (!ready || !domStable) {
-      document.body.classList.remove('home-gsap-active', 'home-hero-entered');
+      if (!document.body.classList.contains('home-hero-entered')) {
+        document.body.classList.remove('home-gsap-active', 'home-hero-entered');
+      }
+      return undefined;
+    }
+
+    if (document.body.classList.contains('home-hero-entered')) {
       return undefined;
     }
 

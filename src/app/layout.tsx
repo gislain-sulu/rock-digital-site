@@ -52,13 +52,9 @@ export default function RootLayout({
     <html
       lang="fr"
       className={`${montserrat.variable} ${openSans.variable} ${inter.variable}`}
+      suppressHydrationWarning
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.setTimeout(function(){var boot=document.querySelector('[data-home-boot-screen]');if(boot){boot.remove();}document.body.classList.add('home-hero-entered');document.body.classList.remove('home-gsap-active');},4500);`,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -72,7 +68,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <a href="#main" className="skip-link">
           Aller au contenu principal
         </a>
