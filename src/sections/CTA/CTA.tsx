@@ -49,8 +49,9 @@ export function CTA() {
                 Démarrer un projet
               </RockDigitalButton>
               <RockDigitalButton href="/contact#devis" variant="outline">
-                Demander un devis
+                Demander un devis   
               </RockDigitalButton>
+              
             </div>
           </StaggerItem>
         </StaggerGroup>

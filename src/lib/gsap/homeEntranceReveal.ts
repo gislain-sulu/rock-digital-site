@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { HERO_ENTRANCE_TARGETS } from './heroSelectors';
 
 const HEADER_ENTRANCE_SELECTORS =
-  '[data-layout="site-header"] [class*="header__halo"], [data-layout="site-header"] [class*="navbar__brand"], [data-layout="site-header"] [class*="navbar__navLink"], [data-layout="site-header"] [class*="navbar__cta"], [data-layout="site-header"] [class*="navbar__burger"], [data-layout="site-header"] [class*="navbar__actions"]';
+  '[data-layout="site-header"] [class*="header__brand"], [data-layout="site-header"] [class*="header__navLink"], [data-layout="site-header"] [class*="header__cta"], [data-layout="site-header"] [class*="header__burger"], [data-layout="site-header"] [class*="header__actions"], [data-layout="site-header"] [class*="navbar__brand"], [data-layout="site-header"] [class*="navbar__navLink"], [data-layout="site-header"] [class*="navbar__cta"], [data-layout="site-header"] [class*="navbar__burger"], [data-layout="site-header"] [class*="navbar__actions"]';
 
 
 export function forceRevealHomeEntrance(root: Element): void {

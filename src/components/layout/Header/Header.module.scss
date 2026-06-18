@@ -1,26 +1,129 @@
 @use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+$header-height: 90px;
 
 .header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: $z-header;
-  isolation: isolate;
+  height: $header-height;
+  background: $bg-base;
+  transition: $transition-color, box-shadow $duration-base $ease-out-quart;
 
-  &__halo {
-    position: absolute;
-    left: 50%;
-    top: -22px;
-    width: min(920px, 84vw);
-    height: 168px;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(56, 189, 248, 0.22) 0%,
-      rgba(37, 99, 235, 0.14) 32%,
-      rgba(14, 38, 78, 0) 76%
-    );
-    filter: blur(24px);
-    pointer-events: none;
-    z-index: -1;
+  &--scrolled {
+    background: rgba($bg-base, 0.98);
+    box-shadow: $shadow-sm;
+  }
+
+  &__inner {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp($space-4, 2vw, $space-8);
+    height: 100%;
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    @include focus-ring;
+  }
+
+  &__logo {
+    display: block;
+    width: clamp(110px, 11vw, 150px);
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  &__nav {
+    display: none;
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+
+    @include bp-up(lg) {
+      display: flex;
+    }
+  }
+
+  &__navList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: clamp($space-5, 2vw, $space-8);
+  }
+
+  &__navLink {
+    display: inline-flex;
+    padding-block: $space-2;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $text-muted;
+    white-space: nowrap;
+    transition: $transition-color;
+
+    &:hover,
+    &--active {
+      color: $text-primary;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    flex-shrink: 0;
+  }
+
+  &__cta {
+    display: none;
+
+    @include bp-up(md) {
+      display: inline-flex;
+    }
+  }
+
+  &__burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-md;
+    border: 1px solid $border-default;
+    background: $bg-base;
+    @include focus-ring;
+
+    @include bp-up(lg) {
+      display: none;
+    }
+  }
+
+  &__burgerBar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    margin-inline: auto;
+    border-radius: $radius-pill;
+    background: $text-primary;
+    transition:
+      transform $duration-base $ease-out-quart,
+      opacity $duration-base $ease-out-quart;
+
+    &--open-1 {
+      transform: translateY(4px) rotate(45deg);
+    }
+
+    &--open-2 {
+      transform: translateY(-4px) rotate(-45deg);
+    }
   }
 }

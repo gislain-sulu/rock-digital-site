@@ -230,7 +230,10 @@ export function initPremiumCardHovers(
 }
 
 export function initNavLinkHover(root: GsapRoot): CardHoverCleanup {
-  const links = qa(root, '[data-layout="site-header"] .navbar__navLink');
+  const links = qa(
+    root,
+    '[data-layout="site-header"] [class*="header__navLink"], [data-layout="site-header"] [class*="navbar__navLink"]'
+  );
   const cleanups: Array<() => void> = [];
 
   links.forEach((link) => {
@@ -252,8 +255,14 @@ export function initNavLinkHover(root: GsapRoot): CardHoverCleanup {
 }
 
 export function initStickyHeaderTransition(root: GsapRoot): ScrollTrigger | void {
-  const header = q<HTMLElement>(root, '[data-layout="site-header"] .navbar');
-  const inner = q<HTMLElement>(root, '[data-layout="site-header"] .navbar__inner');
+  const header = q<HTMLElement>(
+    root,
+    '[data-layout="site-header"].header, [data-layout="site-header"] .navbar, [data-layout="site-header"]'
+  );
+  const inner = q<HTMLElement>(
+    root,
+    '[data-layout="site-header"] [class*="header__inner"], [data-layout="site-header"] [class*="navbar__inner"]'
+  );
   if (!header || !inner) return;
 
   return ScrollTrigger.create({

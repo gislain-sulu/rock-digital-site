@@ -1,0 +1,143 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.servicesHighlight {
+  position: relative;
+  z-index: $z-base;
+  margin-top: calc(-1 * clamp(#{$space-8}, 8vw, #{$space-16}));
+  padding-top: 0;
+  padding-bottom: clamp($space-12, 6vw, $space-16);
+  background: $color-blue-night;
+
+  :global([data-home-landing]) & {
+    flex: 0 0 auto;
+    margin-top: calc(-1 * clamp(#{$space-6}, 6vh, #{$space-12}));
+    padding-top: 0;
+    padding-bottom: clamp($space-6, 4vh, $space-8);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 0%, rgba($brand-primary, 0.18), transparent 42%),
+      radial-gradient(circle at 85% 100%, rgba($brand-primary, 0.1), transparent 38%);
+    pointer-events: none;
+  }
+
+  &__srTitle {
+    @include visually-hidden;
+  }
+
+  &__grid {
+    position: relative;
+    z-index: $z-base;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-5;
+
+    @include bp-up(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include bp-up(xl) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: $space-6;
+    }
+
+    :global([data-home-landing]) & {
+      gap: $space-4;
+
+      @include bp-up(lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    min-height: 100%;
+    padding: $space-8;
+    border-radius: $radius-lg;
+    border: 1px solid $border-on-dark;
+    background: rgba($color-white, 0.03);
+    transition:
+      transform $duration-base $ease-out-quart,
+      box-shadow $duration-base $ease-out-quart,
+      border-color $duration-base $ease-out-quart,
+      background-color $duration-base $ease-out-quart;
+
+    :global([data-home-landing]) & {
+      gap: $space-3;
+      padding: clamp($space-4, 2vh, $space-6);
+      border-radius: $radius-lg;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      border-color: rgba($brand-accent, 0.35);
+      background: rgba($color-white, 0.05);
+      box-shadow: $shadow-lg, 0 0 0 1px rgba($brand-accent, 0.12);
+    }
+
+    :global([data-home-landing]) &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  &__iconWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: $radius-md;
+    background: rgba($brand-accent, 0.12);
+    color: $brand-accent;
+
+    :global([data-home-landing]) & {
+      width: 44px;
+      height: 44px;
+      border-radius: $radius-sm;
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+
+    :global([data-home-landing]) & {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__cardTitle {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp($fs-md, 1.4vw, $fs-lg);
+    font-weight: $fw-bold;
+    line-height: $lh-snug;
+    color: $text-on-dark;
+
+    :global([data-home-landing]) & {
+      font-size: clamp($fs-base, 1.5vw, $fs-md);
+    }
+  }
+
+  &__cardText {
+    margin: 0;
+    font-family: $font-body;
+    font-size: $fs-sm;
+    line-height: $lh-relaxed;
+    color: $text-on-dark-soft;
+
+    :global([data-home-landing]) & {
+      line-height: $lh-base;
+    }
+  }
+}

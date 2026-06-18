@@ -1,0 +1,9 @@
+@use '@/styles/tokens' as *;
+@use '@/styles/breakpoints' as *;
+
+.homeLanding {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - var(--header-height, 90px));
+  isolation: isolate;
+}

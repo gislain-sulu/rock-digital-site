@@ -95,13 +95,21 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     ? q(hero, `[data-hero-digital], ${HERO_SELECTORS.titleHighlight}`)
     : null;
 
-  const navBrand = siteHeader?.querySelector('[class*="navbar__brand"]');
+  const navBrand = siteHeader?.querySelector(
+    '[class*="header__brand"], [class*="navbar__brand"]'
+  );
   const navLinks = siteHeader
-    ? Array.from(siteHeader.querySelectorAll('[class*="navbar__navLink"]'))
+    ? Array.from(
+        siteHeader.querySelectorAll('[class*="header__navLink"], [class*="navbar__navLink"]')
+      )
     : [];
-  const navActions = siteHeader?.querySelector('[class*="navbar__actions"]');
-  const navCta = siteHeader?.querySelector('[class*="navbar__cta"]');
-  const navBurger = siteHeader?.querySelector('[class*="navbar__burger"]');
+  const navActions = siteHeader?.querySelector(
+    '[class*="header__actions"], [class*="navbar__actions"]'
+  );
+  const navCta = siteHeader?.querySelector('[class*="header__cta"], [class*="navbar__cta"]');
+  const navBurger = siteHeader?.querySelector(
+    '[class*="header__burger"], [class*="navbar__burger"]'
+  );
   const headerHalo = siteHeader?.querySelector('[class*="header__halo"]');
 
   const entranceTargets = [
@@ -176,7 +184,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     },
   });
 
-  
   if (headerHalo) {
     fadeInUp(tl, headerHalo, 0, { duration: 0.85, y: 0, filter: 'blur(0px)' });
   }
@@ -196,7 +203,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     fadeInUp(tl, navActions, 0.26, { duration: 0.65, y: 0 });
   }
 
-  
   if (heroMedia) {
     tl.to(
       heroMedia,
@@ -205,7 +211,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     );
   }
 
-  
   const titleStart = 0.32;
 
   titleLines.forEach((line, index) => {
@@ -225,7 +230,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     }
   });
 
-  
   if (digitalWord) {
     tl.fromTo(
       digitalWord,
@@ -243,7 +247,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     );
   }
 
-  
   if (leadChunks.length) {
     fadeInUp(tl, leadChunks, titleStart + 0.48, {
       duration: 1,
@@ -254,7 +257,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     fadeInUp(tl, lead, titleStart + 0.48, { duration: 1, y: 0 });
   }
 
-  
   if (visualCol) {
     fadeInUp(tl, visualCol, titleStart + 0.38, {
       duration: 1.1,

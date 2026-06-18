@@ -6,7 +6,6 @@
 
 
 
-
 :root {
   --color-blue: #{$color-blue};
   --color-blue-deep: #{$color-blue-deep};
@@ -28,7 +27,7 @@
   --container-max: #{$container-2xl};
   --container-padding: #{$container-padding};
 
-  --header-height: 96px;
+  --header-height: 90px;
 
   color-scheme: light;
 }
@@ -36,7 +35,6 @@
 html {
   position: relative;
 }
-
 
 
 html:not(.motion-hydrated) {
@@ -58,7 +56,6 @@ html:not(.motion-hydrated) {
     transform: none !important;
   }
 }
-
 
 main.gsap-inner-active:not(.gsap-page-ready) [data-gsap-region='breadcrumb'] {
   opacity: 0;
@@ -89,8 +86,11 @@ main {
   min-height: 100vh;
   max-width: 100%;
   overflow-x: clip;
-}
 
+  &:has([data-home-landing]) {
+    min-height: 0;
+  }
+}
 
 html.lenis,
 html.lenis body {
@@ -117,8 +117,6 @@ html.lenis {
   pointer-events: none;
 }
 
-
-
 body:has(#main [data-page-loading]:not([data-home-boot-screen])) [data-layout='site-header'] {
   visibility: hidden;
   pointer-events: none;
@@ -127,7 +125,6 @@ body:has(#main [data-page-loading]:not([data-home-boot-screen])) [data-layout='s
 body.home-boot-loading {
   overflow: hidden;
 }
-
 
 body.home-gsap-active:not(.home-hero-entered) {
   #hero [class*='hero__titleLine'],
@@ -141,7 +138,11 @@ body.home-gsap-active:not(.home-hero-entered) {
   #hero [data-hero-visual],
   #hero [data-hero-visual] img,
   #hero [class*='hero__scroll'],
-  [data-layout='site-header'] [class*='header__halo'],
+  [data-layout='site-header'] [class*='header__brand'],
+  [data-layout='site-header'] [class*='header__navLink'],
+  [data-layout='site-header'] [class*='header__cta'],
+  [data-layout='site-header'] [class*='header__burger'],
+  [data-layout='site-header'] [class*='header__actions'],
   [data-layout='site-header'] [class*='navbar__brand'],
   [data-layout='site-header'] [class*='navbar__navLink'],
   [data-layout='site-header'] [class*='navbar__cta'],
@@ -175,7 +176,6 @@ body.home-gsap-active:not(.home-hero-entered) {
   }
 }
 
-
 .skip-link {
   position: absolute;
   top: -100px;
@@ -194,12 +194,10 @@ body.home-gsap-active:not(.home-hero-entered) {
   }
 }
 
-
 ::selection {
   background: rgba(46, 110, 187, 0.18);
   color: $color-black;
 }
-
 
 ::-webkit-scrollbar {
   width: 12px;
@@ -220,13 +218,11 @@ body.home-gsap-active:not(.home-hero-entered) {
   background: rgba(35, 31, 32, 0.3);
 }
 
-
 :focus-visible {
   outline: 2px solid $brand-accent;
   outline-offset: 3px;
   border-radius: $radius-xs;
 }
-
 
 @include reduce-motion {
   *,

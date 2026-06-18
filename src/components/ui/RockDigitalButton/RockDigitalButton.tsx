@@ -15,6 +15,7 @@ type RockDigitalButtonProps = {
   iconPosition?: 'left' | 'right';
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  onClick?: () => void;
 };
 
 export function RockDigitalButton({
@@ -27,6 +28,7 @@ export function RockDigitalButton({
   iconPosition = 'right',
   type = 'button',
   disabled = false,
+  onClick,
 }: RockDigitalButtonProps) {
   const withOverlay = variant === 'default' || variant === 'dark';
   const content = (
@@ -58,6 +60,7 @@ export function RockDigitalButton({
       {href ? (
         <Link
           href={href}
+          onClick={onClick}
           className={cn(
             styles['rock-digital-btn__link'],
             styles[`rock-digital-btn__link--${variant}`],
@@ -70,6 +73,7 @@ export function RockDigitalButton({
         <button
           type={type}
           disabled={disabled}
+          onClick={onClick}
           className={cn(
             styles['rock-digital-btn__link'],
             styles[`rock-digital-btn__link--${variant}`],
