@@ -1,8 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { HERO_SELECTORS } from './heroSelectors';
-
 const EASE_OUT = 'power3.out';
 const EASE_EXPO = 'expo.out';
 
@@ -70,7 +68,6 @@ function parallaxY(
 
 
 export function buildHomeScrollAnimations(root: HomeRoot): void {
-  const hero = q(root, '#hero');
   const about = q(root, '#about');
   const process = q(root, '#process');
   const projects = q(root, '#recent-projects');
@@ -78,86 +75,8 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
   const testimonials = q(root, '#testimonials');
   const contact = q(root, '#contact');
 
-  
-  if (hero) {
-    const heroMedia = q(hero, HERO_SELECTORS.media);
-    const heroImageWrap = q(hero, HERO_SELECTORS.imageWrap);
-    const heroVisual = q(hero, HERO_SELECTORS.visualCol);
-    const heroLayout = q(hero, HERO_SELECTORS.layout);
 
-    parallaxY(heroMedia, 80, hero, 'top top', 'bottom top');
 
-    if (heroImageWrap) {
-      gsap.fromTo(
-        heroImageWrap,
-        { y: '0%' },
-        {
-          y: '14%',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: hero,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.2,
-          },
-        }
-      );
-    }
-
-    if (heroLayout) {
-      gsap.fromTo(
-        heroLayout,
-        { y: 0 },
-        {
-          y: -34,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: hero,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.4,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        heroLayout,
-        { autoAlpha: 1 },
-        {
-          autoAlpha: 0.84,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: hero,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.4,
-          },
-        }
-      );
-    }
-
-    if (heroVisual) {
-      gsap.fromTo(
-        heroVisual,
-        { y: 0, scale: 1 },
-        {
-          y: -40,
-          scale: 1.04,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: hero,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-          },
-        }
-      );
-    }
-  }
-
-  
-
-  
   if (about) {
     const media = q(about, '[class*="aboutShowcase__media"]');
     const content = q(about, '[class*="aboutShowcase__content"]');
@@ -184,9 +103,7 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  
 
-  
   if (process) {
     const header = q(process, '[class*="processSection__header"]');
 
@@ -195,7 +112,6 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  
   if (projects) {
     const intro = q(projects, '[class*="projectArea__headerIntro"]');
     const aside = q(projects, '[class*="projectArea__headerAside"]');
@@ -234,7 +150,6 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     parallaxY(projects, 50, projects);
   }
 
-  
   if (technologies) {
     const heading = q(technologies, '.heading');
     const kicker = q(technologies, '[class*="tech__kicker"]');
@@ -255,7 +170,6 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  
   if (testimonials) {
     const titleBlock = q(testimonials, '[class*="testimonialArea__sectionTitle"]');
     const viewport = q(testimonials, '[class*="testimonialArea__viewport"]');
@@ -280,7 +194,6 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  
   if (contact) {
     const main = q(contact, '[class*="ctaSection__main"]');
     const metaWrap = q(contact, '[class*="ctaSection__metaWrap"]');
@@ -310,7 +223,6 @@ export function buildHomeScrollAnimations(root: HomeRoot): void {
     }
   }
 
-  
   const sectionIds = [
     '#values',
     '#about',

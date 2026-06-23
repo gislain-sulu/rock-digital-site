@@ -148,7 +148,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     gsap.set(actions, { autoAlpha: 0, y: 20, scale: 0.97, filter: 'blur(8px)' });
   }
   if (visualCol) {
-    gsap.set(visualCol, { autoAlpha: 0, x: 56, scale: 0.94, filter: 'blur(14px)' });
+    gsap.set(visualCol, { autoAlpha: 0, x: 56, scale: 0.94, filter: 'blur(14px)', y: 0 });
   }
   if (scrollIndicator) {
     gsap.set(scrollIndicator, { autoAlpha: 0, y: 16, filter: 'blur(6px)' });
@@ -258,11 +258,21 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   }
 
   if (visualCol) {
-    fadeInUp(tl, visualCol, titleStart + 0.38, {
-      duration: 1.1,
-      x: 0,
-      scale: 1,
-    });
+    tl.fromTo(
+      visualCol,
+      { autoAlpha: 0, x: 56, scale: 0.94, filter: 'blur(14px)' },
+      {
+        autoAlpha: 1,
+        x: 0,
+        scale: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 1.1,
+        ease: EASE_OUT,
+        clearProps: 'transform,filter',
+      },
+      titleStart + 0.38
+    );
   }
 
   if (actions.length) {

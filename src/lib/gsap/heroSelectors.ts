@@ -10,7 +10,7 @@ export const HERO_SELECTORS = {
   media: '[class*="hero__media"]',
   imageWrap: '[class*="hero__imageWrap"]',
   glow: '[class*="hero__glow"]',
-  layout: '[class*="hero__layout"]',
+  layout: '[class*="hero__columns"]',
   titleHighlight: '[class*="hero__titleHighlight"]',
   titleDigital: '[data-hero-digital]',
 } as const;

@@ -19,7 +19,7 @@ const PARTICLES = [
   { top: '10%', left: '78%', size: 12, tone: 'blue', delay: 0.5 },
   { top: '18%', left: '84%', size: 9, tone: 'orange', delay: 0.15 },
   { top: '6%', left: '88%', size: 11, tone: 'blue', delay: 0.4 },
-];
+] as const;
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -33,7 +33,10 @@ export function HeroSection() {
 
       registerGsap();
       const visual = visualRef.current;
-      if (!visual) return;
+      const section = sectionRef.current;
+      if (!visual || !section) return;
+
+      if (section.closest('[data-home-landing]')) return;
 
       gsap.to(visual, {
         y: -12,
@@ -68,8 +71,8 @@ export function HeroSection() {
       data-home-hero
     >
       <Container className={styles.hero__container}>
-        <div className={styles.hero__layout}>
-          <div className={styles.hero__main}>
+        <div className={styles.hero__columns}>
+          <div className={styles.hero__content}>
             <h1 id="hero-title" className={styles.hero__title}>
               <span className={styles.hero__titleLine}>
                 <span className={styles.hero__word}>

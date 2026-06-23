@@ -15,7 +15,7 @@
     flex: 0 0 auto;
     flex-direction: column;
     justify-content: center;
-    margin-top: calc(-1 * clamp(#{$space-6}, 6vh, #{$space-12}));
+    margin-top: calc(-1 * clamp(#{$space-5}, 3vh, #{$space-8}));
     padding-top: 0;
     padding-bottom: 0;
   }

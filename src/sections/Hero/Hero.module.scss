@@ -37,39 +37,47 @@
     padding-right: 0;
   }
 
-  &__layout {
+  &__columns {
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
     gap: clamp($space-6, 4vw, $space-10);
     flex: 1;
     min-height: 0;
+    width: 100%;
 
     @include bp-up(lg) {
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      gap: clamp($space-6, 3vw, $space-10);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp($space-8, 4vw, $space-12);
       align-items: center;
     }
 
     :global([data-home-landing]) & {
+      flex: 1;
+      align-items: stretch;
+      gap: $space-4;
+
       @include bp-down(lg) {
-        gap: $space-4;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @include bp-up(lg) {
+        gap: clamp($space-6, 3vw, $space-10);
       }
     }
   }
 
-  &__main {
-    order: 2;
+  &__content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: clamp($space-5, 2.5vw, $space-8);
     max-width: 720px;
-
-    @include bp-up(lg) {
-      order: 1;
-    }
+    min-width: 0;
 
     :global([data-home-landing]) & {
+      gap: $space-3;
       justify-content: flex-start;
       align-self: start;
     }
@@ -131,24 +139,27 @@
   }
 
   &__visualCol {
-    order: 1;
     position: relative;
     z-index: 1;
+    width: 100%;
+    min-width: 0;
     height: clamp(220px, 48vw, 360px);
 
     @include bp-up(lg) {
-      order: 2;
-      align-self: end;
-      height: clamp(300px, 38vw, 540px);
-      margin-bottom: calc(-1 * clamp(#{$space-10}, 8vw, #{$space-16}));
+      height: clamp(300px, 38vw, 520px);
+      justify-self: stretch;
+      align-self: center;
     }
 
     :global([data-home-landing]) & {
       height: clamp(200px, 42vw, 320px);
+      margin-top: auto;
+      margin-bottom: calc(-1 * clamp(#{$space-5}, 3vh, #{$space-8}));
 
       @include bp-up(lg) {
         height: clamp(280px, 34vh, 480px);
-        margin-bottom: calc(-1 * clamp(#{$space-8}, 6vh, #{$space-14}));
+        margin-top: 0;
+        align-self: end;
       }
     }
   }
@@ -157,6 +168,10 @@
     position: relative;
     width: 100%;
     height: 100%;
+
+    :global([data-home-landing]) & {
+      transform: translateY(clamp(#{$space-2}, 1.5vh, #{$space-4}));
+    }
   }
 
   &__media {
