@@ -110,7 +110,7 @@ export function HeroSection() {
                   className={styles.hero__image}
                   fill
                   priority
-                  sizes="(max-width: 1023px) 90vw, 50vw"
+                  sizes="(max-width: 1023px) 92vw, 58vw"
                 />
               </div>
 

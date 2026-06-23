@@ -140,21 +140,21 @@
     z-index: 1;
     width: 100%;
     min-width: 0;
-    height: clamp(220px, 48vw, 360px);
+    height: clamp(260px, 52vw, 400px);
 
     @include bp-up(lg) {
-      height: clamp(300px, 38vw, 520px);
+      height: clamp(360px, 44vw, 620px);
       justify-self: stretch;
       align-self: center;
     }
 
     :global([data-home-landing]) & {
-      height: clamp(200px, 42vw, 320px);
+      height: clamp(260px, 52vw, 400px);
       margin-top: auto;
       margin-bottom: calc(-1 * clamp(#{$space-6}, 4vh, #{$space-10}));
 
       @include bp-up(lg) {
-        height: clamp(280px, 34vh, 480px);
+        height: clamp(380px, 52vh, 640px);
         margin-top: 0;
         align-self: end;
       }
@@ -176,10 +176,11 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
     background: transparent;
 
     @include bp-down(lg) {
+      overflow: hidden;
       border-radius: $radius-lg;
       background: $bg-subtle;
       box-shadow: $shadow-sm;
@@ -191,8 +192,16 @@
     object-position: center bottom;
 
     @include bp-up(lg) {
+      object-fit: contain;
       object-position: right bottom;
       filter: drop-shadow(0 24px 48px rgba($color-black, 0.08));
+    }
+
+    :global([data-home-landing]) & {
+      @include bp-up(lg) {
+        transform: scale(1.32);
+        transform-origin: right bottom;
+      }
     }
   }
 
