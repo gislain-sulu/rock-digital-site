@@ -27,18 +27,63 @@ export function HeroSection() {
 
   useGSAP(
     () => {
-      if (prefersReducedMotion() || document.body.classList.contains('home-gsap-active')) {
-        return;
-      }
+      if (prefersReducedMotion()) return;
 
       registerGsap();
-      const visual = visualRef.current;
       const section = sectionRef.current;
-      if (!visual || !section) return;
+      const visualCol = visualRef.current;
+      if (!section || !visualCol) return;
 
-      if (section.closest('[data-home-landing]')) return;
+      const isHomeLanding = Boolean(section.closest('[data-home-landing]'));
+      const media = visualCol.querySelector<HTMLElement>('[class*="hero__media"]');
+      const particles = visualCol.querySelectorAll('[data-hero-particle]');
 
-      gsap.to(visual, {
+      const startAmbientMotion = () => {
+        if (media) {
+          gsap.to(media, {
+            y: -10,
+            duration: 4.5,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+          });
+        }
+
+        particles.forEach((particle, index) => {
+          gsap.to(particle, {
+            y: '+=14',
+            x: index % 2 === 0 ? '+=6' : '-=6',
+            rotation: index % 2 === 0 ? 8 : -8,
+            duration: 3 + index * 0.25,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+          });
+        });
+      };
+
+      if (isHomeLanding) {
+        const runWhenEntered = () => {
+          if (document.body.classList.contains('home-hero-entered')) {
+            startAmbientMotion();
+            return true;
+          }
+          return false;
+        };
+
+        if (runWhenEntered()) return;
+
+        const observer = new MutationObserver(() => {
+          if (runWhenEntered()) observer.disconnect();
+        });
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+        return () => observer.disconnect();
+      }
+
+      if (document.body.classList.contains('home-gsap-active')) return;
+
+      gsap.to(visualCol, {
         y: -12,
         duration: 4.5,
         ease: 'sine.inOut',
@@ -46,18 +91,7 @@ export function HeroSection() {
         repeat: -1,
       });
 
-      const particles = visual.querySelectorAll('[data-hero-particle]');
-      particles.forEach((particle, index) => {
-        gsap.to(particle, {
-          y: '+=14',
-          x: index % 2 === 0 ? '+=6' : '-=6',
-          rotation: index % 2 === 0 ? 8 : -8,
-          duration: 3 + index * 0.25,
-          ease: 'sine.inOut',
-          yoyo: true,
-          repeat: -1,
-        });
-      });
+      startAmbientMotion();
     },
     { scope: sectionRef }
   );
