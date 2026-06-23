@@ -91,9 +91,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   const heroImageWrap = hero ? q(hero, HERO_SELECTORS.imageWrap) : null;
   const heroGlow = hero ? q(hero, HERO_SELECTORS.glow) : null;
   const visualFigure = hero ? q(hero, '[class*="visual__figure"]') : null;
-  const digitalWord = hero
-    ? q(hero, `[data-hero-digital], ${HERO_SELECTORS.titleHighlight}`)
-    : null;
 
   const navBrand = siteHeader?.querySelector(
     '[class*="header__brand"], [class*="navbar__brand"]'
@@ -122,7 +119,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
     heroMedia,
     ...titleLines,
     ...words,
-    digitalWord,
     ...leadChunks,
     lead,
     ...actions,
@@ -137,9 +133,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
   }
   if (words.length) {
     gsap.set(words, { ...FADE_FROM, y: 36 });
-  }
-  if (digitalWord) {
-    gsap.set(digitalWord, { autoAlpha: 0, y: 14, scale: 0.92 });
   }
   if (leadChunks.length) {
     gsap.set(leadChunks, { ...FADE_FROM, y: 24 });
@@ -229,23 +222,6 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
       });
     }
   });
-
-  if (digitalWord) {
-    tl.fromTo(
-      digitalWord,
-      { scale: 0.9, y: 14, autoAlpha: 0.4 },
-      {
-        scale: 1,
-        y: 0,
-        autoAlpha: 1,
-        filter: 'none',
-        duration: 0.78,
-        ease: 'back.out(1.35)',
-        clearProps: 'transform,filter',
-      },
-      titleStart + 0.58
-    );
-  }
 
   if (leadChunks.length) {
     fadeInUp(tl, leadChunks, titleStart + 0.48, {

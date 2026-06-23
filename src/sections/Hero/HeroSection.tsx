@@ -10,6 +10,7 @@ import { RockDigitalButton } from '@/components/ui/RockDigitalButton';
 import { prefersReducedMotion } from '@/lib/gsap/motion';
 import { registerGsap } from '@/lib/gsap/registerGsap';
 
+import { HeroAnimatedHighlight } from './components/HeroAnimatedHighlight';
 import styles from './Hero.module.scss';
 
 const PARTICLES = [
@@ -107,17 +108,16 @@ export function HeroSection() {
       <Container className={styles.hero__container}>
         <div className={styles.hero__columns}>
           <div className={styles.hero__content}>
-            <h1 id="hero-title" className={styles.hero__title}>
+            <h1
+              id="hero-title"
+              className={styles.hero__title}
+              aria-label="Nous concevons des solutions digitales performantes pour accélérer votre croissance."
+            >
               <span className={styles.hero__titleLine}>
                 <span className={styles.hero__word}>
                   Nous concevons des solutions digitales performantes pour{' '}
                 </span>
-                <span
-                  className={styles.hero__titleHighlight}
-                  data-hero-digital
-                >
-                  accélérer votre croissance.
-                </span>
+                <HeroAnimatedHighlight />
               </span>
             </h1>
 

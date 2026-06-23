@@ -7,7 +7,7 @@ const HEADER_ENTRANCE_SELECTORS =
 
 
 const HERO_LAYOUT_LOCK_SELECTORS =
-  '#hero [class*="hero__visualCol"], #hero [data-hero-visual], #hero [class*="hero__media"]';
+  '#hero [class*="hero__visualCol"], #hero [data-hero-visual], #hero [class*="hero__media"], #hero [data-hero-digital]';
 
 
 export function forceRevealHomeEntrance(root: Element): void {

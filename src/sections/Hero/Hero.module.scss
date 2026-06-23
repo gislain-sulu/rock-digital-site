@@ -104,9 +104,41 @@
     display: inline;
   }
 
+  &__titleHighlightWrap {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    text-align: left;
+
+    @include bp-up(md) {
+      white-space: nowrap;
+    }
+  }
+
   &__titleHighlight {
     display: inline;
     color: $brand-primary;
+  }
+
+  &__titleCursor {
+    display: inline-block;
+    width: 0.12em;
+    height: 1em;
+    margin-left: 0.06em;
+    vertical-align: -0.08em;
+    background: $brand-primary;
+    animation: heroTitleCursorBlink 0.75s step-end infinite;
+
+    &--hidden {
+      opacity: 0;
+      animation: none;
+    }
+  }
+
+  @keyframes heroTitleCursorBlink {
+    50% {
+      opacity: 0;
+    }
   }
 
   &__lead {
