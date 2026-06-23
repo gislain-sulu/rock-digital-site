@@ -29,22 +29,23 @@ export function ServicesHighlight() {
       const cards = grid.querySelectorAll('[data-service-highlight-card]');
       const isAboveFold = Boolean(section.closest('[data-home-landing]'));
 
+      if (isAboveFold) {
+        gsap.set(cards, { autoAlpha: 1, y: 0, clearProps: 'transform,opacity,visibility' });
+        return;
+      }
+
       gsap.from(cards, {
-        y: isAboveFold ? 24 : 48,
+        y: 48,
         autoAlpha: 0,
         duration: 0.9,
         stagger: 0.12,
         ease: GSAP_EASE.out,
-        delay: isAboveFold ? 0.35 : 0,
-        ...(isAboveFold
-          ? {}
-          : {
-              scrollTrigger: scrollVarsWithInViewFix({
-                trigger: section,
-                start: 'top 82%',
-                once: true,
-              }),
-            }),
+        clearProps: 'transform',
+        scrollTrigger: scrollVarsWithInViewFix({
+          trigger: section,
+          start: 'top 82%',
+          once: true,
+        }),
       });
     },
     { scope: sectionRef }
@@ -56,7 +57,7 @@ export function ServicesHighlight() {
       className={styles.servicesHighlight}
       aria-labelledby="services-highlight-title"
     >
-      <Container className={styles.servicesHighlight__container}>
+      <Container size="fluid" className={styles.servicesHighlight__container}>
         <h2 id="services-highlight-title" className={styles.servicesHighlight__srTitle}>
           Nos expertises
         </h2>

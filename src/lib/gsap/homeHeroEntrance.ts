@@ -269,7 +269,7 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
         filter: 'blur(0px)',
         duration: 1.1,
         ease: EASE_OUT,
-        clearProps: 'transform,filter',
+        clearProps: 'filter',
       },
       titleStart + 0.38
     );

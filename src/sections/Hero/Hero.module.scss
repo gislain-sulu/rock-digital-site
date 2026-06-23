@@ -21,10 +21,7 @@
     min-height: 0;
     padding-top: clamp($space-6, 3vh, $space-10);
     padding-bottom: 0;
-
-    @include bp-up(lg) {
-      overflow: visible;
-    }
+    overflow: hidden;
   }
 
   &__container {
@@ -154,7 +151,7 @@
     :global([data-home-landing]) & {
       height: clamp(200px, 42vw, 320px);
       margin-top: auto;
-      margin-bottom: calc(-1 * clamp(#{$space-5}, 3vh, #{$space-8}));
+      margin-bottom: calc(-1 * clamp(#{$space-6}, 4vh, #{$space-10}));
 
       @include bp-up(lg) {
         height: clamp(280px, 34vh, 480px);
@@ -170,7 +167,7 @@
     height: 100%;
 
     :global([data-home-landing]) & {
-      transform: translateY(clamp(#{$space-2}, 1.5vh, #{$space-4}));
+      transform: translateY(clamp(#{$space-3}, 2vh, #{$space-5}));
     }
   }
 
