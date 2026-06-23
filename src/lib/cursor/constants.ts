@@ -14,8 +14,8 @@ export const CURSOR_INTERACTIVE_SELECTOR = [
   'article[class*="__card"]',
 ].join(', ');
 
-export const CURSOR_LERP = 0.14;
+export const CURSOR_LERP = 0.15;
 
-export const CURSOR_RING_HOVER_SCALE = 1.85;
+export const CURSOR_RING_HOVER_SCALE = 1.5;
 
 export const CURSOR_DOT_HOVER_SCALE = 1.2;

@@ -3,8 +3,12 @@
 .customCursor {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: $z-cursor;
   pointer-events: none;
+
+  @media (pointer: coarse) {
+    display: none;
+  }
 
   &--disabled {
     display: none;
@@ -37,24 +41,17 @@
     top: 0;
     left: 0;
     z-index: 1;
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    border: 1.5px solid rgba($brand-accent, 0.82);
-    background: rgba($color-white, 0.08);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow:
-      0 0 0 1px rgba($color-white, 0.18),
-      0 8px 24px rgba($color-blue-night, 0.08);
+    border: 2px solid $brand-accent;
+    background: transparent;
+    box-shadow: none;
+    mix-blend-mode: difference;
     will-change: transform, opacity;
 
     &--hover {
-      border-color: rgba($brand-primary, 0.55);
-      background: rgba($color-blue-soft, 0.22);
-      box-shadow:
-        0 0 0 1px rgba($brand-primary, 0.2),
-        0 10px 28px rgba($brand-primary, 0.14);
+      border-color: $color-white;
     }
   }
 }
