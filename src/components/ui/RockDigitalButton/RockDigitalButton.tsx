@@ -11,6 +11,7 @@ type RockDigitalButtonProps = {
   className?: string;
   linkClassName?: string;
   variant?: 'default' | 'dark' | 'outline' | 'plain';
+  hoverEffect?: boolean;
   icon?: ReactNode;
   iconPosition?: 'left' | 'right';
   type?: 'button' | 'submit' | 'reset';
@@ -24,13 +25,14 @@ export function RockDigitalButton({
   className,
   linkClassName,
   variant = 'default',
+  hoverEffect = true,
   icon,
   iconPosition = 'right',
   type = 'button',
   disabled = false,
   onClick,
 }: RockDigitalButtonProps) {
-  const withOverlay = variant === 'default' || variant === 'dark';
+  const withOverlay = hoverEffect && (variant === 'default' || variant === 'dark');
   const content = (
     <>
       {icon && iconPosition === 'left' && (
@@ -64,6 +66,7 @@ export function RockDigitalButton({
           className={cn(
             styles['rock-digital-btn__link'],
             styles[`rock-digital-btn__link--${variant}`],
+            !hoverEffect && styles['rock-digital-btn__link--noHoverFx'],
             linkClassName
           )}
         >
@@ -77,6 +80,7 @@ export function RockDigitalButton({
           className={cn(
             styles['rock-digital-btn__link'],
             styles[`rock-digital-btn__link--${variant}`],
+            !hoverEffect && styles['rock-digital-btn__link--noHoverFx'],
             linkClassName
           )}
         >

@@ -35,7 +35,7 @@ $header-height: 90px;
 
   &__logo {
     display: block;
-    width: clamp(110px, 11vw, 150px);
+    width: clamp(85px, 8.5vw, 115px);
     height: auto;
     flex-shrink: 0;
   }
@@ -87,6 +87,12 @@ $header-height: 90px;
 
     @include bp-up(md) {
       display: inline-flex;
+    }
+
+    [class*='rock-digital-btn__link'] {
+      padding: 10px 18px;
+      font-size: 12px;
+      border-radius: 22px;
     }
   }
 

@@ -271,19 +271,8 @@ export function buildHomeHeroEntrance(root: HomeRoot): gsap.core.Timeline {
       stagger: 0.12,
       scale: 1,
       y: 0,
+      clearProps: 'transform',
     });
-
-    tl.add(() => {
-      actions.forEach((action) => {
-        gsap.to(action, {
-          y: -5,
-          duration: 2.6,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        });
-      });
-    }, titleStart + 1.1);
   }
 
   if (scrollIndicator) {

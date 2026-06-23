@@ -92,9 +92,8 @@ export function HeroSection() {
             </p>
 
             <div className={styles.hero__actions}>
-              <RockDigitalButton href="/services">Découvrir nos services</RockDigitalButton>
-              <RockDigitalButton href="/portfolio" variant="outline">
-                Nos réalisations
+              <RockDigitalButton href="/services" hoverEffect={false}>
+                Découvrir nos services
               </RockDigitalButton>
             </div>
           </div>

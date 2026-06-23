@@ -64,6 +64,15 @@
   color: $color-white;
 }
 
+.rock-digital-btn__link--noHoverFx:hover {
+  color: inherit;
+}
+
+.rock-digital-btn__link--default.rock-digital-btn__link--noHoverFx:hover,
+.rock-digital-btn__link--dark.rock-digital-btn__link--noHoverFx:hover {
+  color: $color-white;
+}
+
 .rock-digital-btn__link:disabled {
   opacity: 0.65;
   cursor: not-allowed;

@@ -56,7 +56,7 @@ export function ServicesHighlight() {
       className={styles.servicesHighlight}
       aria-labelledby="services-highlight-title"
     >
-      <Container>
+      <Container className={styles.servicesHighlight__container}>
         <h2 id="services-highlight-title" className={styles.servicesHighlight__srTitle}>
           Nos expertises
         </h2>
